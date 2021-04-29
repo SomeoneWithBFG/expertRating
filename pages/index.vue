@@ -1,0 +1,67 @@
+<template>
+  <div class="container">
+    <div>
+      <a-select class="selector" @change="handleChange">
+        <a-select-option value="pairComparsion">
+          Метод парных сравнений
+        </a-select-option>
+        <a-select-option value="sequentiallyComparison">
+          Метод последовательных сравнений
+        </a-select-option>
+        <a-select-option value="weighing" >
+          Метод взвешивания
+        </a-select-option>
+        <a-select-option value="preference">
+          Метод предпочтения
+        </a-select-option>
+        <a-select-option value="kondorse">
+          Принцип Кондорсе
+        </a-select-option>
+        <a-select-option value="kemeniSnella">
+          Метод Кемени-Снелла
+        </a-select-option>
+      </a-select>
+      <InputSelectors :method="method" />
+      <div v-if="method==='pairComparsion'"> <PairComparsion /> </div>
+      <div v-if="method==='sequentiallyComparison'"> <SequentiallyComparison /></div>
+      <div v-if="method==='weighing'"> <Weighing /> </div>
+      <div v-if="method==='preference'"> <Preference /> </div>
+      <div v-if="method==='kondorse'"> <Kondorse /> </div>
+      <div v-if="method==='kemeniSnella'"> <KemeniSnella /> </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapMutations, mapGetters, mapActions } from "vuex";
+export default {
+  data() {
+    return {
+      method: "",
+    }
+  },
+  methods: {
+    handleChange(value) {
+      this.method = value;
+    },
+  },
+  mounted: function () {
+  },
+}
+</script>
+
+<style>
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.selector {
+  width: 16rem;
+  margin-top: 2rem;
+}
+</style>

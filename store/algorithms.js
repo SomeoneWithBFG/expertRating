@@ -347,7 +347,7 @@ export const mutations = {
     },
     changeX(state, x) {
         state.x = x;
-        state.inputMatrix = createMatrix(state.x, state.y, state.inputMatrix);
+        state.inputMatrix = createMatrix(state.x, state.y);
     },
     changeY(state, y) {
         state.y = y;

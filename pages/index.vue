@@ -22,12 +22,22 @@
         </a-select-option>
       </a-select>
       <InputSelectors :method="method" />
-      <div v-if="method==='pairComparsion'"> <PairComparsion /> </div>
-      <div v-if="method==='sequentiallyComparison'"> <SequentiallyComparison /></div>
-      <div v-if="method==='weighing'"> <Weighing /> </div>
-      <div v-if="method==='preference'"> <Preference /> </div>
-      <div v-if="method==='kondorse'"> <Kondorse /> </div>
-      <div v-if="method==='kemeniSnella'"> <KemeniSnella /> </div>
+      <a-button 
+        v-if="method"
+        class="calcButton"
+        @click="calculate()"
+        :type="isCalculated ? 'danger' : 'default'"
+      >
+        {{isCalculated ? 'Отменить' : 'Рассчитать'}}
+      </a-button>
+      <div v-if="isCalculated">
+        <div v-if="method==='pairComparsion'"> <PairComparsion /> </div>
+        <div v-if="method==='sequentiallyComparison'"> <SequentiallyComparison /></div>
+        <div v-if="method==='weighing'"> <Weighing /> </div>
+        <div v-if="method==='preference'"> <Preference /> </div>
+        <div v-if="method==='kondorse'"> <Kondorse /> </div>
+        <div v-if="method==='kemeniSnella'"> <KemeniSnella /> </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,11 +48,15 @@ export default {
   data() {
     return {
       method: "",
+      isCalculated: false,
     }
   },
   methods: {
     handleChange(value) {
       this.method = value;
+    },
+    calculate() {
+      this.isCalculated = !this.isCalculated;
     },
   },
   mounted: function () {
@@ -59,7 +73,10 @@ export default {
   text-align: center;
   flex-direction: column;
 }
-
+.calcButton{
+  width: 7.5rem;
+  margin-bottom: 2rem;
+}
 .selector {
   width: 16rem;
   margin-top: 2rem;

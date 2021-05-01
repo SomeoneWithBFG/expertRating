@@ -1,13 +1,18 @@
 <template>
   <div class="matrix">
-    <div v-for="(val, indexY) in new Array(getX)" :key="val">
-        <div v-for="(val, indexX) in new Array(getY)" :key="val" class="string">
-            <a-input 
-              class="inputField"
-              :placeholder="0" 
-              @change="handleChange(indexX, indexY)"
-              v-model="array[indexX][indexY]"/>
+    <div v-for="(val, indexY) in new Array(x)" :key="val" >
+      {{text[indexY]}}
+      <div v-for="(val, indexX) in new Array(y)" :key="val" class="string">
+        <div v-if="indexY === 0" class="stringEl">
+          Э{{indexX+1}} &nbsp;
         </div>
+        <a-input 
+          class="inputField"
+          :placeholder="0" 
+          @change="handleChange(indexX, indexY)"
+          v-model="array[indexX][indexY]"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -15,38 +20,66 @@
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
-    data() {
-      return {
-      }
-    },
-    computed: {
-        ...mapGetters({
-            getX: "algorithms/getX",
-            getY: "algorithms/getY",
-            getInputMatrix: "algorithms/getInputMatrix",
-        }),
-        array: function () {
-          var m = new Array(10)
-          for (var i = 0; i < 10; i++) {
-            m[i] = new Array(10);
-            m[i].fill(0);
-          }
-          return m;
-        }
-    },
-    methods: {
-      ...mapMutations({
-        setMatrixElement: "algorithms/setMatrixElement",
-      }),
-      handleChange(x, y) {
-        var payload = {
-          x: x, 
-          y: y, 
-          value: parseFloat(this.array[x][y] || 0)
-        }
-        this.setMatrixElement(payload)
-      }
+  props: {
+    method: String,
+  },
+  data() {
+    return {
     }
+  },
+  computed: {
+    ...mapGetters({
+        getX: "algorithms/getX",
+        getY: "algorithms/getY",
+        getInputMatrix: "algorithms/getInputMatrix",
+    }),
+    text: function() {
+      switch(this.method) {
+        case "sequentiallyComparison":
+          return ["название", "вес"];
+        case "weighing":
+          var arr = [];
+          for (var i = 0; i < this.getX; i++) {
+            arr.push("Z" + i);
+          }
+          arr[0] = "R"
+          return arr
+        default: 
+          var arr = [];
+          for (var i = 0; i < this.getX; i++) {
+            arr.push("Z" + (i + 1));
+          }
+          return arr
+      }
+    },
+    x: function() {
+      return this.getX
+    },
+    y: function() {
+      return this.getY
+    },
+    array: function () {
+      var m = new Array(10)
+      for (var i = 0; i < 10; i++) {
+        m[i] = new Array(10);
+        m[i].fill(0);
+      }
+      return m;
+    },
+  },
+  methods: {
+    ...mapMutations({
+      setMatrixElement: "algorithms/setMatrixElement",
+    }),
+    handleChange(x, y) {
+      var payload = {
+        x: x, 
+        y: y, 
+        value: parseFloat(this.array[x][y] || 0)
+      }
+      this.setMatrixElement(payload)
+    }
+  }
 }
 </script>
 
@@ -54,14 +87,23 @@ export default {
 .matrix {
   display: flex;
   justify-content: center;
-  max-width: 40rem;
   margin-bottom: 2rem;
+  align-items: center;
+  text-align: center;
 }
 .string {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.stringEl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .inputField {
-  max-width: 8.25rem;
+  max-width: 4rem;
 }
 </style>

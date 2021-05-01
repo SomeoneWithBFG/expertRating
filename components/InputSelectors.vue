@@ -1,24 +1,25 @@
 <template>
   <div>
     <div class="text">
+      Размерность матрицы: &nbsp;
       <div class="textItem">
-        Количество альтернатив
+        X
       </div>
-      <a-select style="width: 5rem" @change="handleChangeX" default-value="2">
-        <a-select-option v-for="(val,index) in new Array(10)" :key=index :value=index>
-          {{index + 1}}
+      <a-select style="width: 5rem" @change="handleChangeX" default-value="2" :disabled="disableX">
+        <a-select-option v-for="(val,index) in new Array(9)" :key=index :value=index>
+          {{index + 2}}
         </a-select-option>
       </a-select>
-      <div class="textItem">
-        Количество экспертов
+      <div class="textItem">  
+        Y
       </div>
-      <a-select style="width: 5rem" @change="handleChangeY" default-value="2">
-        <a-select-option v-for="(val,index) in new Array(10)" :key=index :value=index>
-          {{index + 1}}
+      <a-select style="width: 5rem" @change="handleChangeY" default-value="2" :disabled="disableY"> 
+        <a-select-option v-for="(val,index) in new Array(9)" :key=index :value=index>
+          {{index + 2}}
         </a-select-option>
       </a-select>
     </div>
-    <InputArea />
+    <InputArea :method="this.method"/>
   </div>
 </template>
 
@@ -30,8 +31,21 @@ export default {
   },
   data() {
     return {
-      
     }
+  },
+  computed: { 
+    disableX: function() {
+      switch (this.method) {
+        case "sequentiallyComparison": return true
+        default: return false
+      }
+    },
+    disableY: function() {
+      switch (this.method) {
+        
+        default: return false
+      }
+    },
   },
   methods: {
     ...mapMutations({
@@ -39,10 +53,10 @@ export default {
       changeY: "algorithms/changeY",
     }),
     handleChangeX(value) {
-      this.changeX(value+1)
+      this.changeX(value+2)
     },
     handleChangeY(value) {
-      this.changeY(value+1)
+      this.changeY(value+2)
     },
   },
 }
@@ -51,7 +65,9 @@ export default {
 <style>
 .text {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
   margin: 2rem;
 }
 .textItem {

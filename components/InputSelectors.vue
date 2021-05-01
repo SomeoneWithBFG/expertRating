@@ -49,8 +49,8 @@ export default {
   },
   methods: {
     ...mapMutations({
-      changeX: "algorithms/changeX",
-      changeY: "algorithms/changeY",
+      changeX: "store/changeX",
+      changeY: "store/changeY",
     }),
     handleChangeX(value) {
       this.changeX(value+2)

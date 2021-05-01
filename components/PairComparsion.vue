@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      pairComparsion: "algorithms/pairComparsion",
+      pairComparsion: "store/pairComparsion",
     }),
     dataToShow: function () {
       var data = {

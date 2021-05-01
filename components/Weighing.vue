@@ -24,7 +24,7 @@ export default {
     },
     computed: {
     ...mapGetters({
-      weighing: "algorithms/weighing",
+      weighing: "store/weighing",
     }),
     dataToShow: function () {
       var data = {

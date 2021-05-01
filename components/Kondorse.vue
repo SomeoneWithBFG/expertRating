@@ -23,7 +23,7 @@ export default {
     },
     computed: {
     ...mapGetters({
-      kondorse: "algorithms/kondorse",
+      kondorse: "store/kondorse",
     }),
     dataToShow: function () {
       return this.kondorse;

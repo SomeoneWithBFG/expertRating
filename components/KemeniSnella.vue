@@ -35,7 +35,7 @@ export default {
     },
     computed: {
     ...mapGetters({
-      kemeniSnella: "algorithms/kemeniSnella",
+      kemeniSnella: "store/kemeniSnella",
     }),
     dataToShow: function () {
       return this.kemeniSnella;

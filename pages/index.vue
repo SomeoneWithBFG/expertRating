@@ -54,6 +54,7 @@ export default {
   methods: {
     handleChange(value) {
       this.method = value;
+      this.isCalculated = false;
     },
     calculate() {
       this.isCalculated = !this.isCalculated;

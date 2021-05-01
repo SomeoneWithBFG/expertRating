@@ -27,7 +27,7 @@ export default {
     },
     computed: {
     ...mapGetters({
-      sequentiallyComparison: "algorithms/sequentiallyComparison",
+      sequentiallyComparison: "store/sequentiallyComparison",
     }),
     dataToShow: function () {
       var data = {

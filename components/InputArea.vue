@@ -29,9 +29,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-        getX: "algorithms/getX",
-        getY: "algorithms/getY",
-        getInputMatrix: "algorithms/getInputMatrix",
+        getX: "store/getX",
+        getY: "store/getY",
+        getInputMatrix: "store/getInputMatrix",
     }),
     text: function() {
       switch(this.method) {
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setMatrixElement: "algorithms/setMatrixElement",
+      setMatrixElement: "store/setMatrixElement",
     }),
     handleChange(x, y) {
       var payload = {

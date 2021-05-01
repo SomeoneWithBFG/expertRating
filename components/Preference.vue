@@ -30,7 +30,7 @@ export default {
     },
     computed: {
     ...mapGetters({
-      preference: "algorithms/preference",
+      preference: "store/preference",
     }),
     dataToShow: function () {
       console.log(this.preference)

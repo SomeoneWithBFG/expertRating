@@ -17,16 +17,16 @@
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
-    data() {
-      return {
-      }
-    },
-    computed: {
-    ...mapGetters({
-      kondorse: "store/kondorse",
-    }),
+  props: {
+    solution: Object,
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
     dataToShow: function () {
-      return this.kondorse;
+      return this.solution;
     },
   }
 }

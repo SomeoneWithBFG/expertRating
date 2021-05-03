@@ -24,41 +24,43 @@
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
-    data() {
-      return {
-      }
-    },
-    computed: {
+  props: {
+    solution: Object,
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
     ...mapGetters({
       preference: "store/preference",
     }),
     dataToShow: function () {
-      console.log(this.preference)
-      var numOfEl = this.preference.modMatrix[0].length
+      var numOfEl = this.solution.modMatrix[0].length
       var data = {
-        modMatrix: Array(this.preference.modMatrix.length).fill(""),
+        modMatrix: Array(this.solution.modMatrix.length).fill(""),
         sumMarks: "",
         sumOfMarks: "",
         weights: "",
         order: "",
       }
-      for (var i = 0; i < this.preference.modMatrix.length; i++) {
+      for (var i = 0; i < this.solution.modMatrix.length; i++) {
         for (var j = 0; j < numOfEl; j++) {
-          data.modMatrix[i] += this.preference.modMatrix[i][j] + " ";
+          data.modMatrix[i] += this.solution.modMatrix[i][j] + " ";
         }
       }
       for (var i = 0; i < numOfEl; i++) {
-        data.sumMarks += i+1 + ": " + this.preference.sumMarks[i];
-        if (i+1 !== this.preference.sumMarks.length)
+        data.sumMarks += i+1 + ": " + this.solution.sumMarks[i];
+        if (i+1 !== this.solution.sumMarks.length)
           data.sumMarks += " | "
       }
       for (var i = 0; i < numOfEl; i++) {
-        data.weights += i+1 + ": " + this.preference.weights[i];
-        if (i+1 !== this.preference.weights.length)
+        data.weights += i+1 + ": " + this.solution.weights[i];
+        if (i+1 !== this.solution.weights.length)
           data.weights += " | "
       }
-      data.sumOfMarks = this.preference.sumOfMarks
-      data.order = this.preference.order
+      data.sumOfMarks = this.solution.sumOfMarks
+      data.order = this.solution.order
       return data
     },
   }

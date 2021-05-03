@@ -21,14 +21,14 @@
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
-    data() {
-      return {
-      }
-    },
-    computed: {
-    ...mapGetters({
-      sequentiallyComparison: "store/sequentiallyComparison",
-    }),
+  props: {
+    solution: Object,
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
     dataToShow: function () {
       var data = {
         causedCorrections: "",
@@ -37,20 +37,20 @@ export default {
         weights: "",
         order: "",
       }
-      data.causedCorrections = this.sequentiallyComparison.causedCorrections
-      data.sumOfWeights = this.sequentiallyComparison.sumOfWeights
-      this.sequentiallyComparison.correctedEvaluations.map((item, index) => {
+      data.causedCorrections = this.solution.causedCorrections
+      data.sumOfWeights = this.solution.sumOfWeights
+      this.solution.correctedEvaluations.map((item, index) => {
         data.correctedEvaluations += item
-        if (index+1 !== this.sequentiallyComparison.correctedEvaluations.length)
+        if (index+1 !== this.solution.correctedEvaluations.length)
           data.correctedEvaluations += ", "
       })
-      this.sequentiallyComparison.weights.map((item, index) => {
+      this.solution.weights.map((item, index) => {
         data.weights += item.toFixed(4)
-        if (index+1 !== this.sequentiallyComparison.weights.length)
+        if (index+1 !== this.solution.weights.length)
           data.weights += ", "
       })
-      var foo = this.sequentiallyComparison.weights
-      data.order = this.sequentiallyComparison.order
+      var foo = this.solution.weights
+      data.order = this.solution.order
       return data
     },
   }

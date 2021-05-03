@@ -19,7 +19,7 @@
         </a-select-option>
       </a-select>
     </div>
-    <InputArea :method="this.method"/>
+    <InputArea :method="this.method" :isCalculated="isCalculated"/>
   </div>
 </template>
 
@@ -28,6 +28,7 @@ import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
   props: {
     method: String,
+    isCalculated: Boolean,
   },
   data() {
     return {
@@ -35,14 +36,17 @@ export default {
   },
   computed: { 
     disableX: function() {
+      if(this.isCalculated)
+        return true
       switch (this.method) {
         case "sequentiallyComparison": return true
         default: return false
       }
     },
     disableY: function() {
+      if(this.isCalculated || this.method === "pairComparsion")
+        return true
       switch (this.method) {
-        
         default: return false
       }
     },
@@ -53,6 +57,8 @@ export default {
       changeY: "store/changeY",
     }),
     handleChangeX(value) {
+      if (this.method === "pairComparsion")
+        this.changeY(value+2)
       this.changeX(value+2)
     },
     handleChangeY(value) {
@@ -65,6 +71,7 @@ export default {
 <style>
 .text {
   display: flex;
+  max-width: 24rem;
   justify-content: space-between;
   align-items: center;
   text-align: center;

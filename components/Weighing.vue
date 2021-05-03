@@ -18,14 +18,14 @@
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
-    data() {
-      return {
-      }
-    },
-    computed: {
-    ...mapGetters({
-      weighing: "store/weighing",
-    }),
+  props: {
+    solution: Object,
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
     dataToShow: function () {
       var data = {
         sumOfMarks: 0,
@@ -33,18 +33,18 @@ export default {
         weights: "",
         order: "",
       }
-      data.sumOfMarks = this.weighing.sumOfMarks
-      this.weighing.relativeExpertsMarks.map((item, index) => {
+      data.sumOfMarks = this.solution.sumOfMarks
+      this.solution.relativeExpertsMarks.map((item, index) => {
         data.relativeExpertsMarks += index+1 + ": " + item
-        if (index+1 !== this.weighing.relativeExpertsMarks.length)
+        if (index+1 !== this.solution.relativeExpertsMarks.length)
           data.relativeExpertsMarks += ", "
       })
-      this.weighing.weights.map((item, index) => {
+      this.solution.weights.map((item, index) => {
         data.weights += index+1 + ": " + item.toFixed(4)
-        if (index+1 !== this.weighing.weights.length)
+        if (index+1 !== this.solution.weights.length)
           data.weights += ", "
       })
-      data.order = this.weighing.order
+      data.order = this.solution.order
       return data
     },
   }

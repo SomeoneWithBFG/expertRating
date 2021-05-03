@@ -18,33 +18,34 @@
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
+  props: {
+    solution: Object,
+  },
   data() {
     return {
     }
   },
   computed: {
-    ...mapGetters({
-      pairComparsion: "store/pairComparsion",
-    }),
     dataToShow: function () {
+      console.log(1, this.solution)
       var data = {
         values: "",
         sumOfValues: 0,
         weights: "",
         order: "",
       }
-      this.pairComparsion.values.map((item, index) => {
+      this.solution.values.map((item, index) => {
         data.values += index + 1 + ": " + item;
-        if (index + 1 !== this.pairComparsion.values.length)
-          data.values += ", "
+        if (index + 1 !== this.solution.values.length)
+          data.values += " | "
       })
-      data.sumOfValues = this.pairComparsion.sumOfValues
-      this.pairComparsion.weights.map((item, index) => {
+      data.sumOfValues = this.solution.sumOfValues
+      this.solution.weights.map((item, index) => {
         data.weights += index + 1 + ": " + item.toFixed(4);
-        if (index+1 !== this.pairComparsion.weights.length)
-          data.weights += ", "
+        if (index+1 !== this.solution.weights.length)
+          data.weights += " | "
       })
-      data.order = this.pairComparsion.order
+      data.order = this.solution.order
       return data
     },
   },

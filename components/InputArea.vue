@@ -3,7 +3,7 @@
     <div v-for="(val, indexY) in new Array(x)" :key="val" >
       {{text[indexY]}}
       <div v-for="(val, indexX) in new Array(y)" :key="val" class="string">
-        <div v-if="indexY === 0" class="stringEl">
+        <div v-if="indexY === 0 && method!=='sequentiallyComparison'" class="stringEl">
           Э{{indexX+1}} &nbsp;
         </div>
         <a-input 
@@ -11,6 +11,7 @@
           :placeholder="0" 
           @change="handleChange(indexX, indexY)"
           v-model="array[indexX][indexY]"
+          :disabled="(method === 'pairComparsion' && indexX === indexY || isCalculated)"
         />
       </div>
     </div>
@@ -22,6 +23,7 @@ import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
   props: {
     method: String,
+    isCalculated: Boolean,
   },
   data() {
     return {
@@ -72,12 +74,22 @@ export default {
       setMatrixElement: "store/setMatrixElement",
     }),
     handleChange(x, y) {
-      var payload = {
-        x: x, 
-        y: y, 
-        value: parseFloat(this.array[x][y] || 0)
+      if (this.method === 'sequentiallyComparison' && y === 0) {
+        var payload = {
+          x: x, 
+          y: y, 
+          value: this.array[x][y]
+        }
+        this.setMatrixElement(payload)
       }
-      this.setMatrixElement(payload)
+      else {
+        var payload = {
+          x: x, 
+          y: y, 
+          value: parseFloat(this.array[x][y] || 0)
+        }
+        this.setMatrixElement(payload)
+      }
     }
   }
 }

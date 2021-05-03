@@ -29,16 +29,16 @@
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
 export default {
-    data() {
-      return {
+  props: {
+    solution: Object,
+  },
+  data() {
+    return {
       }
     },
-    computed: {
-    ...mapGetters({
-      kemeniSnella: "store/kemeniSnella",
-    }),
+  computed: {
     dataToShow: function () {
-      return this.kemeniSnella;
+      return this.solution;
     },
   }
 }

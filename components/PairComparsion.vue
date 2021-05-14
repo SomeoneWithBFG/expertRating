@@ -27,7 +27,6 @@ export default {
   },
   computed: {
     dataToShow: function () {
-      console.log(1, this.solution)
       var data = {
         values: "",
         sumOfValues: 0,

@@ -38,12 +38,22 @@
         <div v-if="method==='kondorse'"> <Kondorse :solution="solution"/> </div>
         <div v-if="method==='kemeniSnella'"> <KemeniSnella :solution="solution"/> </div>
       </div>
+      <a-button 
+        v-if="method && isCalculated"
+        class="calcButton"
+        @click="print()"
+        :type="'default'"
+      >
+        Скачать решение
+      </a-button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
+import stringGenerator from "../files/stringGenerator";
+
 export default {
   data() {
     return {
@@ -79,6 +89,16 @@ export default {
       if (this.isCalculated)
         this.solution = this.solve(this.method);
     },
+    print() {
+      var element = document.createElement('a');
+      var text = stringGenerator(this.solution, this.method);
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      element.setAttribute('download', "solution.txt");
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
   },
   mounted: function () {
   },
@@ -95,7 +115,8 @@ export default {
   flex-direction: column;
 }
 .calcButton{
-  width: 7.5rem;
+  width: 10rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 .selector {

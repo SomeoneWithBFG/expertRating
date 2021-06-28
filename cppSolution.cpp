@@ -2,7 +2,7 @@
 #include <string>
 
 using namespace std;
-
+  
 void PairComparsion() {
     int binaryMatrix[4][4] = { 
         {-100, 1, 1, 1}, 

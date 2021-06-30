@@ -7,8 +7,6 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux"
 import { addArticle, removeArticle } from "../redux/actionCreators"
 import { Dispatch } from "redux"
 
-import './App.scss';
-
 const App: React.FC = () => {
   const articles: readonly IArticle[] = useSelector(
     (state: ArticleState) => state.articles,

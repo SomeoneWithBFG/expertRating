@@ -1,4 +1,5 @@
 import * as React from "react"
+import styles from './Article.module.scss';
 
 type Props = {
   saveArticle: (article: IArticle | any) => void
@@ -20,7 +21,7 @@ export const AddArticle: React.FC<Props> = ({ saveArticle }) => {
   }
 
   return (
-    <form onSubmit={addNewArticle} className="addArticle">
+    <form onSubmit={addNewArticle} className={styles.addArticle}>
       <input
         type="text"
         id="title"

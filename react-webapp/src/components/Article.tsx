@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Dispatch } from "redux"
 import { useDispatch } from "react-redux"
+import styles from './Article.module.scss';
 
 type Props = {
   article: IArticle
@@ -16,7 +17,7 @@ export const Article: React.FC<Props> = ({ article, removeArticle }) => {
   )
 
   return (
-    <div className="article">
+    <div className={styles.article}>
       <div>
         <h1>{article.title}</h1>
         <p>{article.body}</p>

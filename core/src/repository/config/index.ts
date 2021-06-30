@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 
 class Config {
-    ConfigNames: string[] = [
+    configNames: string[] = [
         'DB_HOST',
         'DB_USER',
         'DB_PASSWORD',
@@ -10,13 +10,15 @@ class Config {
     config: {[key: string]: string} = {}
 
     constructor() {
-        dotenv.config({path: '../../../.env'})
+        dotenv.config()
 
-        this.ConfigNames.forEach(key=>{
+        this.configNames.forEach(key=>{
             if(!process.env[key])
                 console.error(`ENV ${key} not set`)
             this.config[key] = process.env[key] || ''
         })
+
+        console.log(this.config)
     }
 }
 

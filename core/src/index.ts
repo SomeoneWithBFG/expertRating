@@ -11,6 +11,7 @@ const app: express.Application = express();
 repository.connect();
 
 app.use("/api/test", Routers.TestRouter);
+app.use("/api/calculations", Routers.CalculationsRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

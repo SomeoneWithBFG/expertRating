@@ -1,12 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
-import { useSelector, shallowEqual, useDispatch } from "react-redux"
+
 import { Article } from "../components/Article"
 import { AddArticle } from "../components/AddArticle"
+
+import { useSelector, shallowEqual, useDispatch } from "react-redux"
 import { addArticle, removeArticle } from "../redux/actionCreators"
 import { Dispatch } from "redux"
 
-import './App.css';
+import './App.scss';
 
 const App: React.FC = () => {
   const articles: readonly IArticle[] = useSelector(

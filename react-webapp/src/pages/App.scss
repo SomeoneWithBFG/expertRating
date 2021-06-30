@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: Nunito, sans-serif;
+  font-family: 'Nunito', 'sans-serif';
   background: #f5f6f7;
 }
 
@@ -20,7 +20,7 @@ main > h1 {
   text-align: center;
 }
 
-.Add-article {
+.addArticle {
   margin: 2rem auto;
   padding: 1rem;
   background: #fff;
@@ -31,7 +31,7 @@ main > h1 {
   border-radius: 10px;
 }
 
-.Add-article input {
+.addArticle input {
   display: block;
   margin: 1rem auto;
   width: 20rem;
@@ -41,7 +41,7 @@ main > h1 {
   outline: none;
 }
 
-.Add-article button {
+.addArticle button {
   width: 21rem;
   padding: 0.7rem;
   border: 1px solid #00b8e6;
@@ -52,17 +52,17 @@ main > h1 {
   outline: none;
 }
 
-.Add-article button:hover {
+.addArticle button:hover {
   background: #0093b8;
 }
 
-.Add-article button:disabled {
+.addArticle button:disabled {
   background: #d8d8d8;
   border: 1px solid #d8d8d8;
   cursor: not-allowed;
 }
 
-.Article {
+.article {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,22 +71,22 @@ main > h1 {
   border-radius: 10px;
 }
 
-.Article:not(:last-child) {
+.article:not(:last-child) {
   border-bottom: 2px solid #f5f6f7;
 }
 
-.Article h1 {
+.article h1 {
   color: #222;
   text-transform: capitalize;
   font-weight: 700;
   font-size: 1.7rem;
 }
 
-.Article p {
+.article p {
   padding-right: 1rem;
   color: #444;
 }
-.Article button {
+.article button {
   padding: 0.5rem 0.7rem;
   border: 1px solid #d34b4b;
   background: #d34b4b;
@@ -96,6 +96,6 @@ main > h1 {
   outline: none;
 }
 
-.Article button:hover {
+.article button:hover {
   background: #e06a6a;
 }

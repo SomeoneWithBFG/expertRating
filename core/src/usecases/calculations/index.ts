@@ -52,7 +52,6 @@ class Calculations implements ICalculations {
             objToReturn.order += maxIndex + 1 + " | ";
             foo[maxIndex] = -1;
         }
-        console.log(objToReturn)
         return objToReturn;
     }
     sequentiallyComparison (inputMatrix: SequentiallyComparisonInputMatrix, x: number, y: number) {

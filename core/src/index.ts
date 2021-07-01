@@ -2,11 +2,16 @@ import Routers from "./routers";
 import repository from "./repository";
 import dotenv from "dotenv";
 import express from "express";
+import bb from "express-busboy"
+import cors from "cors"
 
 dotenv.config()
 const port = process.env.PORT
 
 const app: express.Application = express();
+
+bb.extend(app);
+app.use(cors())
 
 repository.connect();
 

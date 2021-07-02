@@ -12,9 +12,7 @@ router.post("/kondorse", (req, res) => {
     res.send(result);
 });
 router.post("/pairComparsion", (req, res) => {
-    var result = Calculations.pairComparsion(Array.of(req.body.binaryMatrix), req.body.x, req.body.y)
-    console.log(req.body, 1)
-    console.log(result)
+    var result = Calculations.pairComparsion(req.body.binaryMatrix, req.body.x, req.body.y)
     res.send(result);
 });
 router.post("/preference", (req, res) => {

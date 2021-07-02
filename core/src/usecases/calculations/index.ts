@@ -18,6 +18,7 @@ function createMatrix(y: number, x: number) {
 
 class Calculations implements ICalculations {
     pairComparsion (binaryMatrix: number[][], x: number, y: number) {
+        console.log(typeof(binaryMatrix), x, y)
         var numOfEl = x;
         var objToReturn = {
             values: Array(x).fill(0),

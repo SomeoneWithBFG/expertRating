@@ -17,8 +17,6 @@ class Config {
                 console.error(`ENV ${key} not set`)
             this.config[key] = process.env[key] || ''
         })
-
-        console.log(this.config)
     }
 }
 

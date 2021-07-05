@@ -11,7 +11,7 @@ export interface SequentiallyComparisonInputMatrixElement {
     resultWeight: number,
 }
 
-export type SequentiallyComparisonInputMatrix = SequentiallyComparisonInputMatrixElement[]
+//export type SequentiallyComparisonInputMatrix = SequentiallyComparisonInputMatrixElement[]
 
 export interface SequentiallyComparisonResult {
     causedCorrections: string,
@@ -43,6 +43,6 @@ export interface KondorseResult {
 
 export interface KemeniSnellaResult {
     binaryMatrixArray: number[],
-    looseMatrix: number[],
+    looseMatrix: number[][],
     order: string,
 }

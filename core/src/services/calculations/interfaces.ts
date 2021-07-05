@@ -8,7 +8,7 @@ import {
     KemeniSnellaResult,
 } from "@src/models/dtm/calculations"
 
-export interface ICalculations {
+export interface ICalculationsService {
     pairComparsion: 
         (binaryMatrix: number[][], x: number, y: number) => PairComparsionResult;
     sequentiallyComparison: 

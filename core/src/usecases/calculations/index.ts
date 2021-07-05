@@ -1,54 +1,32 @@
+import { Request, Response } from "express";
+
 import { ICalculations } from './interfaces'
 import CalculationsService from "../../services/calculations"
 
 class Calculations implements ICalculations {
-    pairComparsion (req: any, res: any) {
-        if (req && req.body) {
-            let result = CalculationsService.pairComparsion(req.body.binaryMatrix, req.body.x, req.body.y);
-            return res.send(result);
-        }
-        else
-            return res.send("no data");
+    pairComparsion (req: Request, res: Response) {
+        const result = CalculationsService.pairComparsion(req.body.binaryMatrix, req.body.x, req.body.y);
+        res.json(result);
     }
-    sequentiallyComparison (req: any, res: any) {
-        if (req && req.body) {
-            let result = CalculationsService.sequentiallyComparison(req.body.inputMatrix, req.body.x, req.body.y);
-            return res.send(result);
-        }
-        else
-            return res.send("no data");
+    sequentiallyComparison (req: Request, res: Response) {
+        const result = CalculationsService.sequentiallyComparison(req.body.inputMatrix, req.body.x, req.body.y);
+        res.json(result);
     }
-    weighing (req: any, res: any) {
-        if (req && req.body) {
-            let result = CalculationsService.weighing(req.body.inputMatrix, req.body.x, req.body.y);
-            return res.send(result);
-        }
-        else
-            return res.send("no data");
+    weighing (req: Request, res: Response) {
+        const result = CalculationsService.weighing(req.body.inputMatrix, req.body.x, req.body.y);
+        return res.json(result);
     }
-    preference (req: any, res: any) {
-        if (req && req.body) {
-            let result = CalculationsService.preference(req.body.inputMatrix, req.body.x, req.body.y);
-            return res.send(result);
-        }
-        else
-            return res.send("no data");
+    preference (req: Request, res: Response) {
+        const result = CalculationsService.preference(req.body.inputMatrix, req.body.x, req.body.y);
+        return res.json(result);
     }
-    kondorse (req: any, res: any) {
-        if (req && req.body) {
-            let result = CalculationsService.kondorse(req.body.inputMatrix, req.body.x, req.body.y)
-            return res.send(result);
-        }
-        else
-            return res.send("no data");
+    kondorse (req: Request, res: Response) {
+        const result = CalculationsService.kondorse(req.body.inputMatrix, req.body.x, req.body.y)
+        return res.json(result);
     }
-    kemeniSnella (req: any, res: any) {
-        if (req && req.body) {
-            let result = CalculationsService.kemeniSnella(req.body.inputMatrix, req.body.x, req.body.y)
-            return res.send(result);
-        }
-        else
-            return res.send("no data");
+    kemeniSnella (req: Request, res: Response) {
+        const result = CalculationsService.kemeniSnella(req.body.inputMatrix, req.body.x, req.body.y)
+        return res.json(result);
     }
 }
 

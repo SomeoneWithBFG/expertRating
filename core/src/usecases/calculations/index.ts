@@ -1,38 +1,54 @@
 import { ICalculations } from './interfaces'
-import {
-    SequentiallyComparisonInputMatrixElement,
-    SequentiallyComparisonResult,
-    WeighingResult,
-    PreferenceResult,
-    KemeniSnellaResult,
-} from "@src/models/dtm/calculations"
-
 import CalculationsService from "../../services/calculations"
 
 class Calculations implements ICalculations {
-    pairComparsion (binaryMatrix: number[][], x: number, y: number) {
-        let result = CalculationsService.pairComparsion(binaryMatrix, x, y);
-        return result;
+    pairComparsion (req: any, res: any) {
+        if (req && req.body) {
+            let result = CalculationsService.pairComparsion(req.body.binaryMatrix, req.body.x, req.body.y);
+            return res.send(result);
+        }
+        else
+            return res.send("no data");
     }
-    sequentiallyComparison (inputMatrix: SequentiallyComparisonInputMatrixElement[], x: number, y: number) {
-        let result = CalculationsService.sequentiallyComparison(inputMatrix, x, y);
-        return result;
+    sequentiallyComparison (req: any, res: any) {
+        if (req && req.body) {
+            let result = CalculationsService.sequentiallyComparison(req.body.inputMatrix, req.body.x, req.body.y);
+            return res.send(result);
+        }
+        else
+            return res.send("no data");
     }
-    weighing (inputMatrix: number[][], x: number, y: number) {
-        let result = CalculationsService.weighing(inputMatrix, x, y);
-        return result;
+    weighing (req: any, res: any) {
+        if (req && req.body) {
+            let result = CalculationsService.weighing(req.body.inputMatrix, req.body.x, req.body.y);
+            return res.send(result);
+        }
+        else
+            return res.send("no data");
     }
-    preference (inputMatrix: number[][], x: number, y: number) {
-        let result = CalculationsService.preference(inputMatrix, x, y);
-        return result;
+    preference (req: any, res: any) {
+        if (req && req.body) {
+            let result = CalculationsService.preference(req.body.inputMatrix, req.body.x, req.body.y);
+            return res.send(result);
+        }
+        else
+            return res.send("no data");
     }
-    kondorse (inputMatrix: number[][], x: number, y: number) {
-        let result = CalculationsService.kondorse(inputMatrix, x, y)
-        return result;
+    kondorse (req: any, res: any) {
+        if (req && req.body) {
+            let result = CalculationsService.kondorse(req.body.inputMatrix, req.body.x, req.body.y)
+            return res.send(result);
+        }
+        else
+            return res.send("no data");
     }
-    kemeniSnella (inputMatrix: number[][], numOfProjects: number, numOfExperts: number) {
-        let result = CalculationsService.kemeniSnella(inputMatrix, numOfProjects, numOfExperts)
-        return result;
+    kemeniSnella (req: any, res: any) {
+        if (req && req.body) {
+            let result = CalculationsService.kemeniSnella(req.body.inputMatrix, req.body.x, req.body.y)
+            return res.send(result);
+        }
+        else
+            return res.send("no data");
     }
 }
 

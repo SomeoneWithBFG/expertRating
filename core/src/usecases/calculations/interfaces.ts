@@ -1,20 +1,12 @@
-import { 
-    PairComparsionResult, 
-    SequentiallyComparisonInputMatrixElement,
-    SequentiallyComparisonResult,
-    WeighingResult,
-    PreferenceResult,
-    KondorseResult,
-    KemeniSnellaResult,
-} from "@src/models/dtm/calculations"
+import { Request, Response, Application } from "express";
 
 export interface ICalculations {
     pairComparsion: 
-        (binaryMatrix: number[][], x: number, y: number) => PairComparsionResult;
+        (req: Request, res: Response) => Application;
     sequentiallyComparison: 
-        (inputMatrix: SequentiallyComparisonInputMatrixElement[], x: number, y: number) => SequentiallyComparisonResult;
-    weighing: (inputMatrix: number[][], x: number, y: number) => WeighingResult;
-    preference: (inputMatrix: number[][], x: number, y: number) => PreferenceResult;
-    kondorse: (inputMatrix: number[][], x: number, y: number) => KondorseResult;
-    kemeniSnella: (inputMatrix: number[][], x: number, y: number) => KemeniSnellaResult;
+        (req: Request, res: Response) => Application;
+    weighing: (req: Request, res: Response) => Application;
+    preference: (req: Request, res: Response) => Application;
+    kondorse: (req: Request, res: Response) => Application;
+    kemeniSnella: (req: Request, res: Response) => Application;
 }

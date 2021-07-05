@@ -50,7 +50,7 @@ class CalculationsService implements ICalculationsService {
     }
     sequentiallyComparison (inputMatrix: SequentiallyComparisonInputMatrixElement[], x: number, numOfEl: number) {
         let rawEvaluations = [];
-        for (let i = 0; i < y; i++) {
+        for (let i = 0; i < numOfEl; i++) {
             rawEvaluations.push(inputMatrix[i]);
         }
         let result: SequentiallyComparisonResult;

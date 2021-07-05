@@ -11,8 +11,6 @@ export interface SequentiallyComparisonInputMatrixElement {
     resultWeight: number,
 }
 
-//export type SequentiallyComparisonInputMatrix = SequentiallyComparisonInputMatrixElement[]
-
 export interface SequentiallyComparisonResult {
     causedCorrections: string,
     correctedEvaluations: number[],

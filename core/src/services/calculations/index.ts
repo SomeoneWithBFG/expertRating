@@ -12,12 +12,11 @@ function createMatrix(y: number, x: number) {
 }
 
 class CalculationsService implements ICalculationsService {
-    pairComparsion (binaryMatrix: number[][], x: number, y: number) {
-        let numOfEl = x;
+    pairComparsion (binaryMatrix: number[][], numOfEl: number, y: number) {
         let result = {
-            values: Array(x).fill(0),
+            values: Array(numOfEl).fill(0),
             sumOfValues: 0,
-            weights: Array(x).fill(0),
+            weights: Array(numOfEl).fill(0),
             order: "",
         };
         for (let i = 0; i < numOfEl; i++) {
@@ -49,7 +48,7 @@ class CalculationsService implements ICalculationsService {
         }
         return result;
     }
-    sequentiallyComparison (inputMatrix: SequentiallyComparisonInputMatrixElement[], x: number, y: number) {
+    sequentiallyComparison (inputMatrix: SequentiallyComparisonInputMatrixElement[], x: number, numOfEl: number) {
         let rawEvaluations = [];
         for (let i = 0; i < y; i++) {
             rawEvaluations.push(inputMatrix[i]);
@@ -62,7 +61,6 @@ class CalculationsService implements ICalculationsService {
             weights: [],
             order: "",
         };
-        let numOfEl = y;
         let weightToAdd = 25;
         for (let i = 0; i < numOfEl - 2; i++) {
             if (rawEvaluations[i].weight <= (rawEvaluations[i + 1].weight + rawEvaluations[i + 2].weight)) {

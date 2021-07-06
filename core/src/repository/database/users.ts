@@ -1,27 +1,27 @@
-import { User } from "@models/dbm/User";
+import { User } from "../../models/dbm/User";
 
 import { IUsersRepository } from "./interfaces";
-import { IUserDTM } from "@models/dtm/User";
+import { IUserDTM } from "../../models//dtm/User";
 
-import DBConnector from "@src/repository/database/connector";
+import DBConnector from "./connector";
 
 class UsersRepository implements IUsersRepository {
   getList = async () => {
     try {
       const response = await DBConnector.connector?.getRepository(User).find();
-      return { value: response };
+      return response ;
     } catch (e) {
-      return { error: e };
+      return e;
     }
   };
 
   getByID = async (id: string) => {
     try {
       const response = await DBConnector.connector?.getRepository(User).findOne(id);
-      if (!response) return { error: new Error('not found')}
-      return { value: response };
+      if (!response) return new Error('not found')
+      return response;
     } catch (e) {
-      return { error: e };
+      return e;
     }
   }
 
@@ -32,9 +32,9 @@ class UsersRepository implements IUsersRepository {
         .save({
           ...data,
         });
-      return { value: response };
+      return response;
     } catch (e) {
-      return { error: e };
+      return e;
     }
   };
 
@@ -45,9 +45,9 @@ class UsersRepository implements IUsersRepository {
         .update(id, {
           ...data,
         });
-      return { value: response.raw };
+      return response.affected;
     } catch (e) {
-      return { error: e };
+      return e;
     }
   };
 
@@ -56,33 +56,9 @@ class UsersRepository implements IUsersRepository {
       const response = await DBConnector.connector
         ?.getRepository(User)
         .delete(id);
-      return { value: !!response.affected };
+      return !!response.affected;
     } catch (e) {
-      return { error: e };
-    }
-  };
-
-  checkLogin = async (login: string) => {
-    try {
-      const response = await DBConnector.connector
-        ?.getRepository(User)
-        .findOne({ where: { login: login } });
-
-      return { value: response };
-    } catch (e) {
-      return { error: e };
-    }
-  };
-
-  login = async (login: string, password: string) => {
-    try {
-      const response = await DBConnector.connector
-        ?.getRepository(User)
-        .findOne({ where: { login: login, password: password } });
-
-      return { value: response };
-    } catch (e) {
-      return { error: e };
+      return e;
     }
   };
 }

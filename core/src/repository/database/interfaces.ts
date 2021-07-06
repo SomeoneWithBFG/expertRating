@@ -1,4 +1,3 @@
-import { IFuncResultModel } from "@models/common/FunctionModel";
 import { User } from "@models/dbm/User";
 
 import { IUserDTM } from "@models/dtm/User";
@@ -13,9 +12,9 @@ export default interface IDB {
 }
 
 export interface IUsersRepository {
-  getList: () => Promise<IFuncResultModel<User[]>>;
-  getByID: (id: string) => Promise<IFuncResultModel<User>>;
-  create: (data: IUserDTM) => Promise<IFuncResultModel<User>>;
-  update: (id: string, data: IUserDTM) => Promise<IFuncResultModel<User>>;
-  delete: (id: string) => Promise<IFuncResultModel<boolean>>;
+  getList: () => Promise<User[]>;
+  getByID: (id: string) => Promise<User>;
+  create: (data: IUserDTM) => Promise<User>;
+  update: (id: string, data: IUserDTM) => Promise<User>;
+  delete: (id: string) => Promise<boolean>;
 }

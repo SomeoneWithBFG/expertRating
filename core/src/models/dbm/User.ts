@@ -5,21 +5,21 @@ export class User {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({default: () => "CURRENT_TIMESTAMP"})
   createdAt: Date;
 
-  @Column()
+  @Column({default: () => "CURRENT_TIMESTAMP"})
   editedAt: Date;
 
   @Column()
   name: string;
 
-  @Column()
+  @Column({default: ""})
   login: string;
 
-  @Column()
+  @Column({default: ""})
   password: string;
 
-  @Column()
+  @Column({default: ""})
   role: string;
 }

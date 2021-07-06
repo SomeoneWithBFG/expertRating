@@ -1,8 +1,8 @@
-import UserService from "./UserService";
+import UserService from "./users";
 
 import {
   IUserService,
-} from "./layerInterfaces";
+} from "./users/interfaces";
 
 class UseCases {
   userService: IUserService;

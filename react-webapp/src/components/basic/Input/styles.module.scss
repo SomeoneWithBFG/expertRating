@@ -1,0 +1,20 @@
+@import "../../../styles/colors/colors.scss";
+@import "../../../styles/fonts/fonts.scss";
+
+.input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    outline: none;
+    font-size: 80%;
+    font: $basic;
+    border: 1px solid $light-gray;
+    background-color: $very-light-gray;
+}
+
+.basic {
+    &:hover, &:focus {
+        border-color: $blue;
+    }
+    background-color: $white;
+}

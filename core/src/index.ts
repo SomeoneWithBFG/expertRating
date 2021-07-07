@@ -1,3 +1,5 @@
+import 'module-alias/register';
+
 import Routers from "./routers";
 import repository from "./repository";
 import dotenv from "dotenv";

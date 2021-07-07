@@ -1,7 +1,7 @@
-import { User } from "../../models/dbm/User";
+import { User } from "@models/dbm/User";
 
 import { IUsersService } from "./interfaces";
-import { IUserDTM } from "../../models//dtm/User";
+import { IUserDTM } from "@models/dtm/User";
 
 import DBConnector from "./connector";
 

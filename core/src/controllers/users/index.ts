@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 
-import UsersRepository from "../../repository/database/users"
+import UsersRepository from "@repository/database/users"
 
 import { IUserController } from "./interfaces";
 
-import MessageGenerator from "../../services/messageGenerator";
+import MessageGenerator from "@services/messageGenerator";
 
 
 class UserController implements IUserController {

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import { ICalculations } from './interfaces'
-import CalculationsService from "../../services/calculations"
+import CalculationsService from "@services/calculations"
 
 class Calculations implements ICalculations {
     pairComparsion (req: Request, res: Response) {

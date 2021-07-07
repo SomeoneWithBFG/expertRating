@@ -5,6 +5,8 @@ import { IUserDTM } from "@models/dtm/User";
 
 import DBConnector from "./connector";
 
+import MessageGenerator from "@services/messageGenerator";
+
 class UsersService implements IUsersService {
   UserRepository = () => {
     return DBConnector.connector?.getRepository(User)
@@ -22,7 +24,7 @@ class UsersService implements IUsersService {
   getUserByID = async (id: string) => {
     try {
       const response = await this.UserRepository().findOne(id);
-      if (!response) return 'User not found'
+      if (!response) return MessageGenerator.createMessage(404, "error", "User with this ID not found")
       return response;
     } catch (e) {
       return e;

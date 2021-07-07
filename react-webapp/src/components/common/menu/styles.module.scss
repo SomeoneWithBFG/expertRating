@@ -1,0 +1,13 @@
+@import "../../../styles/colors/colors.scss";
+@import "../../../styles/fonts/fonts.scss";
+
+.container {
+    position: absolute;
+    left: 0px;
+    top: -1rem;
+    width: 20%;
+    height: 100%;
+    padding: 1rem;
+    background-color: $very-light-gray;
+    border-right: 1px solid $light-gray;
+}

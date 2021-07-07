@@ -1,0 +1,36 @@
+@import "../../../styles/colors/colors.scss";
+@import "../../../styles/fonts/fonts.scss";
+
+.button {
+    width: 100%;
+    min-height: 2.25rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    outline: none;
+    font-size: 80%;
+    font: $basic;
+    border: 1px solid $light-gray;
+}
+
+.basic {
+    &:hover, &:focus {
+        border-color: $blue;
+        color: $blue;
+    }
+    background-color: $white;
+    color: $gray;
+}
+
+.disabled {
+    color: $gray;
+    background-color: $very-light-gray;
+}
+
+.danger {
+    color: $white;
+    background-color: $red;
+    border: none;
+    &:hover, &:focus {
+        background-color: $light-red;
+    }
+}

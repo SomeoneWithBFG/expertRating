@@ -3,7 +3,7 @@ import React from 'react';
 import { Article } from "../components/Article"
 import { AddArticle } from "../components/AddArticle"
 
-import Input from "../components/basic/Input"
+import Button from "../components/basic/Button"
 
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
 import { addArticle, removeArticle } from "../redux/actionCreators"
@@ -36,11 +36,10 @@ const App: React.FC = () => {
       ))}
       
       <div style={{margin:"1rem"}}>
-      <Input name="test" type="disabled" />
-      </div>
-
-      <div style={{margin:"1rem"}}>
-      <Input name="test" type="basic" />
+      <Button 
+        props={{name: "test", type: "disabled", placeholder:"disabled"}}
+        onClick={()=>{console.log("disabled")}}
+      />
       </div>
 
       </div>

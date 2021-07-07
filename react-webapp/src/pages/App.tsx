@@ -3,7 +3,7 @@ import React from 'react';
 import { Article } from "../components/Article"
 import { AddArticle } from "../components/AddArticle"
 
-import Button from "../components/basic/Button"
+import Selector from "../components/basic/Selector"
 
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
 import { addArticle, removeArticle } from "../redux/actionCreators"
@@ -21,6 +21,10 @@ const App: React.FC = () => {
     (article: IArticle) => dispatch(addArticle(article)),
     [dispatch]
   )
+  
+  const testFunction = (item: any) => {
+    console.log(item)
+  }
 
   return (
     <main>
@@ -36,9 +40,12 @@ const App: React.FC = () => {
       ))}
       
       <div style={{margin:"1rem"}}>
-      <Button 
-        props={{name: "test", type: "disabled", placeholder:"disabled"}}
-        onClick={()=>{console.log("disabled")}}
+      <Selector 
+        props={{
+          name: "test", type: "basic", defaultValue: {value: "test1", placeholder: "fckff"},
+          options: [{value: "test1", placeholder: "ftest1"}, {value: "test2", placeholder: "ftest2"}]
+        }}
+        onChange={testFunction}
       />
       </div>
 

@@ -3,6 +3,5 @@ export interface IUserDTM {
     name: string;
     login?: string;
     password?: string;
-    isAdmin?: boolean;
-    role?: string;
+    role?: number;
 }

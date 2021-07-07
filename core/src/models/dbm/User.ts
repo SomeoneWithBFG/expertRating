@@ -14,12 +14,12 @@ export class User {
   @Column()
   name: string;
 
-  @Column({default: ""})
+  @Column({default: "", select: false })
   login: string;
 
-  @Column({default: ""})
+  @Column({default: "", select: false })
   password: string;
 
-  @Column({default: ""})
-  role: string;
+  @Column({default: 0})
+  role: number;
 }

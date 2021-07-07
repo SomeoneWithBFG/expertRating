@@ -1,12 +1,12 @@
 import express, { Router } from "express";
-import Users from "../usecases/users"
+import Users from "../controllers/users"
 
 const router: Router = express.Router();
 
-router.get("/", Users.getList);
-router.get("/:id", Users.getByID);
-router.post("/", Users.create)
-router.patch("/", Users.update)
-router.delete("/", Users.delete)
+router.get("/", Users.getUserList);
+router.get("/by-id", Users.getUserByID);
+router.post("/", Users.createUser)
+router.patch("/", Users.updateUser)
+router.delete("/", Users.deleteUser)
 
 export default router;

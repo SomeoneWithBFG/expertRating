@@ -1,18 +1,18 @@
 import connector from "./connector";
-import UsersRepository from "./users";
+import UsersService from "./users";
 
 import IDB, {
   IConnector,
-  IUsersRepository,
+  IUsersService,
 } from "./interfaces";
 
 class DB implements IDB {
   connector: IConnector;
-  users: IUsersRepository;
+  users: IUsersService;
 
   constructor() {
     this.connector = connector;
-    this.users = UsersRepository;
+    this.users = UsersService;
   }
 }
 

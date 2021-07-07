@@ -1,47 +1,46 @@
 import { User } from "../../models/dbm/User";
 
-import { IUsersRepository } from "./interfaces";
+import { IUsersService } from "./interfaces";
 import { IUserDTM } from "../../models//dtm/User";
 
 import DBConnector from "./connector";
 
-class UsersRepository implements IUsersRepository {
-  getList = async () => {
+class UsersService implements IUsersService {
+  UserRepository = () => {
+    return DBConnector.connector?.getRepository(User)
+  }
+
+  getUserList = async () => {
     try {
-      const response = await DBConnector.connector?.getRepository(User).find();
+      const response = await this.UserRepository().find();
       return response ;
     } catch (e) {
       return e;
     }
   };
 
-  getByID = async (id: string) => {
+  getUserByID = async (id: string) => {
     try {
-      const response = await DBConnector.connector?.getRepository(User).findOne(id);
-      if (!response) return new Error('not found')
+      const response = await this.UserRepository().findOne(id);
+      if (!response) return 'User not found'
       return response;
     } catch (e) {
       return e;
     }
   }
 
-  create = async (data: IUserDTM) => {
+  createUser = async (data: IUserDTM) => {
     try {
-      const response = await DBConnector.connector
-        ?.getRepository(User)
-        .save({
-          ...data,
-        });
+      const response = await this.UserRepository().save(data);
       return response;
     } catch (e) {
       return e;
     }
   };
 
-  update = async (id: string, data: IUserDTM) => {
+  updateUser = async (id: string, data: IUserDTM) => {
     try {
-      const response = await DBConnector.connector
-        ?.getRepository(User)
+      const response = await this.UserRepository()
         .update(id, {
           ...data,
         });
@@ -51,11 +50,9 @@ class UsersRepository implements IUsersRepository {
     }
   };
 
-  delete = async (id: string) => {
+  deleteUser = async (id: string) => {
     try {
-      const response = await DBConnector.connector
-        ?.getRepository(User)
-        .delete(id);
+      const response = await this.UserRepository().delete(id);
       return !!response.affected;
     } catch (e) {
       return e;
@@ -63,4 +60,4 @@ class UsersRepository implements IUsersRepository {
   };
 }
 
-export default new UsersRepository();
+export default new UsersService();

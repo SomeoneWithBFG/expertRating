@@ -8,13 +8,13 @@ export interface IConnector {
 
 export default interface IDB {
   connector: IConnector;
-  users: IUsersRepository;
+  users: IUsersService;
 }
 
-export interface IUsersRepository {
-  getList: () => Promise<User[]>;
-  getByID: (id: string) => Promise<User>;
-  create: (data: IUserDTM) => Promise<User>;
-  update: (id: string, data: IUserDTM) => Promise<User>;
-  delete: (id: string) => Promise<boolean>;
+export interface IUsersService {
+  getUserList: () => Promise<User[]>;
+  getUserByID: (id: string) => Promise<User>;
+  createUser: (data: IUserDTM) => Promise<User>;
+  updateUser: (id: string, data: IUserDTM) => Promise<User>;
+  deleteUser: (id: string) => Promise<boolean>;
 }

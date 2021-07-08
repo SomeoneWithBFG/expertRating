@@ -1,5 +1,5 @@
-import express, { Request, Response, Router } from "express";
-import Calculations from "../usecases/calculations"
+import express, { Router } from "express";
+import Calculations from "@controllers/calculations"
 
 const router: Router = express.Router();
 

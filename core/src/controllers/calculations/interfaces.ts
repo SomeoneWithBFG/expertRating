@@ -1,4 +1,4 @@
-import { Request, Response, Application } from "express";
+import { Request, Response } from "express";
 
 export interface ICalculations {
     pairComparsion: 

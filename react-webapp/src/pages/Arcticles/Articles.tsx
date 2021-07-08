@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Article } from "../components/Article"
-import { AddArticle } from "../components/AddArticle"
+import { Article } from "../../components/Article"
+import { AddArticle } from "../../components/AddArticle"
 
-import Selector from "../components/basic/Selector"
+import Selector from "../../components/basic/Selector"
 
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
-import { addArticle, removeArticle } from "../redux/actionCreators"
+import { addArticle, removeArticle } from "../../redux/actionCreators"
 import { Dispatch } from "redux"
 
 const App: React.FC = () => {

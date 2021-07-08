@@ -4,10 +4,14 @@ import { Article } from "../../components/Article"
 import { AddArticle } from "../../components/AddArticle"
 
 import Selector from "../../components/basic/Selector"
+import Input from "../../components/basic/Input"
+import Button from "../../components/basic/Button"
 
 import { useSelector, shallowEqual, useDispatch } from "react-redux"
 import { addArticle, removeArticle } from "../../redux/actionCreators"
 import { Dispatch } from "redux"
+
+import Menu from "../../components/complex/Menu"
 
 const App: React.FC = () => {
   const articles: readonly IArticle[] = useSelector(
@@ -29,6 +33,7 @@ const App: React.FC = () => {
   return (
     <main>
       <div>
+      <Menu />
       <h1>My Articles</h1>
       <AddArticle saveArticle={saveArticle} />
       {articles.map((article: IArticle) => (
@@ -41,10 +46,18 @@ const App: React.FC = () => {
       
       <div style={{margin:"1rem"}}>
       <Selector 
-        props={{
-          name: "test", type: "basic", defaultValue: {value: "test1", placeholder: "fckff"},
-          options: [{value: "test1", placeholder: "ftest1"}, {value: "test2", placeholder: "ftest2"}]
-        }}
+        onChange={testFunction}
+      />
+      </div>
+
+      <div style={{margin:"1rem"}}>
+      <Input 
+        onChange={testFunction}
+      />
+      </div>
+
+      <div style={{margin:"1rem"}}>
+      <Button 
         onChange={testFunction}
       />
       </div>

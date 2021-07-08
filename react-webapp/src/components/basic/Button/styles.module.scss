@@ -10,27 +10,37 @@
     font-size: 80%;
     font: $basic;
     border: 1px solid $light-gray;
+    box-shadow: 0px 5px 5px $light-gray;
 }
 
 .basic {
-    &:hover, &:focus {
-        border-color: $blue;
-        color: $blue;
+    &:hover {
+        box-shadow: 0px 5px 5px $little-light-gray;
+    }
+    &:focus {
+        box-shadow: 0px 2px 2px $little-light-gray inset;
     }
     background-color: $white;
     color: $gray;
-}
-
-.disabled {
-    color: $gray;
-    background-color: $very-light-gray;
+    &:disabled {
+        color: $gray;
+        background-color: $very-light-gray;
+    }
 }
 
 .danger {
-    color: $white;
-    background-color: $red;
-    border: none;
-    &:hover, &:focus {
-        background-color: $light-red;
+    color: $red;
+    background-color: $white;
+    border: 1px solid $very-light-red;
+    box-shadow: 0px 5px 5px $very-light-red;
+    &:hover {
+        box-shadow: 0px 5px 5px $light-red;
+    }
+    &:focus {
+        box-shadow: 0px 2px 2px $very-light-red inset;
+    }
+    &:disabled {
+        background-color: $very-light-gray;
+        box-shadow: 0px 5px 5px $very-light-red;
     }
 }

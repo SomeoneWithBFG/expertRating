@@ -46,6 +46,9 @@ class UsersService implements IUsersService {
         .update(id, {
           ...data,
         });
+      if (!response.affected) {
+        return MessageGenerator.createMessage(404, "error", "User with this ID not found")
+      }
       return response.affected;
     } catch (e) {
       return e;
@@ -55,6 +58,9 @@ class UsersService implements IUsersService {
   deleteUser = async (id: string) => {
     try {
       const response = await this.UserRepository().delete(id);
+      if (!response.affected) {
+        return MessageGenerator.createMessage(404, "error", "User with this ID not found")
+      }
       return !!response.affected;
     } catch (e) {
       return e;

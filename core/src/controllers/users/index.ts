@@ -45,7 +45,10 @@ class UserController implements IUserController {
       res.json(result);
       return;
     }
-    res.status(404).json(MessageGenerator.createMessage(404, "error", "User with this ID not found"))
+    else {
+      res.json(isUpdated);
+      return;
+    }
   };
 
   deleteUser = async (req: Request, res: Response) => {
@@ -60,8 +63,11 @@ class UserController implements IUserController {
       res.json(result);
       return;
     }
-    res.status(404).json(MessageGenerator.createMessage(404, "error", "User with this ID not found"))
-  };
+    else {
+      res.json(wasDeleted);
+      return;
+    }
+};
 }
 
 export default new UserController();

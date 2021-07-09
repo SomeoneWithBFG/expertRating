@@ -22,6 +22,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "nodemon": "^2.0.8",
     "pg": "^8.6.0",
@@ -36,5 +37,8 @@
     "@controllers": "dist/controllers",
     "@routers": "dist/routers",
     "@repository": "dist/repository"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.4"
   }
 }

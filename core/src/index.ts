@@ -1,6 +1,7 @@
 import 'module-alias/register';
 
 import Routers from "./routers";
+import Middleware from "./middleware";
 import repository from "./repository";
 import dotenv from "dotenv";
 import express from "express";
@@ -19,6 +20,9 @@ app.use(express.json());
 
 repository.connect();
 
+app.use(Middleware.executeJWT);
+app.use("/api/auth", Routers.AuthRouter);
+app.use(Middleware.isAuth);
 app.use("/api/test", Routers.TestRouter);
 app.use("/api/calculations", Routers.CalculationsRouter);
 app.use("/api/users", Routers.UsersRouter);

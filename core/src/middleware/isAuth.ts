@@ -1,11 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 
+import MessageGenerator from "@src/services/messageGenerator";
+
 const isAuth = (req: Request, res: Response, next: NextFunction) => {
-  if (req.body.user === undefined) {
-    res.status(401).json({ status: "error", message: "Token is not defined" });
-  }
-  else if (req.body.user === false) {
-    res.status(401).json({ status: "error", message: "Token is not valid" });
+  if (!req.body.user) {
+    res.json(MessageGenerator.createMessage(401, "error", "Token is not defined or not valid"));
   }
   else {
     delete req.body.user;

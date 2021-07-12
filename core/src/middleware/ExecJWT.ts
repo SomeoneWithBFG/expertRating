@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import AuthService from "@services/authService";
+import JWTService from "@src/services/JWTService";
 
 const execJWT = async (req: Request, res: Response, next: NextFunction) => {
   let token = req.header("Authorization");
@@ -7,7 +7,7 @@ const execJWT = async (req: Request, res: Response, next: NextFunction) => {
     if (token.startsWith("Bearer ")) {
       token = token.slice(7, token.length);
     }
-    const value= await AuthService.verify(token);
+    const value = await JWTService.verify(token);
     if (value instanceof Error) {
       req.body.user = false;
     }

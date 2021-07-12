@@ -5,7 +5,7 @@ import { IAuthController } from "./interfaces";
 import UsersRepository from "@repository/database/users"
 
 import MessageGenerator from "@services/messageGenerator";
-import AuthService from "@services/authService";
+import JWTService from "@src/services/JWTService";
 
 class AuthController implements IAuthController {
     async login (req: Request, res: Response) {
@@ -16,32 +16,21 @@ class AuthController implements IAuthController {
             res.json(MessageGenerator.createMessage(403, "error", "Invalid login or/and password"))
             return;
         } 
-        else {
-            const tokens = AuthService.generate(user.id, user.role)
-            res.json(tokens)
-            return;
-        }
+        const tokens = JWTService.generate(user.id, user.role)
+        res.json(tokens)
     }
     async refreshToken (req: Request, res: Response) {
-        const value = await AuthService.verify(req.body.refreshToken);
-        let id = "";
-        let role = 0;
-        if (value && value.decoded) {
-            id = value.decoded.id
-            role = value.decoded.role
-        }
+        const value = await JWTService.verify(req.body.refreshToken);
         if (value instanceof Error) {
             res.json(MessageGenerator.createMessage(500, "error", "JWT not found"));
             return;
-        } 
-        else {
-            const value = await AuthService.generate(id, role);
-            if (value instanceof Error) {
-                res.json(MessageGenerator.createMessage(500, "error", "JWT undefined error"));
-                return;
-            }
-            res.status(200).json(value);
         }
+        const jwt = await JWTService.generate(value.id, value.role);
+        if (jwt instanceof Error) {
+            res.json(MessageGenerator.createMessage(500, "error", "JWT undefined error"));
+            return;
+        }
+        res.status(200).json(jwt);
     };
 }
 

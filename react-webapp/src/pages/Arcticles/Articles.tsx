@@ -3,7 +3,7 @@ import React from 'react';
 import { Article } from "../../components/Article"
 import { AddArticle } from "../../components/AddArticle"
 
-import Selector from "../../components/basic/Selector"
+import Selector from "../../components/basic/Select"
 import Input from "../../components/basic/Input"
 import Button from "../../components/basic/Button"
 
@@ -52,14 +52,24 @@ const App: React.FC = () => {
 
       <div style={{margin:"1rem"}}>
       <Input 
+        props={{
+          name: "",
+          type: "basic",
+          placeholder: "",
+        }} 
         onChange={testFunction}
       />
       </div>
 
       <div style={{margin:"1rem"}}>
       <Button 
-        onChange={testFunction}
-      />
+        props={{
+          name: "",
+          type: "basic",
+          placeholder: "",
+          isDisabled: false
+        }} 
+        onChange={testFunction} />
       </div>
 
       </div>

@@ -2,8 +2,9 @@
 @import "../../../styles/fonts/fonts.scss";
 
 .input {
-    width: 98%;
-    padding: 0.25rem;
+    width: 100%;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
     border-radius: 0.25rem;
     outline: none;
     font: $basic;

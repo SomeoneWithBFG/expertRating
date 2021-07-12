@@ -1,7 +1,7 @@
 import { FC, SelectHTMLAttributes, useMemo } from "react"
 import styles from "./styles.module.scss"
 
-interface SelectorProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     children?: React.ReactNode;
     props?: {
         name?: string,
@@ -9,10 +9,10 @@ interface SelectorProps extends SelectHTMLAttributes<HTMLSelectElement> {
         defaultValue?: {value: string, placeholder?: string}
         options?: {value: string, placeholder?: string}[],
     };
-    onChange?: any
+    onChange?: React.ChangeEventHandler<HTMLSelectElement> | undefined
 }
 
-const Selector: FC<SelectorProps> = ({children, props, onChange}) => {
+const Select: FC<SelectProps> = ({children, props, onChange}) => {
     const defaultProps = {
         name: "defaultSelector",
         type: "basic",
@@ -27,35 +27,28 @@ const Selector: FC<SelectorProps> = ({children, props, onChange}) => {
         options: (props && props.options) ? props.options : defaultProps.options,
     }
     const classes = useMemo<string>( () =>
-        [styles.selector, styles[data.type]].join(' '), 
+        [styles.select, styles[data.type]].join(' '), 
         [data.type]
     )
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        if(!onChange) {
-            console.log("Input: no event handler was provided")
-            return
-        }
-        onChange(e.currentTarget.value);
-    };
     return (
         <div>
             <select 
                 className={classes}
                 id={data.name} 
                 disabled={data.type === "disabled"}
-                onChange={handleChange}
+                onChange={onChange}
             >
                 <option 
                     key={"hidden"} 
-                    className={styles.selectorElement} 
+                    className={styles.selectElement} 
                     value={data.defaultValue ? data.defaultValue.value : "false"} 
                     hidden
                 >
                     {data.defaultValue.value}
                 </option>
-                {data.options ? data.options.map((option) => {
+                {data.options ? data.options.map((option, index) => {
                     return (
-                        <option key={option.value} className={styles.selectorElement} value={option.value}>
+                        <option key={index} className={styles.selectElement} value={option.value}>
                             {option.placeholder ? option.placeholder : option.value}
                         </option>
                     )
@@ -65,4 +58,4 @@ const Selector: FC<SelectorProps> = ({children, props, onChange}) => {
     );
 }
 
-export default Selector;
+export default Select;

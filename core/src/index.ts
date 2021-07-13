@@ -1,7 +1,6 @@
 import 'module-alias/register';
 
 import Routers from "./routers";
-import Middleware from "./middleware";
 import repository from "./repository";
 import dotenv from "dotenv";
 import express from "express";
@@ -27,8 +26,6 @@ app.get('/', (req, res) => {
 app.use("/api/test", Routers.TestRouter);
 app.use("/api/calculations", Routers.CalculationsRouter);
 app.use("/api/auth", Routers.AuthRouter);
-
-app.use(Middleware.validateJWT);
 app.use("/api/users", Routers.UsersRouter);
 
 app.listen(port, () => {

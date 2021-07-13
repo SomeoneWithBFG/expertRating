@@ -7,21 +7,23 @@
     padding: 0.25rem;
     border-radius: 0.25rem;
     outline: none;
-    font-size: 80%;
     font: $basic;
     border: 1px solid $light-gray;
     box-shadow: 0px 5px 5px $light-gray;
 }
 
 .basic {
+    background-color: $white;
+    color: $gray;
+
     &:hover {
         box-shadow: 0px 5px 5px $little-light-gray;
     }
+
     &:focus {
         box-shadow: 0px 2px 2px $little-light-gray inset;
     }
-    background-color: $white;
-    color: $gray;
+
     &:disabled {
         color: $gray;
         background-color: $very-light-gray;
@@ -33,12 +35,15 @@
     background-color: $white;
     border: 1px solid $very-light-red;
     box-shadow: 0px 5px 5px $very-light-red;
+
     &:hover {
         box-shadow: 0px 5px 5px $light-red;
     }
+
     &:focus {
         box-shadow: 0px 2px 2px $very-light-red inset;
     }
+    
     &:disabled {
         background-color: $very-light-gray;
         box-shadow: 0px 5px 5px $very-light-red;

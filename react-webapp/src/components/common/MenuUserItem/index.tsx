@@ -12,7 +12,7 @@ interface MenuUserItemProps {
 
 const MenuUserItem: FC<MenuUserItemProps> = (props) => {
     const data = {
-        name: props.name.length > 20 ? props.name.slice(-20)+"..." : props.name,
+        name: props.name,
         role: props.role,
         group: props.group ? props.group : null,
         link: props.link,
@@ -23,7 +23,7 @@ const MenuUserItem: FC<MenuUserItemProps> = (props) => {
                 {data.name[0].toUpperCase()}
             </div>
             <div className={styles.infoContainer}>
-                <div>
+                <div className={styles.name}>
                     {data.name}
                 </div>
                 <div className={styles.additionalInfo}>

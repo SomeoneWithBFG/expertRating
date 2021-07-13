@@ -12,19 +12,28 @@
     border-bottom: 1px solid $light-gray;
     box-shadow: 0px 5px 5px $light-gray;
     text-decoration: none;
+
     &:hover {
         box-shadow: 0px 5px 5px $little-light-gray;
     }
+
     &:focus {
         box-shadow: 0px 5px 5px $little-light-gray inset;
     }
 }
 
 .infoContainer {
+    max-width: 12.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     font-size: 1.25rem;
+}
+
+.name {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
 .additionalInfo {
@@ -33,11 +42,13 @@
     justify-content: space-between;
     font-size: 1rem;
     width: 10rem;
+
     .group {
         display: flex;
         justify-content: flex-start;
         //margin-bottom: -1rem;
     }
+
     .role {
         display: flex;
         justify-content: flex-end;
@@ -55,6 +66,7 @@
     border-radius: 50%;
     background-color: $very-light-gray;
     box-shadow: 0px 5px 5px $light-gray;
+    
     &:hover, &:focus {
         box-shadow: 0px 5px 5px $little-light-gray;
     }

@@ -64,9 +64,9 @@ const App: React.FC = () => {
       <div style={{margin:"1rem"}}>
       <Button 
         props={{
-          name: "",
+          name: "afsgh",
           type: "basic",
-          placeholder: "",
+          placeholder: "afsgh",
           isDisabled: false
         }} 
         onChange={testFunction} />

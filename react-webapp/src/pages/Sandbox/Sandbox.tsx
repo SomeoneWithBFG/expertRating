@@ -1,14 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-import Menu from "../../components/complex/Menu"
+import Menu from '../../components/complex/Menu'
 
 const Sandbox: React.FC = () => {
-  return (
-    <main>
-      <Menu />
-    </main>
-  )
+    return (
+        <main>
+            <Menu />
+        </main>
+    )
 }
 
-
-export default Sandbox;
+export default Sandbox

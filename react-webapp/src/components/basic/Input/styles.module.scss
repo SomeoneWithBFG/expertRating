@@ -1,12 +1,12 @@
-@import "../../../styles/colors/colors.scss";
+@import '../../../styles/colors/colors.scss';
 
 .input {
     width: 100%;
     min-height: 2.25rem;
     padding: 5px;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
     border-radius: 0.25rem;
     outline: none;
     border: 1px solid $light-gray;

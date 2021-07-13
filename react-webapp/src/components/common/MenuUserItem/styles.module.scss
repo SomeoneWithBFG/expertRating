@@ -1,5 +1,5 @@
-@import "../../../styles/colors/colors.scss";
-@import "../../../styles/fonts/fonts.scss";
+@import '../../../styles/colors/colors.scss';
+@import '../../../styles/fonts/fonts.scss';
 
 .container {
     height: 5rem;
@@ -31,9 +31,9 @@
 }
 
 .name {
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .additionalInfo {
@@ -65,8 +65,9 @@
     border-radius: 50%;
     background-color: $very-light-gray;
     box-shadow: 0px 5px 5px $light-gray;
-    
-    &:hover, &:focus {
+
+    &:hover,
+    &:focus {
         box-shadow: 0px 5px 5px $little-light-gray;
     }
 }

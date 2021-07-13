@@ -5,6 +5,8 @@ import { IUserDTM } from "@models/dtm/User";
 
 import DBConnector from "./connector";
 
+import MessageGenerator from "@services/messageGenerator";
+
 class UsersService implements IUsersService {
   UserRepository = () => {
     return DBConnector.connector?.getRepository(User)
@@ -22,7 +24,7 @@ class UsersService implements IUsersService {
   getUserByID = async (id: string) => {
     try {
       const response = await this.UserRepository().findOne(id);
-      if (!response) return 'User not found'
+      if (!response) return MessageGenerator.createMessage(404, "error", "User with this ID not found")
       return response;
     } catch (e) {
       return e;
@@ -44,6 +46,9 @@ class UsersService implements IUsersService {
         .update(id, {
           ...data,
         });
+      if (!response.affected) {
+        return MessageGenerator.createMessage(404, "error", "User with this ID not found")
+      }
       return response.affected;
     } catch (e) {
       return e;
@@ -53,7 +58,22 @@ class UsersService implements IUsersService {
   deleteUser = async (id: string) => {
     try {
       const response = await this.UserRepository().delete(id);
+      if (!response.affected) {
+        return MessageGenerator.createMessage(404, "error", "User with this ID not found")
+      }
       return !!response.affected;
+    } catch (e) {
+      return e;
+    }
+  };
+
+  login = async (login: string, password: string) => {
+    try {
+      const response = this.UserRepository().findOne({ 
+        where: { login: login, password: password } 
+      });
+
+      return response;
     } catch (e) {
       return e;
     }

@@ -17,4 +17,5 @@ export interface IUsersService {
   createUser: (data: IUserDTM) => Promise<User>;
   updateUser: (id: string, data: IUserDTM) => Promise<User>;
   deleteUser: (id: string) => Promise<boolean>;
+  login: (login: string, password: string) => Promise<User>;
 }

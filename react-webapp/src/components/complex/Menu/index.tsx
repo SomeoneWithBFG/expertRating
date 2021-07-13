@@ -17,7 +17,7 @@ const Menu: FC = () => {
         link={"/students?id=some-id"}
       />
       {pages.map( (page, index) => {
-        return <MenuItem key={index} props={page}/>
+        return <MenuItem key={index} link={page.link} title={page.title} />
       })}
     </div>
   )

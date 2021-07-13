@@ -11,27 +11,24 @@ interface MenuUserItemProps {
 }
 
 const MenuUserItem: FC<MenuUserItemProps> = (props) => {
-    const data = {
-        name: props.name,
-        role: props.role,
-        group: props.group ? props.group : null,
-        link: props.link,
-    }
     return (
-        <NavLink to={data.link} className={styles.container}>
+        <NavLink to={props.link} className={styles.container}>
             <div className={styles.cycle}>
-                {data.name[0].toUpperCase()}
+                {props.name[0].toUpperCase()}
             </div>
             <div className={styles.infoContainer}>
                 <div className={styles.name}>
-                    {data.name}
+                    {props.name}
                 </div>
                 <div className={styles.additionalInfo}>
-                    <div className={styles.group}>
-                        {data.group ? data.group : ""}
-                    </div>
+                    {props.group ?
+                        (<div className={styles.group}>
+                            {props.group}
+                        </div>)
+                        : (<></>)    
+                    }
                     <div className={styles.role}>
-                        {data.role}
+                        {props.role}
                     </div>
                 </div>
             </div>

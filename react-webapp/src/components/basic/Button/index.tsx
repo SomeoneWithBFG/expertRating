@@ -31,11 +31,4 @@ const Button: FC<ButtonProps> = ({children, name, buttonType="basic", placeholde
     );
 }
 
-Button.defaultProps = {
-    name: "",
-    buttonType: "basic",
-    placeholder: "",
-    isDisabled: false,
-}
-
 export default Button;

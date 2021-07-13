@@ -3,13 +3,13 @@ import styles from "./styles.module.scss"
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string,
-    type: string,
+    type?: string,
     placeholder: string,
     onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
     
 }
 
-const Input: FC<InputProps> = ({children, name, type, placeholder, onChange}) => {
+const Input: FC<InputProps> = ({children, name, type="basic", placeholder, onChange}) => {
     const classes = useMemo<string>(()=>[styles.input, styles[type]].join(' '), [type])
     return (
         <div>
@@ -23,12 +23,6 @@ const Input: FC<InputProps> = ({children, name, type, placeholder, onChange}) =>
             </input>
         </div>
     );
-}
-
-Input.defaultProps = {
-    name: "",
-    type: "basic",
-    placeholder: "",
 }
 
 export default Input;

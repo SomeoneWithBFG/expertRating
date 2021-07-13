@@ -4,13 +4,13 @@ import styles from "./styles.module.scss"
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     children?: React.ReactNode;
     name: string;
-    type: string;
+    type?: string;
     selectDefaultValue?: {value: string, placeholder?: string};
     options: {value: string, placeholder?: string}[];
     onChange: React.ChangeEventHandler<HTMLSelectElement> | undefined
 }
 
-const Select: FC<SelectProps> = ({children, name, type, selectDefaultValue=null, options, onChange}) => {
+const Select: FC<SelectProps> = ({children, name, type="basic", selectDefaultValue=null, options, onChange}) => {
     const classes = useMemo<string>( () =>
         [styles.select, styles[type]].join(' '), 
         [type]

@@ -12,20 +12,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
         | undefined;
 }
 
-const Button: FC<ButtonProps> = ({children, name, buttonType="basic", placeholder="", isDisabled, onClick}) => {
-    const classes = useMemo<string>( () =>
-        [styles.button, styles[buttonType]].join(' '), 
-        [buttonType]
+const Button: FC<ButtonProps> = ({ children, name, buttonType, placeholder = "", isDisabled, onClick }) => {
+    const classes = useMemo<string>( () => 
+        buttonType ? [styles.button, styles[buttonType]].join(' ') : styles.button, [buttonType]
     )
     return (
         <div>
             <button 
-                className={classes}
-                id={name} 
-                disabled={isDisabled}
-                onClick={onClick}
+                className = { classes }
+                id = { name } 
+                disabled = { isDisabled }
+                onClick = { onClick }
             >
-                {placeholder} 
+                { placeholder } 
             </button>
         </div>
     );

@@ -12,14 +12,6 @@
     box-shadow: 0px 5px 5px $light-gray;
     background-color: $very-light-gray;
 
-    .selectElement {
-        font-size: 1rem;
-        outline: none;
-        font: $basic;
-    }
-}
-
-.basic {
     background-color: $white;
 
     &:hover {
@@ -29,8 +21,14 @@
     &:focus {
         box-shadow: 0px 2px 2px $little-light-gray inset;
     }
-}
 
-.disabled {
-    background-color: $white;
+    &:disabled {
+        background-color: $white;
+    }
+
+    .selectElement {
+        font-size: 1rem;
+        outline: none;
+        font: $basic;
+    }
 }

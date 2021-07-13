@@ -1,24 +1,23 @@
-import { FC, InputHTMLAttributes, useMemo } from "react"
+import { FC, InputHTMLAttributes } from "react"
 import styles from "./styles.module.scss"
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string,
-    type?: string,
+    isDisabled?: boolean,
     placeholder: string,
     onChange: React.ChangeEventHandler<HTMLInputElement> | undefined;
     
 }
 
-const Input: FC<InputProps> = ({children, name, type="basic", placeholder, onChange}) => {
-    const classes = useMemo<string>(()=>[styles.input, styles[type]].join(' '), [type])
+const Input: FC<InputProps> = ({ children, name, isDisabled, placeholder, onChange }) => {
     return (
         <div>
             <input 
-                className={classes}
-                id={name} 
-                placeholder={placeholder} 
-                disabled={type === "disabled"}
-                onChange={onChange}
+                className = { styles.input }
+                id = { name } 
+                placeholder = { placeholder } 
+                disabled = { isDisabled }
+                onChange = { onChange }
             >
             </input>
         </div>

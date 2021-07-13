@@ -8,11 +8,11 @@ interface MenuItemProps {
     link: string,
 }
 
-const MenuItem: FC<MenuItemProps> = ({link, title}) => {
+const MenuItem: FC<MenuItemProps> = ({ link, title }) => {
     return (
-        <NavLink to={link} className={styles.container}>
-            <div className={styles.menuItem}>
-                {title}
+        <NavLink to = { link } className = { styles.container }>
+            <div className = { styles.menuItem }>
+                { title }
             </div>
         </NavLink>
     )

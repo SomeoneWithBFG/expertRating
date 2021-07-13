@@ -10,25 +10,25 @@ interface MenuUserItemProps {
     link: string,
 }
 
-const MenuUserItem: FC<MenuUserItemProps> = (props) => {
+const MenuUserItem: FC<MenuUserItemProps> = ({ name, role, group, link }) => {
     return (
-        <NavLink to={props.link} className={styles.container}>
-            <div className={styles.cycle}>
-                {props.name[0].toUpperCase()}
+        <NavLink to = { link } className = { styles.container }>
+            <div className = { styles.cycle }>
+                { name[0].toUpperCase() }
             </div>
-            <div className={styles.infoContainer}>
-                <div className={styles.name}>
-                    {props.name}
+            <div className = { styles.infoContainer }>
+                <div className = { styles.name }>
+                    { name }
                 </div>
-                <div className={styles.additionalInfo}>
-                    {props.group ?
-                        (<div className={styles.group}>
-                            {props.group}
+                <div className = { styles.additionalInfo }>
+                    { group ?
+                        (<div className = { styles.group }>
+                            { group }
                         </div>)
                         : (<></>)    
                     }
-                    <div className={styles.role}>
-                        {props.role}
+                    <div className = { styles.role }>
+                        { role }
                     </div>
                 </div>
             </div>

@@ -1,6 +1,5 @@
-import React from 'react'
 import {
-  Route, Switch, withRouter,
+  Route, Switch,
 } from 'react-router-dom'
 
 import Arcticles from "../pages/Arcticles/Articles"
@@ -20,5 +19,5 @@ const GeneralRouterComponent = () => (
    </Switch>
   )
   
-  export default withRouter(GeneralRouterComponent)
+  export default GeneralRouterComponent
   

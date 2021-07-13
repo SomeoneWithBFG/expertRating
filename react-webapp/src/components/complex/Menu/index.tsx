@@ -5,14 +5,9 @@ import styles from "./styles.module.scss"
 import MenuItem from "../../common/MenuItem"
 import MenuUserItem from "../../common/MenuUserItem"
 
+import { pages } from "./pages"
+
 const Menu: FC = () => {
-  const pages = [
-    {title: "Вычисления", link: "/"},
-    {title: "История",    link: "/history"},
-    {title: "Группа",     link: "/group"},
-    {title: "Студенты",   link: "/students"},
-    {title: "Обучение",   link: "/stydy"},
-  ]
   return (
     <div className={styles.container}>
       <MenuUserItem 
@@ -21,8 +16,8 @@ const Menu: FC = () => {
         group={"АС-53"}
         link={"/students?id=some-id"}
       />
-      {pages.map(page=>{
-        return <MenuItem key={page.title} props={page}/>
+      {pages.map( (page, index) => {
+        return <MenuItem key={index} props={page}/>
       })}
     </div>
   )

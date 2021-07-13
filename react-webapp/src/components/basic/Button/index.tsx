@@ -3,43 +3,39 @@ import styles from "./styles.module.scss"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children?: React.ReactNode;
-    props: {
-        name: string,
-        type: string,
-        placeholder: string,
-        isDisabled: boolean,
-    };
-    onClick?:
+    name: string,
+    buttonType?: string,
+    placeholder?: string,
+    isDisabled: boolean,
+    onClick:
         ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
         | undefined;
 }
 
-const Button: FC<ButtonProps> = ({children, props, onClick}) => {
+const Button: FC<ButtonProps> = ({children, name, buttonType="basic", placeholder="", isDisabled, onClick}) => {
     const classes = useMemo<string>( () =>
-        [styles.button, styles[props.type]].join(' '), 
-        [props.type]
+        [styles.button, styles[buttonType]].join(' '), 
+        [buttonType]
     )
     return (
         <div>
             <button 
                 className={classes}
-                id={props.name} 
-                disabled={props.isDisabled}
+                id={name} 
+                disabled={isDisabled}
                 onClick={onClick}
             >
-                {props.placeholder} 
+                {placeholder} 
             </button>
         </div>
     );
 }
 
 Button.defaultProps = {
-    props: {
-        name: "",
-        type: "basic",
-        placeholder: "",
-        isDisabled: false,
-    }
+    name: "",
+    buttonType: "basic",
+    placeholder: "",
+    isDisabled: false,
 }
 
 export default Button;

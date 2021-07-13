@@ -66,6 +66,18 @@ class UsersService implements IUsersService {
       return e;
     }
   };
+
+  login = async (login: string, password: string) => {
+    try {
+      const response = this.UserRepository().findOne({ 
+        where: { login: login, password: password } 
+      });
+
+      return response;
+    } catch (e) {
+      return e;
+    }
+  };
 }
 
 export default new UsersService();

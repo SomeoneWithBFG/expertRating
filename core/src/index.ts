@@ -19,13 +19,14 @@ app.use(express.json());
 
 repository.connect();
 
+app.get('/', (req, res) => {
+    res.send('Server is alive')
+})
+
 app.use("/api/test", Routers.TestRouter);
 app.use("/api/calculations", Routers.CalculationsRouter);
+app.use("/api/auth", Routers.AuthRouter);
 app.use("/api/users", Routers.UsersRouter);
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
 
 app.listen(port, () => {
     console.log(`Express core listening at http://localhost:${port}`)

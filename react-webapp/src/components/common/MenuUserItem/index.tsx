@@ -17,11 +17,7 @@ const MenuUserItem: FC<MenuUserItemProps> = ({ name, role, group, link }) => {
             <div className={styles.infoContainer}>
                 <div className={styles.name}>{name}</div>
                 <div className={styles.additionalInfo}>
-                    {group ? (
-                        <div className={styles.group}>{group}</div>
-                    ) : (
-                        <></>
-                    )}
+                    {group && <div className={styles.group}>{group}</div>}
                     <div className={styles.role}>{role}</div>
                 </div>
             </div>

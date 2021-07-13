@@ -6,7 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     name: string
     buttonType?: string
     placeholder?: string
-    isDisabled: boolean
+    disabled: boolean
     onClick:
         | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
         | undefined
@@ -17,7 +17,7 @@ const Button: FC<ButtonProps> = ({
     name,
     buttonType,
     placeholder = '',
-    isDisabled,
+    disabled,
     onClick,
 }) => {
     const classes = useMemo<string>(
@@ -32,7 +32,7 @@ const Button: FC<ButtonProps> = ({
             <button
                 className={classes}
                 id={name}
-                disabled={isDisabled}
+                disabled={disabled}
                 onClick={onClick}
             >
                 {placeholder}

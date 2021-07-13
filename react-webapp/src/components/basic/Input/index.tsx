@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string
-    isDisabled?: boolean
+    disabled?: boolean
     placeholder: string
     onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
 }
@@ -11,7 +11,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input: FC<InputProps> = ({
     children,
     name,
-    isDisabled,
+    disabled,
     placeholder,
     onChange,
 }) => {
@@ -21,7 +21,7 @@ const Input: FC<InputProps> = ({
                 className={styles.input}
                 id={name}
                 placeholder={placeholder}
-                disabled={isDisabled}
+                disabled={disabled}
                 onChange={onChange}
             ></input>
         </div>

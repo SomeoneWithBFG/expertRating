@@ -10,7 +10,6 @@ const GeneralRouterComponent = () => (
         <Menu />
         <Switch>
             <Route path="/articles" component={Arcticles} />
-
             <Route path="/sandbox" component={Sandbox} />
         </Switch>
     </>

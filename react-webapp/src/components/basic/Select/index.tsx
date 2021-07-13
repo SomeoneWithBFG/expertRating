@@ -1,11 +1,11 @@
-import { FC, SelectHTMLAttributes, useMemo } from 'react'
+import { FC, SelectHTMLAttributes } from 'react'
 import styles from './styles.module.scss'
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     children?: React.ReactNode
     name: string
-    isDisabled?: boolean
-    selectDefaultValue?: { value: string; placeholder?: string }
+    disabled?: boolean
+    selectDefaultValue?: string
     options: { value: string; placeholder?: string }[]
     onChange: React.ChangeEventHandler<HTMLSelectElement> | undefined
 }
@@ -13,7 +13,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 const Select: FC<SelectProps> = ({
     children,
     name,
-    isDisabled,
+    disabled,
     selectDefaultValue,
     options,
     onChange,
@@ -23,29 +23,25 @@ const Select: FC<SelectProps> = ({
             <select
                 className={styles.select}
                 id={name}
-                disabled={isDisabled}
+                disabled={disabled}
                 onChange={onChange}
-                value={selectDefaultValue ? selectDefaultValue.value : ''}
+                value={selectDefaultValue}
             >
-                {options
-                    ? options.map((option, index) => {
-                          return (
-                              <option
-                                  key={index}
-                                  className={styles.selectElement}
-                                  value={option.value}
-                                  selected={
-                                      selectDefaultValue &&
-                                      selectDefaultValue.value === option.value
-                                  }
-                              >
-                                  {option.placeholder
-                                      ? option.placeholder
-                                      : option.value}
-                              </option>
-                          )
-                      })
-                    : ''}
+                {options &&
+                    options.map((option, index) => {
+                        return (
+                            <option
+                                key={index}
+                                className={styles.selectElement}
+                                value={option.value}
+                                selected={selectDefaultValue === option.value}
+                            >
+                                {option.placeholder
+                                    ? option.placeholder
+                                    : option.value}
+                            </option>
+                        )
+                    })}
             </select>
         </div>
     )

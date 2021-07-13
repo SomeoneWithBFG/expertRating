@@ -20,16 +20,16 @@ app.use(express.json());
 
 repository.connect();
 
-app.use(Middleware.executeJWT);
-app.use("/api/auth", Routers.AuthRouter);
-app.use(Middleware.isAuth);
+app.get('/', (req, res) => {
+    res.send('Server is alive')
+})
+
 app.use("/api/test", Routers.TestRouter);
 app.use("/api/calculations", Routers.CalculationsRouter);
-app.use("/api/users", Routers.UsersRouter);
+app.use("/api/auth", Routers.AuthRouter);
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.use(Middleware.validateJWT);
+app.use("/api/users", Routers.UsersRouter);
 
 app.listen(port, () => {
     console.log(`Express core listening at http://localhost:${port}`)

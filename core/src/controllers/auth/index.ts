@@ -20,7 +20,7 @@ class AuthController implements IAuthController {
         res.json(tokens)
     }
     async refreshToken (req: Request, res: Response) {
-        const value = await JWTService.verify(req.body.refreshToken);
+        const value = await JWTService.verifyAndDecode(req.body.refreshToken);
         if (value instanceof Error) {
             res.json(MessageGenerator.createMessage(500, "error", "JWT not found"));
             return;

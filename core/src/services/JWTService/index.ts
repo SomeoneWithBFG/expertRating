@@ -17,7 +17,7 @@ class JWTService implements IJWTService {
     }
   };
 
-  verify = async (token: string) => {
+  verifyAndDecode = async (token: string) => {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       return decoded;

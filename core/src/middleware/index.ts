@@ -1,15 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 
-import ExecJWT from "./ExecJWT";
-import isAuth from "./isAuth";
+import ValidateJWT from "./ValidateJWT";
 
 class Middleware {
-  executeJWT: (req: Request, res: Response, next: NextFunction) => Promise<void>;
-  isAuth: (req: Request, res: Response, next: NextFunction) => void;
+  validateJWT: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
   constructor() {
-    this.executeJWT = ExecJWT;
-    this.isAuth = isAuth;
+    this.validateJWT = ValidateJWT;
   }
 }
 

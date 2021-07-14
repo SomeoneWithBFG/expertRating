@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+
+import { Calculation } from "./Calculation";
 
 @Entity({ name: "users" })
 export class User {
@@ -22,4 +24,7 @@ export class User {
 
   @Column({default: 0})
   role: number;
+
+  @OneToMany(() => Calculation, calculation => calculation.user)
+  calculations: Calculation[];
 }

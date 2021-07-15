@@ -1,8 +1,6 @@
 import UserController from "./users";
 
-import {
-  IUserController,
-} from "./users/interfaces";
+import { IUserController } from "./users/interfaces";
 
 class UseCases {
   userService: IUserController;

@@ -1,34 +1,35 @@
 <template>
   <div class="kondorseDataContainer">
     <div>
-      Матрица оценок: 
-      <div v-for="(arr) in dataToShow.modMatrix" :key="arr.toString()" class="kondorseLine">
-        <div v-for="(item) in arr" :key="item">
-          {{item}}
+      Матрица оценок:
+      <div
+        v-for="arr in dataToShow.modMatrix"
+        :key="arr.toString()"
+        class="kondorseLine"
+      >
+        <div v-for="item in arr" :key="item">
+          {{ item }}
         </div>
       </div>
     </div>
-    <div>
-      Альтернатива Кондорсе: {{dataToShow.best}}
-    </div>
+    <div>Альтернатива Кондорсе: {{ dataToShow.best }}</div>
   </div>
 </template>
 
 <script>
-import { mapMutations, mapGetters, mapActions } from "vuex";
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 export default {
   props: {
     solution: Object,
   },
   data() {
-    return {
-    }
+    return {}
   },
   computed: {
     dataToShow: function () {
-      return this.solution;
+      return this.solution
     },
-  }
+  },
 }
 </script>
 

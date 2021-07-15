@@ -9,13 +9,13 @@ import MessageGenerator from "@services/messageGenerator";
 
 class UsersService implements IUsersService {
   UserRepository = () => {
-    return DBConnector.connector?.getRepository(User)
-  }
+    return DBConnector.connector?.getRepository(User);
+  };
 
   getUserList = async () => {
     try {
       const response = await this.UserRepository().find();
-      return response ;
+      return response;
     } catch (e) {
       return e;
     }
@@ -24,12 +24,17 @@ class UsersService implements IUsersService {
   getUserByID = async (id: string) => {
     try {
       const response = await this.UserRepository().findOne(id);
-      if (!response) return MessageGenerator.createMessage(404, "error", "User with this ID not found")
+      if (!response)
+        return MessageGenerator.createMessage(
+          404,
+          "error",
+          "User with this ID not found"
+        );
       return response;
     } catch (e) {
       return e;
     }
-  }
+  };
 
   createUser = async (data: IUserDTM) => {
     try {
@@ -42,12 +47,15 @@ class UsersService implements IUsersService {
 
   updateUser = async (id: string, data: IUserDTM) => {
     try {
-      const response = await this.UserRepository()
-        .update(id, {
-          ...data,
-        });
+      const response = await this.UserRepository().update(id, {
+        ...data,
+      });
       if (!response.affected) {
-        return MessageGenerator.createMessage(404, "error", "User with this ID not found")
+        return MessageGenerator.createMessage(
+          404,
+          "error",
+          "User with this ID not found"
+        );
       }
       return response.affected;
     } catch (e) {
@@ -59,7 +67,11 @@ class UsersService implements IUsersService {
     try {
       const response = await this.UserRepository().delete(id);
       if (!response.affected) {
-        return MessageGenerator.createMessage(404, "error", "User with this ID not found")
+        return MessageGenerator.createMessage(
+          404,
+          "error",
+          "User with this ID not found"
+        );
       }
       return !!response.affected;
     } catch (e) {
@@ -69,8 +81,8 @@ class UsersService implements IUsersService {
 
   login = async (login: string, password: string) => {
     try {
-      const response = this.UserRepository().findOne({ 
-        where: { login: login, password: password } 
+      const response = this.UserRepository().findOne({
+        where: { login: login, password: password },
       });
 
       return response;

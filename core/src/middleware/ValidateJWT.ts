@@ -12,15 +12,19 @@ const ValidateJWT = async (req: Request, res: Response, next: NextFunction) => {
     const value = await JWTService.verifyAndDecode(token);
     if (value instanceof Error) {
       isAuthorized = false;
-    }
-    else {
+    } else {
       isAuthorized = value;
     }
   }
   if (!isAuthorized) {
-    res.json(MessageGenerator.createMessage(401, "error", "Token is not defined or not valid"));
-  }
-  else {
+    res.json(
+      MessageGenerator.createMessage(
+        401,
+        "error",
+        "Token is not defined or not valid"
+      )
+    );
+  } else {
     next();
   }
 };

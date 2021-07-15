@@ -5,7 +5,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     children?: React.ReactNode
     name: string
     disabled?: boolean
-    selectDefaultValue?: string
+    value?: string
     options: { value: string; placeholder?: string }[]
     onChange: React.ChangeEventHandler<HTMLSelectElement> | undefined
 }
@@ -14,7 +14,7 @@ const Select: FC<SelectProps> = ({
     children,
     name,
     disabled,
-    selectDefaultValue,
+    value,
     options,
     onChange,
 }) => {
@@ -25,7 +25,7 @@ const Select: FC<SelectProps> = ({
                 id={name}
                 disabled={disabled}
                 onChange={onChange}
-                value={selectDefaultValue}
+                value={value}
             >
                 {options &&
                     options.map((option, index) => {
@@ -34,7 +34,7 @@ const Select: FC<SelectProps> = ({
                                 key={index}
                                 className={styles.selectElement}
                                 value={option.value}
-                                selected={selectDefaultValue === option.value}
+                                selected={value === option.value}
                             >
                                 {option.placeholder
                                     ? option.placeholder

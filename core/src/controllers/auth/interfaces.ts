@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express'
 
 export interface IAuthController {
-  login: (req: Request, res: Response) => void;
-  refreshToken: (req: Request, res: Response) => void;
+    login: (req: Request, res: Response) => void
+    refreshToken: (req: Request, res: Response) => void
 }

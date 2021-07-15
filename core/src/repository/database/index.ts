@@ -1,16 +1,16 @@
-import connector from "./connector";
-import UsersService from "./users";
+import connector from './connector'
+import UsersService from './users'
 
-import IDB, { IConnector, IUsersService } from "./interfaces";
+import IDB, { IConnector, IUsersService } from './interfaces'
 
 class DB implements IDB {
-  connector: IConnector;
-  users: IUsersService;
+    connector: IConnector
+    users: IUsersService
 
-  constructor() {
-    this.connector = connector;
-    this.users = UsersService;
-  }
+    constructor() {
+        this.connector = connector
+        this.users = UsersService
+    }
 }
 
-export default new DB();
+export default new DB()

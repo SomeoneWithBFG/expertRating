@@ -1,7 +1,19 @@
 import express, { Router } from 'express'
 import Calculations from '@controllers/calculations'
 
+import middleware from '@src/middleware'
+
 const router: Router = express.Router()
+
+router.get('/', middleware.validateJWT, Calculations.getCalculationList)
+router.get('/:id', middleware.validateJWT, Calculations.getCalculationByID)
+router.get(
+    '/:userId',
+    middleware.validateJWT,
+    Calculations.getCalculationListByUserID
+)
+
+router.delete('/:id', middleware.validateJWT, Calculations.deleteCalculation)
 
 router.post('/kemeni-snella', Calculations.kemeniSnella)
 router.post('/kondorse', Calculations.kondorse)

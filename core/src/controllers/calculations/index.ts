@@ -11,7 +11,74 @@ import CalculationRepository from '@repository/database/calculations'
 import { User } from '@src/models/dbm/User'
 import * as CalculationDTM from '@src/models/dtm/calculations'
 
+import messageGenerator from '@src/services/messageGenerator'
+
 class Calculations implements ICalculations {
+    getCalculationList = async (req: Request, res: Response) => {
+        const result = await CalculationRepository.getCalculationList()
+
+        res.json(result)
+    }
+    getCalculationListByUserID = async (req: Request, res: Response) => {
+        if (!req.query.userId) {
+            res.json(
+                messageGenerator.createMessage(
+                    404,
+                    'error',
+                    'User with this ID not found'
+                )
+            )
+            return
+        }
+        const result = await CalculationRepository.getCalculationListByUserID(
+            req.query.userId as string
+        )
+
+        res.json(result)
+    }
+    getCalculationByID = async (req: Request, res: Response) => {
+        if (!req.query.id) {
+            res.json(
+                messageGenerator.createMessage(
+                    404,
+                    'error',
+                    'Calculation with this ID not found'
+                )
+            )
+            return
+        }
+        const result = await CalculationRepository.getCalculationByID(
+            req.query.id as string
+        )
+
+        res.json(result)
+    }
+
+    deleteCalculation = async (req: Request, res: Response) => {
+        if (!req.query.id) {
+            res.json(
+                messageGenerator.createMessage(
+                    404,
+                    'error',
+                    'Calculation with this ID not found'
+                )
+            )
+            return
+        }
+        const wasDeleted = await CalculationRepository.deleteCalculation(
+            req.query.id as string
+        )
+        if (wasDeleted) {
+            const result = req.query.id
+
+            res.json(result)
+            return
+        } else {
+            res.json(wasDeleted)
+            return
+        }
+    }
+
     async createControllerBuilder<Input, Output, Calc>(
         service: (data: Input, x: number, y: number) => Output,
         data: Input,
@@ -47,7 +114,6 @@ class Calculations implements ICalculations {
         }
         res.json(result)
     }
-
     pairComparsion = async (req: Request, res: Response) => {
         try {
             this.createControllerBuilder(
@@ -64,7 +130,6 @@ class Calculations implements ICalculations {
             console.log(e)
         }
     }
-
     sequentiallyComparison = async (req: Request, res: Response) => {
         try {
             this.createControllerBuilder(
@@ -81,7 +146,6 @@ class Calculations implements ICalculations {
             console.log(e)
         }
     }
-
     weighing = async (req: Request, res: Response) => {
         try {
             this.createControllerBuilder(
@@ -98,7 +162,6 @@ class Calculations implements ICalculations {
             console.log(e)
         }
     }
-
     preference = async (req: Request, res: Response) => {
         try {
             this.createControllerBuilder(
@@ -115,7 +178,6 @@ class Calculations implements ICalculations {
             console.log(e)
         }
     }
-
     kondorse = async (req: Request, res: Response) => {
         try {
             this.createControllerBuilder(
@@ -132,7 +194,6 @@ class Calculations implements ICalculations {
             console.log(e)
         }
     }
-
     kemeniSnella = async (req: Request, res: Response) => {
         try {
             this.createControllerBuilder(

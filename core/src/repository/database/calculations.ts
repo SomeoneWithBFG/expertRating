@@ -27,7 +27,14 @@ class CalculationService implements ICalculationService {
     getCalculationList = async () => {
         try {
             const response = await this.CalculationRepository().find({
-                relations: ['results'],
+                relations: [
+                    'kemeniSnellaResult',
+                    'kondorseResult',
+                    'pairComparsionResult',
+                    'preferenceResult',
+                    'sequentiallyComparisonResult',
+                    'weighingResult',
+                ],
             })
             return response
         } catch (e) {
@@ -37,7 +44,14 @@ class CalculationService implements ICalculationService {
     getCalculationByID = async (id: string) => {
         try {
             const response = await this.CalculationRepository().findOne(id, {
-                relations: ['results'],
+                relations: [
+                    'kemeniSnellaResult',
+                    'kondorseResult',
+                    'pairComparsionResult',
+                    'preferenceResult',
+                    'sequentiallyComparisonResult',
+                    'weighingResult',
+                ],
             })
             if (!response) {
                 return MessageGenerator.createMessage(

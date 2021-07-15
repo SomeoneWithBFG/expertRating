@@ -62,7 +62,7 @@ export class WeighingResult {
     @Column({ default: () => 'CURRENT_TIMESTAMP' })
     editedAt: Date
 
-    @Column()
+    @Column({ type: "float" })
     sumOfMarks: number
 
     @Column()

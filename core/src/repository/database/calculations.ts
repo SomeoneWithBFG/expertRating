@@ -96,11 +96,7 @@ class CalculationService implements ICalculationService {
     }
 
     createPairComparsion = async (
-        inputMatrix: number[][],
-        x: number,
-        y: number,
-        result: CalculationDTM.PairComparsionResult,
-        user: User
+        result: CalculationDTM.PairComparsionResult
     ) => {
         try {
             const savedResult = await DBConnector.connector
@@ -112,58 +108,173 @@ class CalculationService implements ICalculationService {
                     order: result.order,
                 })
 
-            const savedCalculation = await this.CalculationRepository().save({
-                method: 'PairComparsion',
-                inputMatrix: JSON.stringify(inputMatrix),
-                x: x,
-                y: y,
-                user: user,
-                pairComparsionResult: savedResult,
-            })
-
-            return true
+            return savedResult
         } catch (e) {
             console.log(e)
-            return false
+            return e
         }
     }
-    createSequentiallyComparison: (
-        inputMatrix: CalculationDTM.SequentiallyComparisonInputMatrixElement[],
-        x: number,
-        y: number,
-        result: CalculationDTM.SequentiallyComparisonResult,
-        user: User
-    ) => Promise<boolean>
-    createWeighing: (
-        inputMatrix: number[][],
-        x: number,
-        y: number,
-        result: CalculationDTM.WeighingResult,
-        user: User
-    ) => Promise<boolean>
-    createPreference: (
-        inputMatrix: number[][],
-        x: number,
-        y: number,
-        result: CalculationDTM.PreferenceResult,
-        user: User
-    ) => Promise<boolean>
-    createKondorse: (
-        inputMatrix: number[][],
-        x: number,
-        y: number,
-        result: CalculationDTM.KondorseResult,
-        user: User
-    ) => Promise<boolean>
-    createKemeniSnella: (
-        inputMatrix: number[][],
-        x: number,
-        y: number,
-        result: CalculationDTM.KemeniSnellaResult,
-        user: User
-    ) => Promise<boolean>
+    createSequentiallyComparison = async (
+        result: CalculationDTM.SequentiallyComparisonResult
+    ) => {
+        try {
+            const savedResult = await DBConnector.connector
+                ?.getRepository(SequentiallyComparisonResult)
+                .save({
+                    causedCorrections: result.causedCorrections,
+                    correctedEvaluations: JSON.stringify(
+                        result.correctedEvaluations
+                    ),
+                    sumOfWeights: result.sumOfWeights,
+                    weights: JSON.stringify(result.weights),
+                    order: result.order,
+                })
 
-    deleteCalculation: (id: string) => Promise<boolean>
+            return savedResult
+        } catch (e) {
+            console.log(e)
+            return e
+        }
+    }
+    createWeighingResult = async (result: CalculationDTM.WeighingResult) => {
+        try {
+            const savedResult = await DBConnector.connector
+                ?.getRepository(WeighingResult)
+                .save({
+                    sumOfMarks: result.sumOfMarks,
+                    relativeExpertsMarks: JSON.stringify(
+                        result.relativeExpertsMarks
+                    ),
+                    weights: JSON.stringify(result.weights),
+                    order: result.order,
+                })
+
+            return savedResult
+        } catch (e) {
+            console.log(e)
+            return e
+        }
+    }
+    createPreferenceResult = async (
+        result: CalculationDTM.PreferenceResult
+    ) => {
+        try {
+            const savedResult = await DBConnector.connector
+                ?.getRepository(PreferenceResult)
+                .save({
+                    modMatrix: JSON.stringify(result.modMatrix),
+                    sumMarks: JSON.stringify(result.sumMarks),
+                    sumOfMarks: result.sumOfMarks,
+                    weights: JSON.stringify(result.weights),
+                    order: result.order,
+                })
+
+            return savedResult
+        } catch (e) {
+            console.log(e)
+            return e
+        }
+    }
+    createKondorseResult = async (result: CalculationDTM.KondorseResult) => {
+        try {
+            const savedResult = await DBConnector.connector
+                ?.getRepository(KondorseResult)
+                .save({
+                    modMatrix: JSON.stringify(result.modMatrix),
+                    best: result.best,
+                })
+
+            return savedResult
+        } catch (e) {
+            console.log(e)
+            return e
+        }
+    }
+    createKemeniSnellaResult = async (
+        result: CalculationDTM.KemeniSnellaResult
+    ) => {
+        try {
+            const savedResult = await DBConnector.connector
+                ?.getRepository(KemeniSnellaResult)
+                .save({
+                    binaryMatrixArray: JSON.stringify(result.binaryMatrixArray),
+                    looseMatrix: JSON.stringify(result.looseMatrix),
+                    order: result.order,
+                })
+
+            return savedResult
+        } catch (e) {
+            console.log(e)
+            return e
+        }
+    }
+
+    createCalc = async (
+        inputMatrix:
+            | number[][]
+            | CalculationDTM.SequentiallyComparisonInputMatrixElement[],
+        x: number,
+        y: number,
+        method: string,
+        user: User,
+        result:
+            | CalculationDTM.PairComparsionResult
+            | CalculationDTM.SequentiallyComparisonResult
+            | CalculationDTM.WeighingResult
+            | CalculationDTM.PreferenceResult
+            | CalculationDTM.KondorseResult
+            | CalculationDTM.KemeniSnellaResult
+    ) => {
+        try {
+            let calcToSave = {
+                method,
+                inputMatrix: JSON.stringify(inputMatrix),
+                x,
+                y,
+                user,
+                pairComparsionResult:
+                    CalculationDTM.isPairComparsionResult(result) ?
+                    (await this.createPairComparsion(result)) : null,
+                sequentiallyComparisonResult:
+                    CalculationDTM.isSequentiallyComparisonResult(result) ?
+                    (await this.createSequentiallyComparison(result)) : null,
+                weighingResult:
+                    CalculationDTM.isWeighingResult(result) ?
+                    (await this.createWeighingResult(result)) : null,
+                preferenceResult:
+                    CalculationDTM.isPreferenceResult(result) ?
+                    (await this.createPreferenceResult(result)) : null,
+                kondorseResult:
+                    CalculationDTM.isKondorseResult(result) ?
+                    (await this.createKondorseResult(result)) : null,
+                kemeniSnellaResult:
+                    CalculationDTM.isKemeniSnellaResult(result) ?
+                    (await this.createKemeniSnellaResult(result)) : null,
+            }
+            const savedCalculation = await this.CalculationRepository().save(
+                calcToSave
+            )
+            return savedCalculation
+        } catch (e) {
+            return e
+        }
+    }
+
+    deleteCalculation = async (id: string) => {
+        try {
+            const response = await this.CalculationRepository().delete(id)
+            if (!response.affected) {
+                return MessageGenerator.createMessage(
+                    404,
+                    'error',
+                    'User with this ID not found'
+                )
+            }
+            return !!response.affected
+        } catch (e) {
+            return e
+        }
+    }
 }
 
 export default new CalculationService()

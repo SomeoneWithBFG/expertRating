@@ -36,48 +36,20 @@ export interface ICalculationService {
     getCalculationListByUserID: (userId: string) => Promise<Calculation[]>
     getCalculationByID: (id: string) => Promise<Calculation>
 
-    createPairComparsion: (
-        inputMatrix: number[][],
+    createCalc: (
+        inputMatrix: number[][] | SequentiallyComparisonInputMatrixElement[],
         x: number,
         y: number,
-        result: PairComparsionResult,
-        user: User
-    ) => Promise<boolean>
-    createSequentiallyComparison: (
-        inputMatrix: SequentiallyComparisonInputMatrixElement[],
-        x: number,
-        y: number,
-        result: SequentiallyComparisonResult,
-        user: User
-    ) => Promise<boolean>
-    createWeighing: (
-        inputMatrix: number[][],
-        x: number,
-        y: number,
-        result: WeighingResult,
-        user: User
-    ) => Promise<boolean>
-    createPreference: (
-        inputMatrix: number[][],
-        x: number,
-        y: number,
-        result: PreferenceResult,
-        user: User
-    ) => Promise<boolean>
-    createKondorse: (
-        inputMatrix: number[][],
-        x: number,
-        y: number,
-        result: KondorseResult,
-        user: User
-    ) => Promise<boolean>
-    createKemeniSnella: (
-        inputMatrix: number[][],
-        x: number,
-        y: number,
-        result: KemeniSnellaResult,
-        user: User
-    ) => Promise<boolean>
+        method: string,
+        user: User,
+        result:
+            | PairComparsionResult
+            | SequentiallyComparisonResult
+            | WeighingResult
+            | PreferenceResult
+            | KondorseResult
+            | KemeniSnellaResult
+    ) => Promise<Calculation>
 
     deleteCalculation: (id: string) => Promise<boolean>
 }

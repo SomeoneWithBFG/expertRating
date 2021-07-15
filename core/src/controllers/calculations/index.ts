@@ -9,23 +9,25 @@ import UsersRepository from '@repository/database/users'
 import CalculationRepository from '@repository/database/calculations'
 
 import { User } from '@src/models/dbm/User'
-import { PairComparsionResult } from '@src/models/dtm/calculations'
+import * as CalculationDTM from '@src/models/dtm/calculations'
 
 class Calculations implements ICalculations {
-    async createControllerBuilder<Input, Output>(
+    async createControllerBuilder<Input, Output, Calc>(
         service: (data: Input, x: number, y: number) => Output,
         data: Input,
         x: number,
         y: number,
+        method: string,
         req: Request,
         res: Response,
-        repo?: (
-            inputMatrix: Input,
+        repo: (
+            data: Input,
             x: number,
             y: number,
-            result: Output,
-            user: User
-        ) => Promise<boolean>
+            method: string,
+            user: User,
+            result: Output
+        ) => Calc
     ) {
         const result = service(data, x, y)
         let token = req.header('Authorization')
@@ -39,12 +41,8 @@ class Calculations implements ICalculations {
                 return
             }
             const user = await UsersRepository.getUserByID(decodedToken.id)
-            if (repo) {
-                let savedResult = await repo(data, x, y, result, user)
-                res.json({ result, savedResult })
-                return
-            }
-            res.json(result)
+            let savedResult = await repo(data, x, y, method, user, result)
+            res.json({ result, savedResult })
             return
         }
         res.json(result)
@@ -57,9 +55,10 @@ class Calculations implements ICalculations {
                 req.body.binaryMatrix,
                 req.body.x,
                 req.body.y,
+                "pairComparsion",
                 req,
                 res,
-                CalculationRepository.createPairComparsion
+                CalculationRepository.createCalc
             )
         } catch (e) {
             console.log(e)
@@ -73,8 +72,10 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
+                "sequentiallyComparison",
                 req,
-                res
+                res,
+                CalculationRepository.createCalc
             )
         } catch (e) {
             console.log(e)
@@ -88,8 +89,10 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
+                "weighing",
                 req,
-                res
+                res,
+                CalculationRepository.createCalc
             )
         } catch (e) {
             console.log(e)
@@ -103,8 +106,10 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
+                "preference",
                 req,
-                res
+                res,
+                CalculationRepository.createCalc
             )
         } catch (e) {
             console.log(e)
@@ -118,8 +123,10 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
+                "kondorse",
                 req,
-                res
+                res,
+                CalculationRepository.createCalc
             )
         } catch (e) {
             console.log(e)
@@ -133,8 +140,10 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
+                "kemeniSnella",
                 req,
-                res
+                res,
+                CalculationRepository.createCalc
             )
         } catch (e) {
             console.log(e)

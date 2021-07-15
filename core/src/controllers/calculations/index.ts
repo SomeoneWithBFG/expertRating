@@ -55,7 +55,7 @@ class Calculations implements ICalculations {
                 req.body.binaryMatrix,
                 req.body.x,
                 req.body.y,
-                "pairComparsion",
+                'pairComparsion',
                 req,
                 res,
                 CalculationRepository.createCalc
@@ -72,7 +72,7 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
-                "sequentiallyComparison",
+                'sequentiallyComparison',
                 req,
                 res,
                 CalculationRepository.createCalc
@@ -89,7 +89,7 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
-                "weighing",
+                'weighing',
                 req,
                 res,
                 CalculationRepository.createCalc
@@ -106,7 +106,7 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
-                "preference",
+                'preference',
                 req,
                 res,
                 CalculationRepository.createCalc
@@ -123,7 +123,7 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
-                "kondorse",
+                'kondorse',
                 req,
                 res,
                 CalculationRepository.createCalc
@@ -140,7 +140,7 @@ class Calculations implements ICalculations {
                 req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
-                "kemeniSnella",
+                'kemeniSnella',
                 req,
                 res,
                 CalculationRepository.createCalc

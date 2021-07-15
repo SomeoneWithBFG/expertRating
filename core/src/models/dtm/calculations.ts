@@ -8,7 +8,7 @@ export interface PairComparsionResult {
 export function isPairComparsionResult(
     object: any
 ): object is PairComparsionResult {
-    return "values" in object
+    return 'values' in object
 }
 
 export interface SequentiallyComparisonInputMatrixElement {
@@ -27,7 +27,7 @@ export interface SequentiallyComparisonResult {
 export function isSequentiallyComparisonResult(
     object: any
 ): object is SequentiallyComparisonResult {
-    return "causedCorrections" in object
+    return 'causedCorrections' in object
 }
 
 export interface WeighingResult {
@@ -38,7 +38,7 @@ export interface WeighingResult {
 }
 
 export function isWeighingResult(object: any): object is WeighingResult {
-    return "relativeExpertsMarks" in object
+    return 'relativeExpertsMarks' in object
 }
 
 export interface PreferenceResult {
@@ -50,7 +50,7 @@ export interface PreferenceResult {
 }
 
 export function isPreferenceResult(object: any): object is PreferenceResult {
-    return "sumMarks" in object
+    return 'sumMarks' in object
 }
 
 export interface KondorseResult {
@@ -59,7 +59,7 @@ export interface KondorseResult {
 }
 
 export function isKondorseResult(object: any): object is KondorseResult {
-    return "best" in object
+    return 'best' in object
 }
 
 export interface KemeniSnellaResult {
@@ -71,5 +71,5 @@ export interface KemeniSnellaResult {
 export function isKemeniSnellaResult(
     object: any
 ): object is KemeniSnellaResult {
-    return 'looseMatrix' in object;
+    return 'looseMatrix' in object
 }

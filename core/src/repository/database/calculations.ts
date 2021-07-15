@@ -232,24 +232,27 @@ class CalculationService implements ICalculationService {
                 x,
                 y,
                 user,
-                pairComparsionResult:
-                    CalculationDTM.isPairComparsionResult(result) ?
-                    (await this.createPairComparsion(result)) : null,
+                pairComparsionResult: CalculationDTM.isPairComparsionResult(
+                    result
+                )
+                    ? await this.createPairComparsion(result)
+                    : null,
                 sequentiallyComparisonResult:
-                    CalculationDTM.isSequentiallyComparisonResult(result) ?
-                    (await this.createSequentiallyComparison(result)) : null,
-                weighingResult:
-                    CalculationDTM.isWeighingResult(result) ?
-                    (await this.createWeighingResult(result)) : null,
-                preferenceResult:
-                    CalculationDTM.isPreferenceResult(result) ?
-                    (await this.createPreferenceResult(result)) : null,
-                kondorseResult:
-                    CalculationDTM.isKondorseResult(result) ?
-                    (await this.createKondorseResult(result)) : null,
-                kemeniSnellaResult:
-                    CalculationDTM.isKemeniSnellaResult(result) ?
-                    (await this.createKemeniSnellaResult(result)) : null,
+                    CalculationDTM.isSequentiallyComparisonResult(result)
+                        ? await this.createSequentiallyComparison(result)
+                        : null,
+                weighingResult: CalculationDTM.isWeighingResult(result)
+                    ? await this.createWeighingResult(result)
+                    : null,
+                preferenceResult: CalculationDTM.isPreferenceResult(result)
+                    ? await this.createPreferenceResult(result)
+                    : null,
+                kondorseResult: CalculationDTM.isKondorseResult(result)
+                    ? await this.createKondorseResult(result)
+                    : null,
+                kemeniSnellaResult: CalculationDTM.isKemeniSnellaResult(result)
+                    ? await this.createKemeniSnellaResult(result)
+                    : null,
             }
             const savedCalculation = await this.CalculationRepository().save(
                 calcToSave

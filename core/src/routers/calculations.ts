@@ -8,7 +8,7 @@ const router: Router = express.Router()
 router.get('/', middleware.validateJWT, Calculations.getCalculationList)
 router.get('/:id', middleware.validateJWT, Calculations.getCalculationByID)
 router.get(
-    '/:userId',
+    '/user/:userId',
     middleware.validateJWT,
     Calculations.getCalculationListByUserID
 )

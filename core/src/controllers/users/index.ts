@@ -14,7 +14,7 @@ class UserController implements IUserController {
     }
 
     getUserByID = async (req: Request, res: Response) => {
-        if (!req.query.id) {
+        if (!req.params.id) {
             res.json(
                 MessageGenerator.createMessage(
                     404,
@@ -24,7 +24,9 @@ class UserController implements IUserController {
             )
             return
         }
-        const result = await UsersRepository.getUserByID(req.query.id as string)
+        const result = await UsersRepository.getUserByID(
+            req.params.id as string
+        )
 
         res.json(result)
     }

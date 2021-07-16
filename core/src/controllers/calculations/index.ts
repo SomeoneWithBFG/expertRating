@@ -20,7 +20,7 @@ class Calculations implements ICalculations {
         res.json(result)
     }
     getCalculationListByUserID = async (req: Request, res: Response) => {
-        if (!req.query.userId) {
+        if (!req.params.userId) {
             res.json(
                 messageGenerator.createMessage(
                     404,
@@ -31,13 +31,13 @@ class Calculations implements ICalculations {
             return
         }
         const result = await CalculationRepository.getCalculationListByUserID(
-            req.query.userId as string
+            req.params.userId as string
         )
 
         res.json(result)
     }
     getCalculationByID = async (req: Request, res: Response) => {
-        if (!req.query.id) {
+        if (!req.params.id) {
             res.json(
                 messageGenerator.createMessage(
                     404,
@@ -48,14 +48,14 @@ class Calculations implements ICalculations {
             return
         }
         const result = await CalculationRepository.getCalculationByID(
-            req.query.id as string
+            req.params.id as string
         )
 
         res.json(result)
     }
 
     deleteCalculation = async (req: Request, res: Response) => {
-        if (!req.query.id) {
+        if (!req.params.id) {
             res.json(
                 messageGenerator.createMessage(
                     404,
@@ -66,10 +66,10 @@ class Calculations implements ICalculations {
             return
         }
         const wasDeleted = await CalculationRepository.deleteCalculation(
-            req.query.id as string
+            req.params.id as string
         )
         if (wasDeleted) {
-            const result = req.query.id
+            const result = req.params.id
 
             res.json(result)
             return

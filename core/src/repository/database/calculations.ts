@@ -57,7 +57,7 @@ class CalculationService implements ICalculationService {
                 return MessageGenerator.createMessage(
                     404,
                     'error',
-                    'User with this ID not found'
+                    'Calculation with this ID not found'
                 )
             }
             return response

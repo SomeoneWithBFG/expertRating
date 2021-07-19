@@ -1,0 +1,13 @@
+@import '../../../../styles/colors/colors.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.outputField {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}

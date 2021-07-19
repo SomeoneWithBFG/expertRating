@@ -7,7 +7,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { addArticle, removeArticle } from '../../redux/actionCreators'
 import { Dispatch } from 'redux'
 
-import Menu from '../../components/complex/Menu'
+import styles from './styles.module.scss'
 
 const App: React.FC = () => {
     const articles: readonly IArticle[] = useSelector(
@@ -23,9 +23,8 @@ const App: React.FC = () => {
     )
 
     return (
-        <main>
+        <main className={styles.pageContainer}>
             <div>
-                <Menu />
                 <h1>My Articles</h1>
                 <AddArticle saveArticle={saveArticle} />
                 {articles.map((article: IArticle) => (

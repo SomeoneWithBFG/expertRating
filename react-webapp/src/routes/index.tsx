@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 
+import Calculations from '../pages/Calculations'
 import Arcticles from '../pages/Arcticles/Articles'
 import Sandbox from '../pages/Sandbox/Sandbox'
 
@@ -9,8 +10,9 @@ const GeneralRouterComponent = () => (
     <>
         <Menu />
         <Switch>
-            <Route path="/articles" component={Arcticles} />
-            <Route path="/sandbox" component={Sandbox} />
+            <Route path="/" exact component={Calculations} />
+            <Route path="/articles" exact component={Arcticles} />
+            <Route path="/sandbox" exact component={Sandbox} />
         </Switch>
     </>
 )

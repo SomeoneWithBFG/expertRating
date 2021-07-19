@@ -25,7 +25,6 @@ const Select: FC<SelectProps> = ({
                 id={name}
                 disabled={disabled}
                 onChange={onChange}
-                value={value}
             >
                 {options &&
                     options.map((option, index) => {

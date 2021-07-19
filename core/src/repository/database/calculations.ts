@@ -223,7 +223,7 @@ class CalculationService implements ICalculationService {
         }
     }
 
-    createCalc = async (
+    createCalculation = async (
         inputMatrix:
             | number[][]
             | CalculationDTM.SequentiallyComparisonInputMatrixElement[],
@@ -240,33 +240,36 @@ class CalculationService implements ICalculationService {
             | CalculationDTM.KemeniSnellaResult
     ) => {
         try {
-            let calcToSave = {
+            const calcToSave = {
                 method,
                 inputMatrix: JSON.stringify(inputMatrix),
                 x,
                 y,
                 user,
-                pairComparsionResult: CalculationDTM.isPairComparsionResult(
-                    result
-                )
-                    ? await this.createPairComparsion(result)
-                    : null,
+                pairComparsionResult:
+                    result.method === 'PairComparsionResult'
+                        ? await this.createPairComparsion(result)
+                        : null,
                 sequentiallyComparisonResult:
-                    CalculationDTM.isSequentiallyComparisonResult(result)
+                    result.method === 'SequentiallyComparisonResult'
                         ? await this.createSequentiallyComparison(result)
                         : null,
-                weighingResult: CalculationDTM.isWeighingResult(result)
-                    ? await this.createWeighingResult(result)
-                    : null,
-                preferenceResult: CalculationDTM.isPreferenceResult(result)
-                    ? await this.createPreferenceResult(result)
-                    : null,
-                kondorseResult: CalculationDTM.isKondorseResult(result)
-                    ? await this.createKondorseResult(result)
-                    : null,
-                kemeniSnellaResult: CalculationDTM.isKemeniSnellaResult(result)
-                    ? await this.createKemeniSnellaResult(result)
-                    : null,
+                weighingResult:
+                    result.method === 'WeighingResult'
+                        ? await this.createWeighingResult(result)
+                        : null,
+                preferenceResult:
+                    result.method === 'PreferenceResult'
+                        ? await this.createPreferenceResult(result)
+                        : null,
+                kondorseResult:
+                    result.method === 'KondorseResult'
+                        ? await this.createKondorseResult(result)
+                        : null,
+                kemeniSnellaResult:
+                    result.method === 'KemeniSnellaResult'
+                        ? await this.createKemeniSnellaResult(result)
+                        : null,
             }
             const savedCalculation = await this.CalculationRepository().save(
                 calcToSave

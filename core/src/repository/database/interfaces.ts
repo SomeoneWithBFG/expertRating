@@ -36,7 +36,7 @@ export interface ICalculationService {
     getCalculationListByUserID: (userId: string) => Promise<Calculation[]>
     getCalculationByID: (id: string) => Promise<Calculation>
 
-    createCalc: (
+    createCalculation: (
         inputMatrix: number[][] | SequentiallyComparisonInputMatrixElement[],
         x: number,
         y: number,

@@ -15,11 +15,19 @@ router.get(
 
 router.delete('/:id', middleware.validateJWT, Calculations.deleteCalculation)
 
-router.post('/kemeni-snella', Calculations.kemeniSnella)
-router.post('/kondorse', Calculations.kondorse)
-router.post('/pair-comparsion', Calculations.pairComparsion)
-router.post('/preference', Calculations.preference)
-router.post('/sequentially-comparison', Calculations.sequentiallyComparison)
-router.post('/weighing', Calculations.weighing)
+router.post('/kemeni-snella', middleware.addUserId, Calculations.kemeniSnella)
+router.post('/kondorse', middleware.addUserId, Calculations.kondorse)
+router.post(
+    '/pair-comparsion',
+    middleware.addUserId,
+    Calculations.pairComparsion
+)
+router.post('/preference', middleware.addUserId, Calculations.preference)
+router.post(
+    '/sequentially-comparison',
+    middleware.addUserId,
+    Calculations.sequentiallyComparison
+)
+router.post('/weighing', middleware.addUserId, Calculations.weighing)
 
 export default router

@@ -1,14 +1,9 @@
 export interface PairComparsionResult {
+    method: 'PairComparsionResult'
     values: number[]
     sumOfValues: number
     weights: number[]
     order: string
-}
-
-export function isPairComparsionResult(
-    object: any
-): object is PairComparsionResult {
-    return 'values' in object
 }
 
 export interface SequentiallyComparisonInputMatrixElement {
@@ -17,6 +12,7 @@ export interface SequentiallyComparisonInputMatrixElement {
     resultWeight: number
 }
 export interface SequentiallyComparisonResult {
+    method: 'SequentiallyComparisonResult'
     causedCorrections: string
     correctedEvaluations: number[]
     sumOfWeights: number
@@ -24,24 +20,16 @@ export interface SequentiallyComparisonResult {
     order: string
 }
 
-export function isSequentiallyComparisonResult(
-    object: any
-): object is SequentiallyComparisonResult {
-    return 'causedCorrections' in object
-}
-
 export interface WeighingResult {
+    method: 'WeighingResult'
     sumOfMarks: number
     relativeExpertsMarks: number[]
     weights: number[]
     order: string
 }
 
-export function isWeighingResult(object: any): object is WeighingResult {
-    return 'relativeExpertsMarks' in object
-}
-
 export interface PreferenceResult {
+    method: 'PreferenceResult'
     modMatrix: number[][]
     sumMarks: number[]
     sumOfMarks: number
@@ -49,27 +37,15 @@ export interface PreferenceResult {
     order: string
 }
 
-export function isPreferenceResult(object: any): object is PreferenceResult {
-    return 'sumMarks' in object
-}
-
 export interface KondorseResult {
+    method: 'KondorseResult'
     modMatrix: number[][]
     best: number
 }
 
-export function isKondorseResult(object: any): object is KondorseResult {
-    return 'best' in object
-}
-
 export interface KemeniSnellaResult {
+    method: 'KemeniSnellaResult'
     binaryMatrixArray: number[]
     looseMatrix: number[][]
     order: string
-}
-
-export function isKemeniSnellaResult(
-    object: any
-): object is KemeniSnellaResult {
-    return 'looseMatrix' in object
 }

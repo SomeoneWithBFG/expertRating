@@ -97,17 +97,8 @@ class Calculations implements ICalculations {
         ) => Calc
     ) {
         const result = service(data, x, y)
-        let token = req.header('Authorization')
-        if (token) {
-            if (token.startsWith('Bearer ')) {
-                token = token.slice(7, token.length)
-            }
-            const decodedToken = await JWTService.verifyAndDecode(token)
-            if (decodedToken instanceof Error) {
-                res.json(result)
-                return
-            }
-            const user = await UsersRepository.getUserByID(decodedToken.id)
+        if (req.body.reqUserId) {
+            const user = await UsersRepository.getUserByID(req.body.reqUserId)
             let savedResult = await repo(data, x, y, method, user, result)
             res.json({ result, savedResult })
             return
@@ -124,10 +115,10 @@ class Calculations implements ICalculations {
                 'pairComparsion',
                 req,
                 res,
-                CalculationRepository.createCalc
+                CalculationRepository.createCalculation
             )
         } catch (e) {
-            console.log(e)
+            res.json(e)
         }
     }
     sequentiallyComparison = async (req: Request, res: Response) => {
@@ -140,10 +131,10 @@ class Calculations implements ICalculations {
                 'sequentiallyComparison',
                 req,
                 res,
-                CalculationRepository.createCalc
+                CalculationRepository.createCalculation
             )
         } catch (e) {
-            console.log(e)
+            res.json(e)
         }
     }
     weighing = async (req: Request, res: Response) => {
@@ -156,10 +147,10 @@ class Calculations implements ICalculations {
                 'weighing',
                 req,
                 res,
-                CalculationRepository.createCalc
+                CalculationRepository.createCalculation
             )
         } catch (e) {
-            console.log(e)
+            res.json(e)
         }
     }
     preference = async (req: Request, res: Response) => {
@@ -172,10 +163,10 @@ class Calculations implements ICalculations {
                 'preference',
                 req,
                 res,
-                CalculationRepository.createCalc
+                CalculationRepository.createCalculation
             )
         } catch (e) {
-            console.log(e)
+            res.json(e)
         }
     }
     kondorse = async (req: Request, res: Response) => {
@@ -188,10 +179,10 @@ class Calculations implements ICalculations {
                 'kondorse',
                 req,
                 res,
-                CalculationRepository.createCalc
+                CalculationRepository.createCalculation
             )
         } catch (e) {
-            console.log(e)
+            res.json(e)
         }
     }
     kemeniSnella = async (req: Request, res: Response) => {
@@ -204,10 +195,10 @@ class Calculations implements ICalculations {
                 'kemeniSnella',
                 req,
                 res,
-                CalculationRepository.createCalc
+                CalculationRepository.createCalculation
             )
         } catch (e) {
-            console.log(e)
+            res.json(e)
         }
     }
 }

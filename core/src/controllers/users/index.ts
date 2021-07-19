@@ -67,10 +67,9 @@ class UserController implements IUserController {
 
             res.json(result)
             return
-        } else {
-            res.json(isUpdated)
-            return
         }
+        res.json(isUpdated)
+        return
     }
 
     deleteUser = async (req: Request, res: Response) => {
@@ -92,10 +91,9 @@ class UserController implements IUserController {
 
             res.json(result)
             return
-        } else {
-            res.json(wasDeleted)
-            return
         }
+        res.json(wasDeleted)
+        return
     }
 }
 

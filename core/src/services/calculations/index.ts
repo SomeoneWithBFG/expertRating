@@ -4,6 +4,8 @@ import {
     SequentiallyComparisonResult,
     WeighingResult,
     PreferenceResult,
+    PairComparsionResult,
+    KondorseResult,
     KemeniSnellaResult,
 } from '@src/models/dtm/calculations'
 
@@ -13,7 +15,9 @@ function createMatrix(y: number, x: number) {
 
 class CalculationsService implements ICalculationsService {
     pairComparsion(binaryMatrix: number[][], numOfEl: number, y: number) {
-        let result = {
+        let result: PairComparsionResult
+        result = {
+            method: 'PairComparsionResult',
             values: Array(numOfEl).fill(0),
             sumOfValues: 0,
             weights: Array(numOfEl).fill(0),
@@ -60,6 +64,7 @@ class CalculationsService implements ICalculationsService {
         }
         let result: SequentiallyComparisonResult
         result = {
+            method: 'SequentiallyComparisonResult',
             causedCorrections: '',
             correctedEvaluations: [],
             sumOfWeights: 0,
@@ -118,6 +123,7 @@ class CalculationsService implements ICalculationsService {
         }
         let result: WeighingResult
         result = {
+            method: 'WeighingResult',
             sumOfMarks: 0,
             relativeExpertsMarks: [],
             weights: [],
@@ -164,6 +170,7 @@ class CalculationsService implements ICalculationsService {
     preference(inputMatrix: number[][], x: number, y: number) {
         let result: PreferenceResult
         result = {
+            method: 'PreferenceResult',
             modMatrix: createMatrix(y, x),
             sumMarks: Array(x).fill(0),
             sumOfMarks: 0,
@@ -207,7 +214,9 @@ class CalculationsService implements ICalculationsService {
         return result
     }
     kondorse(inputMatrix: number[][], x: number, y: number) {
-        let result = {
+        let result: KondorseResult
+        result = {
+            method: 'KondorseResult',
             modMatrix: createMatrix(x, x),
             best: 0,
         }
@@ -248,6 +257,7 @@ class CalculationsService implements ICalculationsService {
     ) {
         let result: KemeniSnellaResult
         result = {
+            method: 'KemeniSnellaResult',
             binaryMatrixArray: [],
             looseMatrix: [],
             order: '',

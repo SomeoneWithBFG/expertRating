@@ -1,13 +1,11 @@
-import TestRouter from "./test";
-import CalculationsRouter from "./calculations";
-import UsersRouter from "./users";
-import AuthRouter from "./auth";
+import CalculationsRouter from './calculations'
+import UsersRouter from './users'
+import AuthRouter from './auth'
 
 const Routers = {
-  AuthRouter,
-  TestRouter,
-  CalculationsRouter,
-  UsersRouter,
-};
+    AuthRouter,
+    CalculationsRouter,
+    UsersRouter,
+}
 
-export default Routers;
+export default Routers

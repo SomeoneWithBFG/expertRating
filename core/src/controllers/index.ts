@@ -1,13 +1,13 @@
-import UserController from "./users";
+import UserController from './users'
 
-import { IUserController } from "./users/interfaces";
+import { IUserController } from './users/interfaces'
 
 class UseCases {
-  userService: IUserController;
+    userService: IUserController
 
-  constructor() {
-    this.userService = UserController;
-  }
+    constructor() {
+        this.userService = UserController
+    }
 }
 
-export default new UseCases();
+export default new UseCases()

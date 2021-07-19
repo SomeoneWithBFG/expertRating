@@ -73,10 +73,8 @@ class Calculations implements ICalculations {
 
             res.json(result)
             return
-        } else {
-            res.json(wasDeleted)
-            return
         }
+        res.json(wasDeleted)
     }
 
     async createControllerBuilder<Input, Output, Calc>(

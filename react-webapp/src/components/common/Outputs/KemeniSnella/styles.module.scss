@@ -7,7 +7,20 @@
 
 .outputField {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     margin-bottom: 1rem;
+}
+
+.binaryMatrix {
+    margin: 1rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.matrixElement {
+    margin: 0.1rem;
 }

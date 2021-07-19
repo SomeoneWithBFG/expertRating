@@ -8,7 +8,7 @@ import SequentiallyComparison from '../../../common/Outputs/SequentiallyComparsi
 import Weighing from '../../../common/Outputs/Weighing/'
 
 const method = () => {
-    return "Weighing"
+    return "KemeniSnella"
 }
 
 const Output: React.FC = () => {

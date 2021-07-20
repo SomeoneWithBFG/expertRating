@@ -3,24 +3,27 @@
 .container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .outputField {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     margin-bottom: 1rem;
 }
 
-.binaryMatrix {
+.dataContainer {
     margin: 1rem;
+    justify-content: center;
 }
 
 .row {
+    width: 10rem;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 .matrixElement {
-    margin: 0.1rem;
+    margin-left: 0.1rem;
 }

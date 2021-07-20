@@ -9,26 +9,35 @@ const KemeniSnella: React.FC = () => {
     return (
         <div className={styles.container}>
             <div className={styles.outputField}>
-
-                <div className={styles.binaryMatrixes}>
-                    {data.result.binaryMatrixArray.map(matrix=>(
-                        matrix.map((row, i) => (
-                            <div key={row[i]} className={styles.row}>
-                                {row.map((col) => (
-                                    <div key={col} className={styles.matrixElement}>
-                                        {col}
-                                    </div>
-                                ))}
-                            </div>
-                        ))
+                <div className={styles.dataContainer}>
+                    {data.result.binaryMatrixArray.map((matrix, j) => (
+                        <>
+                            {'Эксперт ' + (j + 1) + ':'}
+                            {matrix.map((row, i) => (
+                                <div key={row[i]} className={styles.row}>
+                                    {row.map((col) => (
+                                        <div
+                                            key={col}
+                                            className={styles.matrixElement}
+                                        >
+                                            {col}
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </>
                     ))}
                 </div>
 
-                <div className={styles.looseMatrix}>
-                    <div>{data.result.looseMatrix}</div>
+                <div className={styles.dataContainer}>
+                    Матрица потерь:
+                    {data.result.looseMatrix.map((col) => (
+                        <div className={styles.matrixElement}>{col + '  '}</div>
+                    ))}
                 </div>
 
-                <div className={styles.order}>
+                <div className={styles.dataContainer}>
+                    Результат:
                     <div>{data.result.order}</div>
                 </div>
             </div>

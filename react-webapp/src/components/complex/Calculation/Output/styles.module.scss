@@ -1,0 +1,12 @@
+@import '../../../../styles/colors/colors.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.downloadButton {
+    margin: 1rem;
+    width: 10rem;
+}

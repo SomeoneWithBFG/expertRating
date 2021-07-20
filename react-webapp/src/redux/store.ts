@@ -1,9 +1,16 @@
 import thunk from 'redux-thunk'
-import reducer from './reducer'
-import { createStore, applyMiddleware, Store } from 'redux'
+import calculationReducer from './calculations/reducer'
+import { combineReducers } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
-const store: Store<ArticleState, ArticleAction> & {
-    dispatch: DispatchType
-} = createStore(reducer, applyMiddleware(thunk))
+const rootReducer = combineReducers({
+    calculationReducer,
+})
+
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: [thunk, ...getDefaultMiddleware()],
+})
 
 export default store

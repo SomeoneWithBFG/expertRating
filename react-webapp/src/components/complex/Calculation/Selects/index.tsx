@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import Select from '../../../basic/Select'
 
@@ -6,8 +7,14 @@ import styles from './styles.module.scss'
 
 import { types, size } from './data'
 
+import { setMethod } from '../../../../redux/calculations/actions'
+
 function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     console.log(e.target.value)
+}
+
+function handleMethodChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    setMethod(e.target.value)
 }
 
 const Selects: React.FC = () => {
@@ -18,13 +25,15 @@ const Selects: React.FC = () => {
                     name={'typeSelector'}
                     disabled={false}
                     options={types}
-                    onChange={handleChange}
+                    onChange={handleMethodChange}
                 />
             </div>
             <div className={styles.size}>
-                <div className={styles.sizeElement}>Размерность матрицы:</div>
                 <div className={styles.sizeElement}>
-                    X: 
+                    Размерность матрицы:
+                </div>
+                <div className={styles.sizeElement}>
+                    X:
                     <Select
                         name={'typeSelector'}
                         disabled={false}
@@ -33,7 +42,7 @@ const Selects: React.FC = () => {
                     />
                 </div>
                 <div className={styles.sizeElement}>
-                    Y: 
+                    Y:
                     <Select
                         name={'typeSelector'}
                         disabled={false}
@@ -46,4 +55,11 @@ const Selects: React.FC = () => {
     )
 }
 
-export default Selects
+const mapDispatchToProps = {
+    setMethod
+};
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Selects);

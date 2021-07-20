@@ -2,10 +2,10 @@
 @import '../../../styles/fonts/fonts.scss';
 
 .container {
-    position: absolute;
+    position: fixed;
     left: 0px;
     top: 0px;
-    height: 100vh;
+    height: 100%;
     width: 20rem;
     padding-top: 0.5rem;
     display: flex;

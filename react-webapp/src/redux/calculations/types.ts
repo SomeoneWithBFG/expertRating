@@ -5,7 +5,7 @@ export interface sequentiallyComparisonMatrixElement {
 }
 
 export interface CalculationState {
-    type: string
+    method: string
     x: number
     y: number
     commonMatrix: number[][]

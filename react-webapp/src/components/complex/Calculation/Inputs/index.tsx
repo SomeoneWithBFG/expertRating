@@ -24,9 +24,13 @@ const Inputs: React.FC = () => {
                 <div className={styles.rowNameContainer}>
                     {inputField[0].map((row, i) =>
                         i === 0 ? (
-                            <div className={styles.firstRowName}>k</div>
+                            <div key={i} className={styles.firstRowName}>
+                                k
+                            </div>
                         ) : (
-                            <div className={styles.rowName}>k</div>
+                            <div key={i} className={styles.rowName}>
+                                k
+                            </div>
                         )
                     )}
                 </div>

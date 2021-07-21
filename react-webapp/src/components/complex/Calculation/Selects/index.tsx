@@ -1,23 +1,32 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import Select from '../../../basic/Select'
+
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
 
 import styles from './styles.module.scss'
 
 import { types, size } from './data'
 
-import { setMethod } from '../../../../redux/calculations/actions'
-
-function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    console.log(e.target.value)
-}
-
-function handleMethodChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    setMethod(e.target.value)
-}
+import { setMethod, setX, setY } from '../../../../redux/calculations/actions'
 
 const Selects: React.FC = () => {
+    const state = useAppSelector((state) => state)
+
+    const dispatch = useAppDispatch()
+
+    const handleMethodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(setMethod(e.target.value))
+    }
+
+    function handleXChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        dispatch(setX(parseInt(e.target.value)))
+    }
+
+    function handleYChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        dispatch(setY(parseInt(e.target.value)))
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.typeOfCalc}>
@@ -29,16 +38,14 @@ const Selects: React.FC = () => {
                 />
             </div>
             <div className={styles.size}>
-                <div className={styles.sizeElement}>
-                    Размерность матрицы:
-                </div>
+                <div className={styles.sizeElement}>Размерность матрицы:</div>
                 <div className={styles.sizeElement}>
                     X:
                     <Select
                         name={'typeSelector'}
                         disabled={false}
                         options={size}
-                        onChange={handleChange}
+                        onChange={handleXChange}
                     />
                 </div>
                 <div className={styles.sizeElement}>
@@ -47,7 +54,7 @@ const Selects: React.FC = () => {
                         name={'typeSelector'}
                         disabled={false}
                         options={size}
-                        onChange={handleChange}
+                        onChange={handleYChange}
                     />
                 </div>
             </div>
@@ -55,11 +62,4 @@ const Selects: React.FC = () => {
     )
 }
 
-const mapDispatchToProps = {
-    setMethod
-};
-
-export default connect(
-    null,
-    mapDispatchToProps
-)(Selects);
+export default Selects

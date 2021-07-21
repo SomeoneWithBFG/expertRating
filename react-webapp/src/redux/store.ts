@@ -1,16 +1,25 @@
-import thunk from 'redux-thunk'
-import calculationReducer from './calculations/reducer'
-import { combineReducers } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import {
+    configureStore,
+    ThunkAction,
+    Action,
+    combineReducers,
+} from '@reduxjs/toolkit'
+
+import calculations from './calculations/reducer'
 
 const rootReducer = combineReducers({
-    calculationReducer,
+    calculations,
 })
 
-const store = configureStore({
+export const store = configureStore({
     reducer: rootReducer,
-    middleware: [thunk, ...getDefaultMiddleware()],
 })
 
-export default store
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
+>

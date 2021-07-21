@@ -4,16 +4,20 @@ import { BrowserRouter } from 'react-router-dom'
 
 import Routes from './routes'
 
-import store from './redux/store'
+import { store } from './redux/store'
 import { Provider } from 'react-redux'
+
+import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <Provider store={store}>
+        <Provider store={store}>
+            <BrowserRouter>
                 <Routes />
-            </Provider>
-        </BrowserRouter>
+            </BrowserRouter>
+        </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 )
+
+serviceWorker.register()

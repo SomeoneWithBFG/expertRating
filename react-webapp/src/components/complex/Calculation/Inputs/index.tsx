@@ -2,19 +2,49 @@ import React from 'react'
 
 import Input from '../../../basic/Input'
 
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
+import {
+    setMatrixElement,
+    setMatrixElementSeqCompIndex,
+    setMatrixElementSeqCompWeight,
+} from '../../../../redux/calculations/actions'
+
 import styles from './styles.module.scss'
 
-function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.value)
-}
+// function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+//     console.log(e.target.value)
+// }
 
 const Inputs: React.FC = () => {
-    const x = 2
-    const y = 2
-    const inputField = new Array<Array<string>>(x)
-    for (var i = 0; i < x; i++) {
-        inputField[i] = new Array<string>(y)
-        for (var j = 0; j < y; j++) {
+    const state = useAppSelector((state) => state)
+    const dispatch = useAppDispatch()
+
+    function handleInput(data: string, x: number, y: number) {
+        if (state.calculations.method === 'sequentiallyComparison') {
+            let newMatrix = JSON.parse(
+                JSON.stringify(state.calculations.seqCompMatrix)
+            )
+            if (x === 0) {
+                newMatrix[y].index = data
+                dispatch(setMatrixElementSeqCompIndex(newMatrix))
+            }
+            if (x === 1) {
+                newMatrix[y].weight = parseFloat(data)
+                dispatch(setMatrixElementSeqCompWeight(newMatrix))
+            }
+        } else {
+            let newMatrix = JSON.parse(
+                JSON.stringify(state.calculations.commonMatrix)
+            )
+            newMatrix[y][x] = parseFloat(data)
+            dispatch(setMatrixElement(newMatrix))
+        }
+    }
+
+    const inputField = new Array<Array<string>>(state.calculations.x)
+    for (var i = 0; i < state.calculations.x; i++) {
+        inputField[i] = new Array<string>(state.calculations.y)
+        for (var j = 0; j < state.calculations.y; j++) {
             inputField[i][j] = '' + (j + 1) + '-' + (i + 1)
         }
     }
@@ -38,12 +68,17 @@ const Inputs: React.FC = () => {
                     {inputField.map((row, i) => (
                         <div key={row[i]}>
                             f
-                            {row.map((col) => (
+                            {row.map((col, j) => (
                                 <div key={col} className={styles.inputElement}>
                                     <Input
+                                        key={'' + i + ' ' + j}
                                         name={col}
                                         placeholder={col}
-                                        onChange={handleInput}
+                                        onChange={(
+                                            e: React.ChangeEvent<HTMLInputElement>
+                                        ) => {
+                                            handleInput(e.target.value, i, j)
+                                        }}
                                     />
                                 </div>
                             ))}

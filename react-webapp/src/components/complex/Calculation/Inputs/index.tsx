@@ -11,10 +11,6 @@ import {
 
 import styles from './styles.module.scss'
 
-// function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-//     console.log(e.target.value)
-// }
-
 const Inputs: React.FC = () => {
     const state = useAppSelector((state) => state)
     const dispatch = useAppDispatch()

@@ -27,10 +27,7 @@ const calculationReducer = createReducer(initialState, {
             return { ...state, commonMatrix: newMatrix, x: action.payload }
         }
         for (let i = 0; i < state.y; i++) {
-            for (let j = state.x; j < action.payload; j++) {
-                console.log(0)
-                newMatrix[i][j] = 0
-            }
+            newMatrix[i] = newMatrix[i].concat(Array(action.payload-state.x).fill(0))
         }
         return { ...state, commonMatrix: newMatrix, x: action.payload }
     },
@@ -45,7 +42,6 @@ const calculationReducer = createReducer(initialState, {
             for (let i = state.y; i < action.payload; i++) {
                 newMatrix.push({ index: '', weight: 0, resultWeight: 0 })
             }
-            console.log(newMatrix)
             return { ...state, seqCompMatrix: newMatrix, y: action.payload }
         }
         let newMatrix = state.commonMatrix.slice()

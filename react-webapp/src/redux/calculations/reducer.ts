@@ -93,20 +93,20 @@ const calculationReducer = createReducer(initialState, {
     ) => {
         return { ...state, commonMatrix: action.payload.data }
     },
-    
+
     [actions.setMatrixElementSeqCompIndex.type]: (
         state,
-        action: PayloadAction<{ 
-            data: CalculationInterfaces.sequentiallyComparisonMatrixElement[] 
+        action: PayloadAction<{
+            data: CalculationInterfaces.sequentiallyComparisonMatrixElement[]
         }>
     ) => {
         return { ...state, seqCompMatrix: action.payload.data }
     },
-    
+
     [actions.setMatrixElementSeqCompWeight.type]: (
         state,
-        action: PayloadAction<{ 
-            data: CalculationInterfaces.sequentiallyComparisonMatrixElement[] 
+        action: PayloadAction<{
+            data: CalculationInterfaces.sequentiallyComparisonMatrixElement[]
         }>
     ) => {
         return { ...state, seqCompMatrix: action.payload.data }

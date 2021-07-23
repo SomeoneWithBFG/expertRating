@@ -37,6 +37,22 @@ const Inputs: React.FC = () => {
         }
     }
 
+    function setInputValue(i: number, j: number) {
+        if (state.calculations.method === 'sequentiallyComparison') {
+            if (i === 0) {
+                if (state.calculations.seqCompMatrix[j].index !== '') {
+                    return state.calculations.seqCompMatrix[j].index
+                }
+                return
+            }
+            return state.calculations.seqCompMatrix[j].weight.toString()
+        }
+        if (state.calculations.commonMatrix[j][i].toString() === 'NaN') {
+            return
+        }
+        return state.calculations.commonMatrix[j][i].toString()
+    }
+
     const inputField = new Array<Array<string>>(state.calculations.x)
     for (var i = 0; i < state.calculations.x; i++) {
         inputField[i] = new Array<string>(state.calculations.y)
@@ -70,6 +86,11 @@ const Inputs: React.FC = () => {
                                         key={'' + i + ' ' + j}
                                         name={col}
                                         placeholder={col}
+                                        value={setInputValue(i,j)}
+                                        disabled={
+                                            state.calculations.method ===
+                                                'pairComparsion' && i === j
+                                        }
                                         onChange={(
                                             e: React.ChangeEvent<HTMLInputElement>
                                         ) => {

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './styles.module.scss'
+
+import { useAppSelector } from '../../../../redux/hooks'
 
 import Button from '../../../basic/Button'
 
@@ -10,22 +12,19 @@ import Preference from '../../../common/Outputs/Preference/'
 import SequentiallyComparison from '../../../common/Outputs/SequentiallyComparsion/'
 import Weighing from '../../../common/Outputs/Weighing/'
 
-const chooseMethod = () => {
-    const method = () => {
-        return 'Weighing'
-    }
-    switch (method()) {
-        case 'KemeniSnella':
+const chooseMethod = (method: string) => {
+    switch (method) {
+        case 'kemeniSnella':
             return <KemeniSnella />
-        case 'Kondorse':
+        case 'kondorse':
             return <Kondorse />
-        case 'PairComparsion':
+        case 'pairComparsion':
             return <PairComparsion />
-        case 'Preference':
+        case 'preference':
             return <Preference />
-        case 'SequentiallyComparison':
+        case 'sequentiallyComparison':
             return <SequentiallyComparison />
-        case 'Weighing':
+        case 'weighing':
             return <Weighing />
         default:
             return <> </>
@@ -33,14 +32,40 @@ const chooseMethod = () => {
 }
 
 const Output: React.FC = () => {
+    const state = useAppSelector((state) => state)
+
+    const [isCalculated, setIsCalculated] = useState(false)
+    
+    function calculate() {
+        setIsCalculated(!isCalculated)
+    }
+
     return (
         <div className={styles.container}>
-            {chooseMethod()}
-            <div className={styles.downloadButton}>
+            <div className={styles.button}>
+                <Button
+                    name={isCalculated ? 'Отменить' : 'Рассчитать'}
+                    placeholder={isCalculated ? 'Отменить' : 'Рассчитать'}
+                    buttonType={isCalculated ? 'danger' : 'basic'}
+                    disabled={false}
+                    onClick={calculate}
+                />
+            </div>
+            {
+                isCalculated &&
+                    <div>
+                        {chooseMethod(state.calculations.method)}
+                        <div className={styles.button}>
+                            
+                        </div>
+                    </div>
+                    
+            }
+            <div className={styles.button}>
                 <Button
                     name={'Скачать решение'}
                     placeholder={'Скачать решение'}
-                    disabled={false}
+                    disabled={!isCalculated}
                     onClick={(e) => console.log(e.target)}
                 />
             </div>

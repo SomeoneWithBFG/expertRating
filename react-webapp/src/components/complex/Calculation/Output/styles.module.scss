@@ -3,10 +3,10 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 
-.downloadButton {
-    margin: 1rem;
+.button {
     width: 10rem;
+    margin: 1rem;
 }

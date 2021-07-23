@@ -11,7 +11,11 @@ const PairComparsion: React.FC = () => {
             <div className={styles.outputField}>
                 <div className={styles.dataContainer}>
                     Цена каждой цели:
-                    {' ' + data.result.values}
+                    {data.result.values.map((col, i) => (
+                        <div key={col} className={styles.matrixElement}>
+                            {'' + (i + 1) + ': ' + col + ' '}
+                        </div>
+                    ))}
                 </div>
 
                 <div className={styles.dataContainer}>
@@ -21,7 +25,11 @@ const PairComparsion: React.FC = () => {
 
                 <div className={styles.dataContainer}>
                     Исковые веса целей:
-                    {' ' + data.result.weights}
+                    {data.result.weights.map((col, i) => (
+                        <div key={col} className={styles.matrixElement}>
+                            {'' + (i + 1) + ': ' + col + ' '}
+                        </div>
+                    ))}
                 </div>
 
                 <div className={styles.dataContainer}>

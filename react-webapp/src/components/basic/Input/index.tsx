@@ -4,8 +4,8 @@ import styles from './styles.module.scss'
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string
     disabled?: boolean
-    placeholder: string,
-    value?: string,
+    placeholder: string
+    value?: string
     onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
 }
 

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import debounce from 'lodash.debounce'
 
 import Input from '../../../basic/Input'
 
@@ -15,6 +16,26 @@ const Inputs: React.FC = () => {
     const state = useAppSelector((state) => state)
     const dispatch = useAppDispatch()
 
+    function text() {
+        switch (state.calculations.method) {
+            case 'sequentiallyComparison':
+                return ['Название', 'Вес']
+            case 'weighing':
+                var arr = []
+                for (var i = 0; i < state.calculations.x; i++) {
+                    arr.push('Z' + i)
+                }
+                arr[0] = 'R'
+                return arr
+            default:
+                var arr = []
+                for (var i = 0; i < state.calculations.x; i++) {
+                    arr.push('Z' + (i + 1))
+                }
+                return arr
+        }
+    }
+
     function handleInput(data: string, x: number, y: number) {
         if (state.calculations.method === 'sequentiallyComparison') {
             let newMatrix = JSON.parse(
@@ -25,19 +46,21 @@ const Inputs: React.FC = () => {
                 dispatch(setMatrixElementSeqCompIndex(newMatrix))
             }
             if (x === 1) {
-                newMatrix[y].weight = parseFloat(data)
+                newMatrix[y].weight = parseFloat(data + '.005')
                 dispatch(setMatrixElementSeqCompWeight(newMatrix))
             }
         } else {
             let newMatrix = JSON.parse(
                 JSON.stringify(state.calculations.commonMatrix)
             )
+            //
             newMatrix[y][x] = parseFloat(data)
             dispatch(setMatrixElement(newMatrix))
         }
     }
 
     function setInputValue(i: number, j: number) {
+        //console.log(state.calculations.commonMatrix[j][i])
         if (state.calculations.method === 'sequentiallyComparison') {
             if (i === 0) {
                 if (state.calculations.seqCompMatrix[j].index !== '') {
@@ -67,11 +90,13 @@ const Inputs: React.FC = () => {
                     {inputField[0].map((row, i) =>
                         i === 0 ? (
                             <div key={i} className={styles.firstRowName}>
-                                k
+                                {state.calculations.method !==
+                                    'sequentiallyComparison' && 'Э' + (i + 1)}
                             </div>
                         ) : (
                             <div key={i} className={styles.rowName}>
-                                k
+                                {state.calculations.method !==
+                                    'sequentiallyComparison' && 'Э' + (i + 1)}
                             </div>
                         )
                     )}
@@ -79,14 +104,14 @@ const Inputs: React.FC = () => {
                 <div className={styles.row}>
                     {inputField.map((row, i) => (
                         <div key={row[i]}>
-                            f
+                            {text()[i]}
                             {row.map((col, j) => (
                                 <div key={col} className={styles.inputElement}>
                                     <Input
-                                        key={'' + i + ' ' + j}
+                                        key={setInputValue(i, j) + '' + i + j}
                                         name={col}
                                         placeholder={col}
-                                        value={setInputValue(i,j)}
+                                        value={setInputValue(i, j)}
                                         disabled={
                                             state.calculations.method ===
                                                 'pairComparsion' && i === j

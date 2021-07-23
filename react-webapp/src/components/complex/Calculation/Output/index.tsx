@@ -35,7 +35,7 @@ const Output: React.FC = () => {
     const state = useAppSelector((state) => state)
 
     const [isCalculated, setIsCalculated] = useState(false)
-    
+
     function calculate() {
         setIsCalculated(!isCalculated)
     }
@@ -51,16 +51,12 @@ const Output: React.FC = () => {
                     onClick={calculate}
                 />
             </div>
-            {
-                isCalculated &&
-                    <div>
-                        {chooseMethod(state.calculations.method)}
-                        <div className={styles.button}>
-                            
-                        </div>
-                    </div>
-                    
-            }
+            {isCalculated && (
+                <div>
+                    {chooseMethod(state.calculations.method)}
+                    <div className={styles.button}></div>
+                </div>
+            )}
             <div className={styles.button}>
                 <Button
                     name={'Скачать решение'}

@@ -101,7 +101,7 @@ class Calculations implements ICalculations {
             res.json({ result, savedResult })
             return
         }
-        res.json(result)
+        res.json({result: result})
     }
     pairComparsion = async (req: Request, res: Response) => {
         try {

@@ -9,7 +9,6 @@ import Routes from './routes'
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 
-import * as serviceWorker from './serviceWorker'
 
 axios.defaults.baseURL = 'http://localhost:3000/api'
 // axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
@@ -25,5 +24,3 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById('root')
 )
-
-serviceWorker.register()

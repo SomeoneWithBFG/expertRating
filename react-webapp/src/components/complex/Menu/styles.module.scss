@@ -1,0 +1,16 @@
+@import '../../../styles/colors/colors.scss';
+@import '../../../styles/fonts/fonts.scss';
+
+.container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 20rem;
+    height: 100%;
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: $white;
+    border-right: 1px solid $light-gray;
+}

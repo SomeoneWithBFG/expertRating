@@ -26,7 +26,6 @@ const SequentiallyComparison: React.FC = () => {
         )
             .then((response) => {
                 if (response.type === 'error') {
-                    console.log(response.payload)
                     setError(response.payload)
                 } else {
                     setData(response.payload)
@@ -34,7 +33,6 @@ const SequentiallyComparison: React.FC = () => {
                 setLoading(false)
             })
             .catch((ex) => {
-                console.log(ex)
                 setError('Something went wrong')
                 setLoading(false)
             })
@@ -51,18 +49,18 @@ const SequentiallyComparison: React.FC = () => {
 
                     <div className={styles.dataContainer}>
                         Скорректированные оценки:
-                        {data.result.correctedEvaluations.map((col, i) => (
+                        {data.result.correctedEvaluations.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
-                                {'' + (i + 1) + ': ' + col + ' '}
+                                {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
                         ))}
                     </div>
 
                     <div className={styles.dataContainer}>
                         Веса целей:
-                        {data.result.weights.map((col, i) => (
+                        {data.result.weights.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
-                                {'' + (i + 1) + ': ' + col + ' '}
+                                {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
                         ))}
                     </div>

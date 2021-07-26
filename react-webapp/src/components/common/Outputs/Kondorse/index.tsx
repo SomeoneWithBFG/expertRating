@@ -47,8 +47,8 @@ const Kondorse: React.FC = () => {
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Матрица оценок:
-                        {data.result.modMatrix.map((row, i) => (
-                            <div key={row[i]} className={styles.row}>
+                        {data.result.modMatrix.map((row, rowIndex) => (
+                            <div key={row[rowIndex]} className={styles.row}>
                                 {row.map((col) => (
                                     <div
                                         key={col}

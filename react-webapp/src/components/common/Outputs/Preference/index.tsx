@@ -26,7 +26,6 @@ const Preference: React.FC = () => {
         )
             .then((response) => {
                 if (response.type === 'error') {
-                    console.log(response.payload)
                     setError(response.payload)
                 } else {
                     setData(response.payload)
@@ -34,7 +33,6 @@ const Preference: React.FC = () => {
                 setLoading(false)
             })
             .catch((ex) => {
-                console.log(ex)
                 setError('Something went wrong')
                 setLoading(false)
             })
@@ -46,8 +44,8 @@ const Preference: React.FC = () => {
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Модифицированная матрица предпочтения:
-                        {data.result.modMatrix.map((row, i) => (
-                            <div key={row[i]} className={styles.row}>
+                        {data.result.modMatrix.map((row, rowIndex) => (
+                            <div key={row[rowIndex]} className={styles.row}>
                                 {row.map((col) => (
                                     <div
                                         key={col}
@@ -78,9 +76,9 @@ const Preference: React.FC = () => {
 
                     <div className={styles.dataContainer}>
                         Искомые веса целей:
-                        {data.result.weights.map((col, i) => (
+                        {data.result.weights.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
-                                {'' + (i + 1) + ': ' + col + ' '}
+                                {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
                         ))}
                     </div>

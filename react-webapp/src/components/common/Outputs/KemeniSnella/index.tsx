@@ -46,14 +46,14 @@ const KemeniSnella: React.FC = () => {
             {!loading && error === '' && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
-                        {data.result.binaryMatrixArray.map((matrix, j) => (
+                        {data.result.binaryMatrixArray.map((matrix, matrixIndex) => (
                             <>
-                                {'Эксперт ' + (j + 1) + ':'}
-                                {matrix.map((row, i) => (
-                                    <div key={row[i]} className={styles.row}>
-                                        {row.map((col, k) => (
+                                {'Эксперт ' + (matrixIndex + 1) + ':'}
+                                {matrix.map((row, rowIndex) => (
+                                    <div key={row[rowIndex]} className={styles.row}>
+                                        {row.map((col, columnIndex) => (
                                             <div
-                                                key={'' + i + j + k + col}
+                                                key={'' + rowIndex + matrixIndex + columnIndex + col}
                                                 className={styles.matrixElement}
                                             >
                                                 {col}
@@ -67,11 +67,11 @@ const KemeniSnella: React.FC = () => {
 
                     <div className={styles.dataContainer}>
                         Матрица потерь:
-                        {data.result.looseMatrix.map((row, i) => (
-                            <div key={row[i]} className={styles.row}>
-                                {row.map((col, j) => (
+                        {data.result.looseMatrix.map((row, rowIndex) => (
+                            <div key={row[rowIndex]} className={styles.row}>
+                                {row.map((col, columnIndex) => (
                                     <div
-                                        key={'' + i + j + col}
+                                        key={'' + rowIndex + columnIndex + col}
                                         className={styles.matrixElement}
                                     >
                                         {col}

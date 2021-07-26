@@ -34,7 +34,6 @@ const Weighing: React.FC = () => {
                 setLoading(false)
             })
             .catch((ex) => {
-                console.log(ex)
                 setError('Something went wrong')
                 setLoading(false)
             })
@@ -51,18 +50,18 @@ const Weighing: React.FC = () => {
 
                     <div className={styles.dataContainer}>
                         Относительные оценки экспертов:
-                        {data.result.relativeExpertsMarks.map((col, i) => (
+                        {data.result.relativeExpertsMarks.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
-                                {'' + (i + 1) + ': ' + col + ' '}
+                                {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
                         ))}
                     </div>
 
                     <div className={styles.dataContainer}>
                         Искомые веса:
-                        {data.result.weights.map((col, i) => (
+                        {data.result.weights.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
-                                {'' + (i + 1) + ': ' + col + ' '}
+                                {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
                         ))}
                     </div>

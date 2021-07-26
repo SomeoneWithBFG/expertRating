@@ -26,7 +26,6 @@ const Weighing: React.FC = () => {
         )
             .then((response) => {
                 if (response.type === 'error') {
-                    console.log(response.payload)
                     setError(response.payload)
                 } else {
                     setData(response.payload)

@@ -58,6 +58,7 @@ const Output: React.FC = () => {
                 </div>
             )}
             <div className={styles.button}>
+                
                 <Button
                     name={'Скачать решение'}
                     placeholder={'Скачать решение'}

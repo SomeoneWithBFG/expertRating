@@ -122,7 +122,6 @@ export function weighing(inputMatrix: number[][], x: number, y: number) {
         }
     )
         .then((response) => {
-            console.log(response)
             if (response.status === 404) {
                 return { type: 'error', payload: response.data }
             }

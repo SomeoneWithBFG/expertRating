@@ -27,7 +27,6 @@ const Kondorse: React.FC = () => {
         )
             .then((response) => {
                 if (response.type === 'error') {
-                    console.log(response.payload)
                     setError(response.payload)
                 } else {
                     setData(response.payload)
@@ -35,7 +34,6 @@ const Kondorse: React.FC = () => {
                 setLoading(false)
             })
             .catch((ex) => {
-                console.log(ex)
                 setError('Something went wrong')
                 setLoading(false)
             })

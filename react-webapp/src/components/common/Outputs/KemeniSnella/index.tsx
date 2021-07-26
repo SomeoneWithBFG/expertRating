@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 
 import { useAppSelector } from '../../../../redux/hooks'
 
-import axios from 'axios'
+import { kemeniSnella } from '../../../../api/calculations'
 
 import styles from './styles.module.scss'
 
-import { KemeniSnellaResult } from '../resultTypes'
+import { KemeniSnellaResult } from '../../../../dataTypes/resultTypes'
 
 const KemeniSnella: React.FC = () => {
     const state = useAppSelector((state) => state)
@@ -20,32 +20,30 @@ const KemeniSnella: React.FC = () => {
     const [error, setError] = useState('')
 
     useEffect(() => {
-        axios
-            .post<{ result: KemeniSnellaResult; savedResult?: any }>(
-                '/calculations/kemeni-snella',
-                {
-                    inputMatrix: state.calculations.commonMatrix,
-                    x: state.calculations.x,
-                    y: state.calculations.y,
-                }
-            )
+        kemeniSnella(
+            state.calculations.commonMatrix,
+            state.calculations.x,
+            state.calculations.y
+        )
             .then((response) => {
-                setData({ result: response.data.result })
+                if (response.type === 'error') {
+                    console.log(response.payload)
+                    setError(response.payload)
+                } else {
+                    setData(response.payload)
+                }
                 setLoading(false)
             })
             .catch((ex) => {
-                const error =
-                    ex.response.status === 404
-                        ? 'Resource Not found'
-                        : 'An unexpected error has occurred'
-                setError(error)
+                console.log(ex)
+                setError('Something went wrong')
                 setLoading(false)
             })
-    }, [])
+    })
 
     return (
         <div className={styles.container}>
-            {!loading && (
+            {!loading && error === '' && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         {data.result.binaryMatrixArray.map((matrix, j) => (

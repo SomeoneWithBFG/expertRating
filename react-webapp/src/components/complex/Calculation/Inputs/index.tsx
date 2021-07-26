@@ -72,12 +72,18 @@ const Inputs: React.FC = () => {
                         i === 0 ? (
                             <div key={i} className={styles.firstRowName}>
                                 {(state.calculations.method !==
-                                    'sequentiallyComparison' ? 'Э' : 'Z') + (i + 1)}
+                                'sequentiallyComparison'
+                                    ? 'Э'
+                                    : 'Z') +
+                                    (i + 1)}
                             </div>
                         ) : (
                             <div key={i} className={styles.rowName}>
                                 {(state.calculations.method !==
-                                    'sequentiallyComparison' ? 'Э' : 'Z') + (i + 1)}
+                                'sequentiallyComparison'
+                                    ? 'Э'
+                                    : 'Z') +
+                                    (i + 1)}
                             </div>
                         )
                     )}

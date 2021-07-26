@@ -1,10 +1,11 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 
 import { useAppSelector } from '../../../../redux/hooks'
 
-import { PreferenceResult } from '../resultTypes'
+import { preference } from '../../../../api/calculations'
+
+import { PreferenceResult } from '../../../../dataTypes/resultTypes'
 
 const Preference: React.FC = () => {
     const state = useAppSelector((state) => state)
@@ -18,32 +19,30 @@ const Preference: React.FC = () => {
     const [error, setError] = useState('')
 
     useEffect(() => {
-        axios
-            .post<{ result: PreferenceResult; savedResult?: any }>(
-                '/calculations/preference',
-                {
-                    inputMatrix: state.calculations.commonMatrix,
-                    x: state.calculations.x,
-                    y: state.calculations.y,
-                }
-            )
+        preference(
+            state.calculations.commonMatrix,
+            state.calculations.x,
+            state.calculations.y
+        )
             .then((response) => {
-                setData({ result: response.data.result })
+                if (response.type === 'error') {
+                    console.log(response.payload)
+                    setError(response.payload)
+                } else {
+                    setData(response.payload)
+                }
                 setLoading(false)
             })
             .catch((ex) => {
-                const error =
-                    ex.response.status === 404
-                        ? 'Resource Not found'
-                        : 'An unexpected error has occurred'
-                setError(error)
+                console.log(ex)
+                setError('Something went wrong')
                 setLoading(false)
             })
-    }, [])
+    })
 
     return (
         <div className={styles.container}>
-            {!loading && (
+            {!loading && error === '' && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Модифицированная матрица предпочтения:

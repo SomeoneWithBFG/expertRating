@@ -1,10 +1,11 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 
 import { useAppSelector } from '../../../../redux/hooks'
 
-import { SequentiallyComparisonResult } from '../resultTypes'
+import { sequentiallyComparison } from '../../../../api/calculations'
+
+import { SequentiallyComparisonResult } from '../../../../dataTypes/resultTypes'
 
 const SequentiallyComparison: React.FC = () => {
     const state = useAppSelector((state) => state)
@@ -18,33 +19,30 @@ const SequentiallyComparison: React.FC = () => {
     const [error, setError] = useState('')
 
     useEffect(() => {
-        axios
-            .post<{ result: SequentiallyComparisonResult; savedResult?: any }>(
-                '/calculations/sequentially-comparison',
-                {
-                    inputMatrix: state.calculations.seqCompMatrix,
-                    x: state.calculations.y,
-                    y: state.calculations.y,
-                }
-            )
+        sequentiallyComparison(
+            state.calculations.seqCompMatrix,
+            state.calculations.y,
+            state.calculations.y
+        )
             .then((response) => {
-                console.log(response)
-                setData({ result: response.data.result })
+                if (response.type === 'error') {
+                    console.log(response.payload)
+                    setError(response.payload)
+                } else {
+                    setData(response.payload)
+                }
                 setLoading(false)
             })
             .catch((ex) => {
-                const error =
-                    ex.response.status === 404
-                        ? 'Resource Not found'
-                        : 'An unexpected error has occurred'
-                setError(error)
+                console.log(ex)
+                setError('Something went wrong')
                 setLoading(false)
             })
-    }, [])
+    })
 
     return (
         <div className={styles.container}>
-            {!loading && (
+            {!loading && error === '' && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Тройки целей, вызвавшие коррекцию весов:

@@ -1,9 +1,10 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 import { useAppSelector } from '../../../../redux/hooks'
 
-import { KondorseResult } from '../resultTypes'
+import { kondorse } from '../../../../api/calculations'
+
+import { KondorseResult } from '../../../../dataTypes/resultTypes'
 
 import styles from './styles.module.scss'
 
@@ -19,32 +20,30 @@ const Kondorse: React.FC = () => {
     const [error, setError] = useState('')
 
     useEffect(() => {
-        axios
-            .post<{ result: KondorseResult; savedResult?: any }>(
-                '/calculations/kondorse',
-                {
-                    inputMatrix: state.calculations.commonMatrix,
-                    x: state.calculations.x,
-                    y: state.calculations.y,
-                }
-            )
+        kondorse(
+            state.calculations.commonMatrix,
+            state.calculations.x,
+            state.calculations.y
+        )
             .then((response) => {
-                setData({ result: response.data.result })
+                if (response.type === 'error') {
+                    console.log(response.payload)
+                    setError(response.payload)
+                } else {
+                    setData(response.payload)
+                }
                 setLoading(false)
             })
             .catch((ex) => {
-                const error =
-                    ex.response.status === 404
-                        ? 'Resource Not found'
-                        : 'An unexpected error has occurred'
-                setError(error)
+                console.log(ex)
+                setError('Something went wrong')
                 setLoading(false)
             })
-    }, [])
+    })
 
     return (
         <div className={styles.container}>
-            {!loading && (
+            {!loading && error === '' && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Матрица оценок:

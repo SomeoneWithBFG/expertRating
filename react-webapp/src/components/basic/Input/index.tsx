@@ -5,6 +5,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string
     disabled?: boolean
     placeholder: string
+    isPassword?: boolean
     onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
 }
 
@@ -13,11 +14,13 @@ const Input: FC<InputProps> = ({
     name,
     disabled,
     placeholder,
+    isPassword,
     onChange,
 }) => {
     return (
-        <div>
+        <div className={styles.container}>
             <input
+                type={isPassword ? 'password' : undefined}
                 className={styles.input}
                 id={name}
                 placeholder={placeholder}

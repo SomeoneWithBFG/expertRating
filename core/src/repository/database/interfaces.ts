@@ -1,7 +1,9 @@
 import { User } from '@models/dbm/User'
 import { Calculation } from '@models/dbm/Calculation'
+import { Group } from '@models/dbm/Group'
 
 import { IUserDTM } from '@models/dtm/User'
+import { IGroupDTM } from '@models/dtm/Group'
 
 import {
     PairComparsionResult,
@@ -24,6 +26,7 @@ export default interface IDB {
 
 export interface IUsersService {
     getUserList: () => Promise<User[]>
+    getUserListByIds: (ids: string[]) => Promise<User[]>
     getUserByID: (id: string) => Promise<User>
     createUser: (data: IUserDTM) => Promise<User>
     updateUser: (id: string, data: IUserDTM) => Promise<User>
@@ -52,4 +55,22 @@ export interface ICalculationService {
     ) => Promise<Calculation>
 
     deleteCalculation: (id: string) => Promise<boolean>
+}
+
+export interface IGroupService {
+    getGroupList: () => Promise<Group[]>
+    getGroupByID: (id: string) => Promise<Group>
+    createGroup: (
+        data: IGroupDTM,
+        students: User[],
+        teacher: User
+    ) => Promise<Group>
+    updateGroup: (
+        id: string,
+        group: IGroupDTM,
+        students: User[],
+        teacher: User
+    ) => Promise<Group>
+    addUsers: (group: Group, students: User[], teacher: User) => Promise<Group>
+    deleteGroup: (id: string) => Promise<boolean>
 }

@@ -124,7 +124,6 @@ class CalculationService implements ICalculationService {
 
             return savedResult
         } catch (e) {
-            console.log(e)
             return e
         }
     }
@@ -146,7 +145,6 @@ class CalculationService implements ICalculationService {
 
             return savedResult
         } catch (e) {
-            console.log(e)
             return e
         }
     }
@@ -165,7 +163,6 @@ class CalculationService implements ICalculationService {
 
             return savedResult
         } catch (e) {
-            console.log(e)
             return e
         }
     }
@@ -185,7 +182,6 @@ class CalculationService implements ICalculationService {
 
             return savedResult
         } catch (e) {
-            console.log(e)
             return e
         }
     }
@@ -200,7 +196,6 @@ class CalculationService implements ICalculationService {
 
             return savedResult
         } catch (e) {
-            console.log(e)
             return e
         }
     }
@@ -218,7 +213,6 @@ class CalculationService implements ICalculationService {
 
             return savedResult
         } catch (e) {
-            console.log(e)
             return e
         }
     }

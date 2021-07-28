@@ -2,6 +2,16 @@ import axios from 'axios'
 
 import * as ICalculationResults from '../dataTypes/resultTypes'
 
+
+export const endpoints = {
+    "kemeniSnella": "kemeni-snella",
+    "kondorse": "kondorse",
+    "pairComparsion": "pair-comparsion",
+    "preference": "preference",
+    "sequentiallyComparsion": "sequentially-comparsion",
+    "weighing": "weighing",
+}
+
 export function kemeniSnella(inputMatrix: number[][], x: number, y: number) {
     return axios
         .post<{
@@ -44,13 +54,13 @@ export function kondorse(inputMatrix: number[][], x: number, y: number) {
         })
 }
 
-export function pairComparsion(binaryMatrix: number[][], x: number, y: number) {
+export function pairComparsion(inputMatrix: number[][], x: number, y: number) {
     return axios
         .post<{
             result: ICalculationResults.PairComparsionResult
             savedResult?: any
         }>('/calculations/pair-comparsion', {
-            binaryMatrix,
+            inputMatrix,
             x,
             y,
         })
@@ -115,6 +125,27 @@ export function weighing(inputMatrix: number[][], x: number, y: number) {
     return axios
     .post<{ result: ICalculationResults.WeighingResult; savedResult?: any }>(
         '/calculations/weighing',
+        {
+            inputMatrix,
+            x,
+            y,
+        }
+    )
+        .then((response) => {
+            if (response.status === 404) {
+                return { type: 'error', payload: response.data }
+            }
+            return { type: 'ok', payload: response.data }
+        })
+        .catch((err) => {
+            return { type: 'error', payload: JSON.parse(err) }
+        })
+}
+
+export function universal(inputMatrix: number[][], x: number, y: number, endpoint: string) {
+    return axios
+    .post<{ result: ICalculationResults.WeighingResult; savedResult?: any }>(
+        '/calculations/' + endpoint,
         {
             inputMatrix,
             x,

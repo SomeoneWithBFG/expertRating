@@ -1,50 +1,20 @@
-import React, { useEffect, useState } from 'react'
-
-import { useAppSelector } from '../../../../redux/hooks'
-
-import { kemeniSnella } from '../../../../api/calculations'
-
+import React from 'react'
 import styles from './styles.module.scss'
+
+import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
 import { KemeniSnellaResult } from '../../../../dataTypes/resultTypes'
 
 const KemeniSnella: React.FC = () => {
-    const state = useAppSelector((state) => state)
 
-    const [data, setData] = useState({
-        result: {} as KemeniSnellaResult,
-    })
-
-    const [loading, setLoading] = useState(true)
-
-    const [error, setError] = useState('')
-
-    useEffect(() => {
-        kemeniSnella(
-            state.calculations.commonMatrix,
-            state.calculations.x,
-            state.calculations.y
-        )
-            .then((response) => {
-                if (response.type === 'error') {
-                    setError(response.payload)
-                } else {
-                    setData(response.payload)
-                }
-                setLoading(false)
-            })
-            .catch((ex) => {
-                setError('Something went wrong')
-                setLoading(false)
-            })
-    })
+    const {result, loading, error} = useCalculationRequest<KemeniSnellaResult>("kemeni-snella")
 
     return (
         <div className={styles.container}>
             {!loading && error === '' && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
-                        {data.result.binaryMatrixArray.map((matrix, matrixIndex) => (
+                        {result.binaryMatrixArray.map((matrix, matrixIndex) => (
                             <>
                                 {'Эксперт ' + (matrixIndex + 1) + ':'}
                                 {matrix.map((row, rowIndex) => (
@@ -62,10 +32,9 @@ const KemeniSnella: React.FC = () => {
                             </>
                         ))}
                     </div>
-
                     <div className={styles.dataContainer}>
                         Матрица потерь:
-                        {data.result.looseMatrix.map((row, rowIndex) => (
+                        {result.looseMatrix.map((row, rowIndex) => (
                             <div key={row[rowIndex]} className={styles.row}>
                                 {row.map((col, columnIndex) => (
                                     <div
@@ -81,7 +50,7 @@ const KemeniSnella: React.FC = () => {
 
                     <div className={styles.dataContainer}>
                         Результат:
-                        <div>{data.result.order}</div>
+                        <div>{result.order}</div>
                     </div>
                 </div>
             )}

@@ -1,42 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './styles.module.scss'
-
-import { useAppSelector } from '../../../../redux/hooks'
-
-import { pairComparsion } from '../../../../api/calculations'
 
 import { PairComparsionResult } from '../../../../dataTypes/resultTypes'
 
+import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
+
 const PairComparsion: React.FC = () => {
-    const state = useAppSelector((state) => state)
-
-    const [data, setData] = useState({
-        result: {} as PairComparsionResult,
-    })
-
-    const [loading, setLoading] = useState(true)
-
-    const [error, setError] = useState('')
-
-    useEffect(() => {
-        pairComparsion(
-            state.calculations.commonMatrix,
-            state.calculations.x,
-            state.calculations.y
-        )
-            .then((response) => {
-                if (response.type === 'error') {
-                    setError(response.payload)
-                } else {
-                    setData(response.payload)
-                }
-                setLoading(false)
-            })
-            .catch((ex) => {
-                setError('Something went wrong')
-                setLoading(false)
-            })
-    })
+    
+    const {result, loading, error} = useCalculationRequest<PairComparsionResult>("pair-comparsion")
 
     return (
         <div className={styles.container}>
@@ -44,7 +15,7 @@ const PairComparsion: React.FC = () => {
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Цена каждой цели:
-                        {data.result.values.map((col, colIndex) => (
+                        {result.values.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
                                 {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
@@ -53,12 +24,12 @@ const PairComparsion: React.FC = () => {
 
                     <div className={styles.dataContainer}>
                         Сумма цен:
-                        {' ' + data.result.sumOfValues}
+                        {' ' + result.sumOfValues}
                     </div>
 
                     <div className={styles.dataContainer}>
                         Исковые веса целей:
-                        {data.result.weights.map((col, colIndex) => (
+                        {result.weights.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
                                 {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
@@ -67,7 +38,7 @@ const PairComparsion: React.FC = () => {
 
                     <div className={styles.dataContainer}>
                         Порядок предпочтения целей:
-                        {' | ' + data.result.order}
+                        {' | ' + result.order}
                     </div>
                 </div>
             )}

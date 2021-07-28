@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import Input from '../../../basic/Input'
 
@@ -15,25 +15,23 @@ const Inputs: React.FC = () => {
     const state = useAppSelector((state) => state)
     const dispatch = useAppDispatch()
 
-    function text() {
-        var text = []
-        var i = 0
-        switch (state.calculations.method) {
-            case 'sequentiallyComparison':
-                return ['Название', 'Вес']
-            case 'weighing':
-                for (i = 0; i < state.calculations.x; i++) {
-                    text.push('Z' + i)
-                }
-                text[0] = 'R'
-                return text
-            default:
-                for (i = 0; i < state.calculations.x; i++) {
-                    text.push('Z' + (i + 1))
-                }
-                return text
+    let text = useMemo(() => {
+        let text = []
+        let index = 0
+        if (state.calculations.method === 'sequentiallyComparison')
+            return ['Название', 'Вес']
+        if (state.calculations.method === 'weighing') {
+            for (index = 0; index < state.calculations.x; index++) {
+                text.push('Z' + index)
+            }
+            text[0] = 'R'
+            return text
         }
-    }
+        for (index = 0; index < state.calculations.x; index++) {
+            text.push('Z' + (index + 1))
+        }
+        return text
+    }, [state.calculations.method]) 
 
     function handleInput(data: string, x: number, y: number) {
         if (state.calculations.method === 'sequentiallyComparison') {
@@ -58,9 +56,9 @@ const Inputs: React.FC = () => {
     }
 
     const inputField = new Array<Array<string>>(state.calculations.x)
-    for (var i = 0; i < state.calculations.x; i++) {
+    for (let i = 0; i < state.calculations.x; i++) {
         inputField[i] = new Array<string>(state.calculations.y)
-        for (var j = 0; j < state.calculations.y; j++) {
+        for (let j = 0; j < state.calculations.y; j++) {
             inputField[i][j] = '' + (j + 1) + '-' + (i + 1)
         }
     }
@@ -68,44 +66,44 @@ const Inputs: React.FC = () => {
         <div className={styles.container}>
             <div className={styles.inputField}>
                 <div className={styles.rowNameContainer}>
-                    {inputField[0].map((row, i) =>
-                        i === 0 ? (
-                            <div key={i} className={styles.firstRowName}>
+                    {inputField[0].map((row, rowIndex) =>
+                        rowIndex === 0 ? (
+                            <div key={rowIndex} className={styles.firstRowName}>
                                 {(state.calculations.method !==
                                 'sequentiallyComparison'
                                     ? 'Э'
                                     : 'Z') +
-                                    (i + 1)}
+                                    (rowIndex + 1)}
                             </div>
                         ) : (
-                            <div key={i} className={styles.rowName}>
+                            <div key={rowIndex} className={styles.rowName}>
                                 {(state.calculations.method !==
                                 'sequentiallyComparison'
                                     ? 'Э'
                                     : 'Z') +
-                                    (i + 1)}
+                                    (rowIndex + 1)}
                             </div>
                         )
                     )}
                 </div>
                 <div className={styles.row}>
-                    {inputField.map((row, i) => (
-                        <div key={row[i]}>
-                            {text()[i]}
-                            {row.map((col, j) => (
+                    {inputField.map((row, rowIndex) => (
+                        <div key={row[rowIndex]}>
+                            {text[rowIndex]}
+                            {row.map((col, colIndex) => (
                                 <div key={col} className={styles.inputElement}>
                                     <Input
-                                        key={state.calculations.method + i + j}
+                                        key={state.calculations.method + rowIndex + colIndex}
                                         name={col}
                                         placeholder={col}
                                         disabled={
                                             state.calculations.method ===
-                                                'pairComparsion' && i === j
+                                                'pairComparsion' && rowIndex === colIndex
                                         }
                                         onChange={(
                                             e: React.ChangeEvent<HTMLInputElement>
                                         ) => {
-                                            handleInput(e.target.value, i, j)
+                                            handleInput(e.target.value, rowIndex, colIndex)
                                         }}
                                     />
                                 </div>

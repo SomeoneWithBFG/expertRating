@@ -12,26 +12,18 @@ import Preference from '../../../common/Outputs/Preference/'
 import SequentiallyComparison from '../../../common/Outputs/SequentiallyComparsion/'
 import Weighing from '../../../common/Outputs/Weighing/'
 
-const chooseMethod = (method: string) => {
-    switch (method) {
-        case 'kemeniSnella':
-            return <KemeniSnella />
-        case 'kondorse':
-            return <Kondorse />
-        case 'pairComparsion':
-            return <PairComparsion />
-        case 'preference':
-            return <Preference />
-        case 'sequentiallyComparison':
-            return <SequentiallyComparison />
-        case 'weighing':
-            return <Weighing />
-        default:
-            return <> </>
-    }
-}
 
 const Output: React.FC = () => {
+    
+    const chooseMethod: {[key: string]: any,} = {
+        'kemeniSnella': <KemeniSnella />,
+        'kondorse': <Kondorse />,
+        'pairComparsion': <PairComparsion />,
+        'preference': <Preference />,
+        'sequentiallyComparison': <SequentiallyComparison />,
+        'weighing': <Weighing />,
+        'default': <> Something went wrong </>
+    }
     const state = useAppSelector((state) => state)
 
     const [isCalculated, setIsCalculated] = useState(false)
@@ -53,7 +45,7 @@ const Output: React.FC = () => {
             </div>
             {isCalculated && (
                 <div>
-                    {chooseMethod(state.calculations.method)}
+                    {chooseMethod[state.calculations.method || 'default']}
                     <div className={styles.button}></div>
                 </div>
             )}

@@ -1,42 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './styles.module.scss'
 
-import { useAppSelector } from '../../../../redux/hooks'
-
-import { sequentiallyComparison } from '../../../../api/calculations'
-
 import { SequentiallyComparisonResult } from '../../../../dataTypes/resultTypes'
+import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
 const SequentiallyComparison: React.FC = () => {
-    const state = useAppSelector((state) => state)
-
-    const [data, setData] = useState({
-        result: {} as SequentiallyComparisonResult,
-    })
-
-    const [loading, setLoading] = useState(true)
-
-    const [error, setError] = useState('')
-
-    useEffect(() => {
-        sequentiallyComparison(
-            state.calculations.seqCompMatrix,
-            state.calculations.y,
-            state.calculations.y
-        )
-            .then((response) => {
-                if (response.type === 'error') {
-                    setError(response.payload)
-                } else {
-                    setData(response.payload)
-                }
-                setLoading(false)
-            })
-            .catch((ex) => {
-                setError('Something went wrong')
-                setLoading(false)
-            })
-    })
+    
+    const {result, loading, error} = useCalculationRequest<SequentiallyComparisonResult>("sequentially-comparsion")
 
     return (
         <div className={styles.container}>
@@ -44,12 +14,12 @@ const SequentiallyComparison: React.FC = () => {
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Тройки целей, вызвавшие коррекцию весов:
-                        <p>{data.result.causedCorrections}</p>
+                        <p>{result.causedCorrections}</p>
                     </div>
 
                     <div className={styles.dataContainer}>
                         Скорректированные оценки:
-                        {data.result.correctedEvaluations.map((col, colIndex) => (
+                        {result.correctedEvaluations.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
                                 {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
@@ -58,7 +28,7 @@ const SequentiallyComparison: React.FC = () => {
 
                     <div className={styles.dataContainer}>
                         Веса целей:
-                        {data.result.weights.map((col, colIndex) => (
+                        {result.weights.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
                                 {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
@@ -66,11 +36,11 @@ const SequentiallyComparison: React.FC = () => {
                     </div>
 
                     <div className={styles.dataContainer}>
-                        Сумма весов целей: {data.result.sumOfWeights}
+                        Сумма весов целей: {result.sumOfWeights}
                     </div>
 
                     <div className={styles.dataContainer}>
-                        Порядок предпочтения целей: {data.result.order}
+                        Порядок предпочтения целей: {result.order}
                     </div>
                 </div>
             )}

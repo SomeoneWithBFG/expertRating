@@ -1,42 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './styles.module.scss'
 
-import { useAppSelector } from '../../../../redux/hooks'
-
-import { weighing } from '../../../../api/calculations'
-
 import { WeighingResult } from '../../../../dataTypes/resultTypes'
+import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
 const Weighing: React.FC = () => {
-    const state = useAppSelector((state) => state)
-
-    const [data, setData] = useState({
-        result: {} as WeighingResult,
-    })
-
-    const [loading, setLoading] = useState(true)
-
-    const [error, setError] = useState('')
-
-    useEffect(() => {
-        weighing(
-            state.calculations.commonMatrix,
-            state.calculations.x,
-            state.calculations.y
-        )
-            .then((response) => {
-                if (response.type === 'error') {
-                    setError(response.payload)
-                } else {
-                    setData(response.payload)
-                }
-                setLoading(false)
-            })
-            .catch((ex) => {
-                setError('Something went wrong')
-                setLoading(false)
-            })
-    })
+    
+    const {result, loading, error} = useCalculationRequest<WeighingResult>("weighing")
 
     return (
         <div className={styles.container}>
@@ -44,12 +14,12 @@ const Weighing: React.FC = () => {
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Сумма оценок экспертов:
-                        {' ' + data.result.sumOfMarks}
+                        {' ' + result.sumOfMarks}
                     </div>
 
                     <div className={styles.dataContainer}>
                         Относительные оценки экспертов:
-                        {data.result.relativeExpertsMarks.map((col, colIndex) => (
+                        {result.relativeExpertsMarks.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
                                 {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
@@ -58,7 +28,7 @@ const Weighing: React.FC = () => {
 
                     <div className={styles.dataContainer}>
                         Искомые веса:
-                        {data.result.weights.map((col, colIndex) => (
+                        {result.weights.map((col, colIndex) => (
                             <div key={col} className={styles.matrixElement}>
                                 {'' + (colIndex + 1) + ': ' + col + ' '}
                             </div>
@@ -66,7 +36,7 @@ const Weighing: React.FC = () => {
                     </div>
 
                     <div className={styles.dataContainer}>
-                        Порядок предпочтения целей: {data.result.order}
+                        Порядок предпочтения целей: {result.order}
                     </div>
                 </div>
             )}

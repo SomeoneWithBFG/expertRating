@@ -107,7 +107,7 @@ class Calculations implements ICalculations {
         try {
             this.createControllerBuilder(
                 CalculationsService.pairComparsion,
-                req.body.binaryMatrix,
+                req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
                 'pairComparsion',

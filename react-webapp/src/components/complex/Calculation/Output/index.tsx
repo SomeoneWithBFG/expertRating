@@ -12,18 +12,18 @@ import Preference from '../../../common/Outputs/Preference/'
 import SequentiallyComparison from '../../../common/Outputs/SequentiallyComparsion/'
 import Weighing from '../../../common/Outputs/Weighing/'
 
+const chooseMethod: {[key: string]: any,} = {
+    'kemeniSnella': <KemeniSnella />,
+    'kondorse': <Kondorse />,
+    'pairComparsion': <PairComparsion />,
+    'preference': <Preference />,
+    'sequentiallyComparison': <SequentiallyComparison />,
+    'weighing': <Weighing />,
+    'default': <> Something went wrong </>
+}
 
 const Output: React.FC = () => {
     
-    const chooseMethod: {[key: string]: any,} = {
-        'kemeniSnella': <KemeniSnella />,
-        'kondorse': <Kondorse />,
-        'pairComparsion': <PairComparsion />,
-        'preference': <Preference />,
-        'sequentiallyComparison': <SequentiallyComparison />,
-        'weighing': <Weighing />,
-        'default': <> Something went wrong </>
-    }
     const state = useAppSelector((state) => state)
 
     const [isCalculated, setIsCalculated] = useState(false)

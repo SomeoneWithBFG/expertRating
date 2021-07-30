@@ -3,15 +3,6 @@ import axios from 'axios'
 import * as ICalculationResults from '../dataTypes/resultTypes'
 
 
-export const endpoints = {
-    "kemeniSnella": "kemeni-snella",
-    "kondorse": "kondorse",
-    "pairComparsion": "pair-comparsion",
-    "preference": "preference",
-    "sequentiallyComparsion": "sequentially-comparsion",
-    "weighing": "weighing",
-}
-
 export function kemeniSnella(inputMatrix: number[][], x: number, y: number) {
     return axios
         .post<{

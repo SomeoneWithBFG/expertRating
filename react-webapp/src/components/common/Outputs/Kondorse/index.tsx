@@ -5,9 +5,17 @@ import { KondorseResult } from '../../../../dataTypes/resultTypes'
 import styles from './styles.module.scss'
 import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
-const Kondorse: React.FC = () => {
-    
-    const {result, loading, error} = useCalculationRequest<KondorseResult>("kondorse")
+interface props {
+    setResult: React.Dispatch<React.SetStateAction<{}>>
+}
+
+const Kondorse: React.FC<props> = ({ setResult }) => {
+    const { result, loading, error } =
+        useCalculationRequest<KondorseResult>('kondorse')
+
+    if (error === '') {
+        setResult(result)
+    }
 
     return (
         <div className={styles.container}>

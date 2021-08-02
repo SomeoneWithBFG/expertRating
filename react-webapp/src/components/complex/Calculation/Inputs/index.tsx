@@ -31,7 +31,7 @@ const Inputs: React.FC = () => {
             text.push('Z' + (index + 1))
         }
         return text
-    }, [state.calculations.method]) 
+    }, [state.calculations.method])
 
     function handleInput(data: string, x: number, y: number) {
         if (state.calculations.method === 'sequentiallyComparison') {
@@ -93,17 +93,26 @@ const Inputs: React.FC = () => {
                             {row.map((col, colIndex) => (
                                 <div key={col} className={styles.inputElement}>
                                     <Input
-                                        key={state.calculations.method + rowIndex + colIndex}
+                                        key={
+                                            state.calculations.method +
+                                            rowIndex +
+                                            colIndex
+                                        }
                                         name={col}
                                         placeholder={col}
                                         disabled={
                                             state.calculations.method ===
-                                                'pairComparsion' && rowIndex === colIndex
+                                                'pairComparsion' &&
+                                            rowIndex === colIndex
                                         }
                                         onChange={(
                                             e: React.ChangeEvent<HTMLInputElement>
                                         ) => {
-                                            handleInput(e.target.value, rowIndex, colIndex)
+                                            handleInput(
+                                                e.target.value,
+                                                rowIndex,
+                                                colIndex
+                                            )
                                         }}
                                     />
                                 </div>

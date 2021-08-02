@@ -9,7 +9,6 @@ import Routes from './routes'
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 
-
 axios.defaults.baseURL = 'http://localhost:3000/api'
 // axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
 // axios.defaults.headers.post['Content-Type'] = 'application/json';

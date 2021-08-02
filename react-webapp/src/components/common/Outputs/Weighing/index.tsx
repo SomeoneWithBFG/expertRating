@@ -4,9 +4,17 @@ import styles from './styles.module.scss'
 import { WeighingResult } from '../../../../dataTypes/resultTypes'
 import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
-const Weighing: React.FC = () => {
-    
-    const {result, loading, error} = useCalculationRequest<WeighingResult>("weighing")
+interface props {
+    setResult: React.Dispatch<React.SetStateAction<{}>>
+}
+
+const Weighing: React.FC<props> = ({ setResult }) => {
+    const { result, loading, error } =
+        useCalculationRequest<WeighingResult>('weighing')
+
+    if (error === '') {
+        setResult(result)
+    }
 
     return (
         <div className={styles.container}>

@@ -12,24 +12,33 @@ import Preference from '../../../common/Outputs/Preference/'
 import SequentiallyComparison from '../../../common/Outputs/SequentiallyComparsion/'
 import Weighing from '../../../common/Outputs/Weighing/'
 
-const chooseMethod: {[key: string]: any,} = {
-    'kemeniSnella': <KemeniSnella />,
-    'kondorse': <Kondorse />,
-    'pairComparsion': <PairComparsion />,
-    'preference': <Preference />,
-    'sequentiallyComparison': <SequentiallyComparison />,
-    'weighing': <Weighing />,
-    'default': <> Something went wrong </>
-}
+import download from '../../../../services/downloadSolution'
 
 const Output: React.FC = () => {
-    
     const state = useAppSelector((state) => state)
 
     const [isCalculated, setIsCalculated] = useState(false)
 
+    const [result, setResult] = useState({})
+
+    const chooseMethod: { [key: string]: any } = {
+        kemeniSnella: <KemeniSnella setResult={setResult} />,
+        kondorse: <Kondorse setResult={setResult} />,
+        pairComparsion: <PairComparsion setResult={setResult} />,
+        preference: <Preference setResult={setResult} />,
+        sequentiallyComparison: (
+            <SequentiallyComparison setResult={setResult} />
+        ),
+        weighing: <Weighing setResult={setResult} />,
+        default: <> Something went wrong </>,
+    }
+
     function calculate() {
         setIsCalculated(!isCalculated)
+    }
+
+    function handleDownloadClick() {
+        download(result, state.calculations.method)
     }
 
     return (
@@ -50,12 +59,11 @@ const Output: React.FC = () => {
                 </div>
             )}
             <div className={styles.button}>
-                
                 <Button
                     name={'Скачать решение'}
                     placeholder={'Скачать решение'}
                     disabled={!isCalculated}
-                    onClick={(e) => console.log(e.target)}
+                    onClick={handleDownloadClick}
                 />
             </div>
         </div>

@@ -4,9 +4,17 @@ import styles from './styles.module.scss'
 import { PreferenceResult } from '../../../../dataTypes/resultTypes'
 import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
-const Preference: React.FC = () => {
-    
-    const {result, loading, error} = useCalculationRequest<PreferenceResult>("preference")
+interface props {
+    setResult: React.Dispatch<React.SetStateAction<{}>>
+}
+
+const Preference: React.FC<props> = ({ setResult }) => {
+    const { result, loading, error } =
+        useCalculationRequest<PreferenceResult>('preference')
+
+    if (error === '') {
+        setResult(result)
+    }
 
     return (
         <div className={styles.container}>

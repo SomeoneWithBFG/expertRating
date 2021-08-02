@@ -5,9 +5,17 @@ import { PairComparsionResult } from '../../../../dataTypes/resultTypes'
 
 import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
-const PairComparsion: React.FC = () => {
-    
-    const {result, loading, error} = useCalculationRequest<PairComparsionResult>("pair-comparsion")
+interface props {
+    setResult: React.Dispatch<React.SetStateAction<{}>>
+}
+
+const PairComparsion: React.FC<props> = ({ setResult }) => {
+    const { result, loading, error } =
+        useCalculationRequest<PairComparsionResult>('pair-comparsion')
+
+    if (error === '') {
+        setResult(result)
+    }
 
     return (
         <div className={styles.container}>

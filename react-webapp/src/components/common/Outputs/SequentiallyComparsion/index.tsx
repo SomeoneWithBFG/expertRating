@@ -4,9 +4,19 @@ import styles from './styles.module.scss'
 import { SequentiallyComparisonResult } from '../../../../dataTypes/resultTypes'
 import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
-const SequentiallyComparison: React.FC = () => {
-    
-    const {result, loading, error} = useCalculationRequest<SequentiallyComparisonResult>("sequentially-comparsion")
+interface props {
+    setResult: React.Dispatch<React.SetStateAction<{}>>
+}
+
+const SequentiallyComparison: React.FC<props> = ({ setResult }) => {
+    const { result, loading, error } =
+        useCalculationRequest<SequentiallyComparisonResult>(
+            'sequentially-comparsion'
+        )
+
+    if (error === '') {
+        setResult(result)
+    }
 
     return (
         <div className={styles.container}>

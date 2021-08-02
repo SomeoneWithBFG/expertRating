@@ -2,7 +2,6 @@ import axios from 'axios'
 
 import * as ICalculationResults from '../dataTypes/resultTypes'
 
-
 export function kemeniSnella(inputMatrix: number[][], x: number, y: number) {
     return axios
         .post<{
@@ -114,14 +113,14 @@ export function sequentiallyComparison(
 
 export function weighing(inputMatrix: number[][], x: number, y: number) {
     return axios
-    .post<{ result: ICalculationResults.WeighingResult; savedResult?: any }>(
-        '/calculations/weighing',
-        {
+        .post<{
+            result: ICalculationResults.WeighingResult
+            savedResult?: any
+        }>('/calculations/weighing', {
             inputMatrix,
             x,
             y,
-        }
-    )
+        })
         .then((response) => {
             if (response.status === 404) {
                 return { type: 'error', payload: response.data }
@@ -133,16 +132,21 @@ export function weighing(inputMatrix: number[][], x: number, y: number) {
         })
 }
 
-export function universal(inputMatrix: number[][], x: number, y: number, endpoint: string) {
+export function universal(
+    inputMatrix: number[][],
+    x: number,
+    y: number,
+    endpoint: string
+) {
     return axios
-    .post<{ result: ICalculationResults.WeighingResult; savedResult?: any }>(
-        '/calculations/' + endpoint,
-        {
+        .post<{
+            result: ICalculationResults.WeighingResult
+            savedResult?: any
+        }>('/calculations/' + endpoint, {
             inputMatrix,
             x,
             y,
-        }
-    )
+        })
         .then((response) => {
             if (response.status === 404) {
                 return { type: 'error', payload: response.data }

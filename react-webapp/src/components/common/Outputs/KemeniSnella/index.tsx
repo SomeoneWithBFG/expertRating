@@ -5,9 +5,17 @@ import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
 import { KemeniSnellaResult } from '../../../../dataTypes/resultTypes'
 
-const KemeniSnella: React.FC = () => {
+interface props {
+    setResult: React.Dispatch<React.SetStateAction<{}>>
+}
 
-    const {result, loading, error} = useCalculationRequest<KemeniSnellaResult>("kemeni-snella")
+const KemeniSnella: React.FC<props> = ({ setResult }) => {
+    const { result, loading, error } =
+        useCalculationRequest<KemeniSnellaResult>('kemeni-snella')
+
+    if (error === '') {
+        setResult(result)
+    }
 
     return (
         <div className={styles.container}>
@@ -18,10 +26,19 @@ const KemeniSnella: React.FC = () => {
                             <>
                                 {'Эксперт ' + (matrixIndex + 1) + ':'}
                                 {matrix.map((row, rowIndex) => (
-                                    <div key={row[rowIndex]} className={styles.row}>
+                                    <div
+                                        key={row[rowIndex]}
+                                        className={styles.row}
+                                    >
                                         {row.map((col, columnIndex) => (
                                             <div
-                                                key={'' + rowIndex + matrixIndex + columnIndex + col}
+                                                key={
+                                                    '' +
+                                                    rowIndex +
+                                                    matrixIndex +
+                                                    columnIndex +
+                                                    col
+                                                }
                                                 className={styles.matrixElement}
                                             >
                                                 {col}

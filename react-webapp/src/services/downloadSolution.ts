@@ -1,20 +1,20 @@
 import * as ResultTypes from '../dataTypes/resultTypes'
 
-function pairComparsion(solution: ResultTypes.PairComparsionResult) {
-    let data = {
+function pairComparsion(solution: ResultTypes.PairComparsionResult) : string {
+    const data = {
         values: '',
         sumOfValues: 0,
         weights: '',
         order: '',
     }
-    solution.values.map((item, index) => {
+    solution.values.forEach((item, index) => {
         data.values += index + 1 + ': ' + item
         if (index + 1 !== solution.values.length) {
             data.values += ' | '
         }
     })
     data.sumOfValues = solution.sumOfValues
-    solution.weights.map((item, index) => {
+    solution.weights.forEach((item, index) => {
         data.weights += index + 1 + ': ' + item
         if (index + 1 !== solution.weights.length) {
             data.weights += ' | '
@@ -25,14 +25,14 @@ function pairComparsion(solution: ResultTypes.PairComparsionResult) {
     str += 'Цена каждой цели: ' + data.values + '\n'
     str += 'Сумма цен: ' + data.sumOfValues + '\n'
     str += 'Исковые веса целей: ' + data.weights + '\n'
-    str += 'Порядок предпочтения целей: ' + data.order + '\n'
+    str += 'Порядок предпочтения целей: | ' + data.order + '\n'
     return str
 }
 
 function sequentiallyComparison(
     solution: ResultTypes.SequentiallyComparisonResult
-) {
-    let data = {
+) : string {
+    const data = {
         causedCorrections: '',
         correctedEvaluations: '',
         sumOfWeights: 0,
@@ -41,13 +41,13 @@ function sequentiallyComparison(
     }
     data.causedCorrections = solution.causedCorrections
     data.sumOfWeights = solution.sumOfWeights
-    solution.correctedEvaluations.map((item, index) => {
+    solution.correctedEvaluations.forEach((item, index) => {
         data.correctedEvaluations += item
         if (index + 1 !== solution.correctedEvaluations.length) {
             data.correctedEvaluations += ', '
         }
     })
-    solution.weights.map((item, index) => {
+    solution.weights.forEach((item, index) => {
         data.weights += item
         if (index + 1 !== solution.weights.length) {
             data.weights += ', '
@@ -66,21 +66,21 @@ function sequentiallyComparison(
     return str
 }
 
-function weighing(solution: ResultTypes.WeighingResult) {
-    let data = {
+function weighing(solution: ResultTypes.WeighingResult) : string {
+    const data = {
         sumOfMarks: 0,
         relativeExpertsMarks: '',
         weights: '',
         order: '',
     }
     data.sumOfMarks = solution.sumOfMarks
-    solution.relativeExpertsMarks.map((item, index) => {
+    solution.relativeExpertsMarks.forEach((item, index) => {
         data.relativeExpertsMarks += index + 1 + ': ' + item
         if (index + 1 !== solution.relativeExpertsMarks.length) {
             data.relativeExpertsMarks += ', '
         }
     })
-    solution.weights.map((item, index) => {
+    solution.weights.forEach((item, index) => {
         data.weights += index + 1 + ': ' + item
         if (index + 1 !== solution.weights.length) {
             data.weights += ', '
@@ -95,41 +95,38 @@ function weighing(solution: ResultTypes.WeighingResult) {
     return str
 }
 
-function preference(solution: ResultTypes.PreferenceResult) {
-    let numOfEl = solution.modMatrix[0].length
-    let data = {
+function preference(solution: ResultTypes.PreferenceResult) : string {
+    const data = {
         modMatrix: Array(solution.modMatrix.length).fill(''),
         sumMarks: '',
         sumOfMarks: '',
         weights: '',
         order: '',
     }
-    let i = 0
-    let j = 0
-    for (i = 0; i < solution.modMatrix.length; i++) {
-        for (j = 0; j < numOfEl; j++) {
-            data.modMatrix[i] += solution.modMatrix[i][j] + ' '
-        }
-    }
-    for (i = 0; i < numOfEl; i++) {
-        data.sumMarks += i + 1 + ': ' + solution.sumMarks[i]
-        if (i + 1 !== solution.sumMarks.length) {
+    solution.modMatrix.forEach((arr, arrayIndex) => {
+        arr.forEach((item) => {
+            data.modMatrix[arrayIndex] += item + ' '
+        })
+    })
+    solution.sumMarks.forEach((item, index) => {
+        data.sumMarks += index + 1 + ': ' + item
+        if (index + 1 !== solution.sumMarks.length) {
             data.sumMarks += ' | '
         }
-    }
-    for (i = 0; i < numOfEl; i++) {
-        data.weights += i + 1 + ': ' + solution.weights[i]
-        if (i + 1 !== solution.weights.length) {
+    })
+    solution.weights.forEach((item, index) => {
+        data.weights += index + 1 + ': ' + item
+        if (index + 1 !== solution.weights.length) {
             data.weights += ' | '
         }
-    }
+    })
     data.sumOfMarks = solution.sumOfMarks.toString()
     data.order = solution.order
     let str = ''
-    str += 'Модифицированная матрица предпочтения: ' + '\n'
-    for (i = 0; i < data.modMatrix.length; i++) {
-        str += data.modMatrix[i] + '\n'
-    }
+    str += 'Модифицированная матрица предпочтения: \n'
+    data.modMatrix.forEach((item) => {
+        str += item + '\n'
+    })
     str += 'Суммарные оценки предпочтения: ' + data.sumMarks + '\n'
     str += 'Сумма всех оценок: ' + data.sumOfMarks + '\n'
     str += 'Искомые веса целей: ' + data.weights + '\n'
@@ -137,11 +134,11 @@ function preference(solution: ResultTypes.PreferenceResult) {
     return str
 }
 
-function kondorse(solution: ResultTypes.KondorseResult) {
+function kondorse(solution: ResultTypes.KondorseResult) : string {
     let str = ''
-    str += 'Матрица оценок: ' + '\n'
-    solution.modMatrix.map((arr) => {
-        arr.map((item) => {
+    str += 'Матрица оценок: \n'
+    solution.modMatrix.forEach((arr) => {
+        arr.forEach((item) => {
             str += item + '\t'
         })
         str += '\n'
@@ -150,58 +147,50 @@ function kondorse(solution: ResultTypes.KondorseResult) {
     return str
 }
 
-function kemeniSnella(solution: ResultTypes.KemeniSnellaResult) {
+function kemeniSnella(solution: ResultTypes.KemeniSnellaResult) : string {
     let str = ''
-    str += 'Матрицы бинарных предпочтений: ' + '\n'
-    solution.binaryMatrixArray.map((matrix, mIndex) => {
+    str += 'Матрицы бинарных предпочтений: \n'
+    solution.binaryMatrixArray.forEach((matrix, mIndex) => {
         str += 'Эксперт ' + (mIndex + 1) + '\n'
-        matrix.map((arr) => {
-            arr.map((item) => {
+        matrix.forEach((arr) => {
+            arr.forEach((item) => {
                 str += item + '\t'
             })
             str += '\n'
         })
         str += '\n'
     })
-    str += 'Матрица потерь: ' + '\n'
-    solution.looseMatrix.map((arr) => {
-        arr.map((item) => {
+    str += 'Матрица потерь: \n'
+    solution.looseMatrix.forEach((arr) => {
+        arr.forEach((item) => {
             str += item + '\t'
         })
         str += '\n'
     })
-    str += '\n' + 'Результат: ' + solution.order
+    str += '\nРезультат: ' + solution.order
     return str
 }
 
-function fileGenerator(solution: any, method: string) {
-    let result = ''
+function fileGenerator(solution: any, method: string) : string {
     switch (method) {
         case 'pairComparsion':
-            result = pairComparsion(solution)
-            break
+            return pairComparsion(solution)
         case 'sequentiallyComparison':
-            result = sequentiallyComparison(solution)
-            break
+            return sequentiallyComparison(solution)
         case 'weighing':
-            result = weighing(solution)
-            break
+            return weighing(solution)
         case 'preference':
-            result = preference(solution)
-            break
+            return preference(solution)
         case 'kondorse':
-            result = kondorse(solution)
-            break
+            return kondorse(solution)
         case 'kemeniSnella':
-            result = kemeniSnella(solution)
-            break
+            return kemeniSnella(solution)
         default:
-            result = 'error in generator, try again'
+            return 'error in generator, try again'
     }
-    return result
 }
 
-export default function download(solution: any, method: string) {
+export default function download(solution: any, method: string) : void {
     let element = document.createElement('a')
     let text = fileGenerator(solution, method)
     element.setAttribute(

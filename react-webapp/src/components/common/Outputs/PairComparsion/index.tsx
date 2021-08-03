@@ -1,9 +1,10 @@
 import React from 'react'
 import styles from './styles.module.scss'
 
-import { PairComparsionResult } from '../../../../dataTypes/resultTypes'
-
 import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
+import { endpoints } from '../../../../api/calculations'
+
+import { PairComparsionResult } from '../../../../dataTypes/resultTypes'
 
 interface props {
     setResult: React.Dispatch<React.SetStateAction<{}>>
@@ -11,35 +12,40 @@ interface props {
 
 const PairComparsion: React.FC<props> = ({ setResult }) => {
     const { result, loading, error } =
-        useCalculationRequest<PairComparsionResult>('pair-comparsion')
+        useCalculationRequest<PairComparsionResult>(endpoints.pairComparsion)
 
-    if (error === '') {
+    if (!error) {
         setResult(result)
     }
 
     return (
         <div className={styles.container}>
-            {!loading && error === '' && (
+            {!loading && !error && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Цена каждой цели:
                         {result.values.map((col, colIndex) => (
-                            <div key={col} className={styles.matrixElement}>
-                                {'' + (colIndex + 1) + ': ' + col + ' '}
+                            <div
+                                key={colIndex}
+                                className={styles.matrixElement}
+                            >
+                                {colIndex + 1 + ': ' + col + ' '}
                             </div>
                         ))}
                     </div>
 
                     <div className={styles.dataContainer}>
-                        Сумма цен:
-                        {' ' + result.sumOfValues}
+                        Сумма цен: {result.sumOfValues}
                     </div>
 
                     <div className={styles.dataContainer}>
                         Исковые веса целей:
                         {result.weights.map((col, colIndex) => (
-                            <div key={col} className={styles.matrixElement}>
-                                {'' + (colIndex + 1) + ': ' + col + ' '}
+                            <div
+                                key={colIndex}
+                                className={styles.matrixElement}
+                            >
+                                {colIndex + 1 + ': ' + col + ' '}
                             </div>
                         ))}
                     </div>

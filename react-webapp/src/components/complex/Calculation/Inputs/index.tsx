@@ -31,7 +31,7 @@ const Inputs: React.FC = () => {
             text.push('Z' + (index + 1))
         }
         return text
-    }, [state.calculations.method])
+    }, [state.calculations.method, state.calculations.x])
 
     function handleInput(data: string, x: number, y: number) {
         if (state.calculations.method === 'sequentiallyComparison') {
@@ -56,10 +56,10 @@ const Inputs: React.FC = () => {
     }
 
     const inputField = new Array<Array<string>>(state.calculations.x)
-    for (let i = 0; i < state.calculations.x; i++) {
-        inputField[i] = new Array<string>(state.calculations.y)
-        for (let j = 0; j < state.calculations.y; j++) {
-            inputField[i][j] = '' + (j + 1) + '-' + (i + 1)
+    for (let colIndex = 0; colIndex < state.calculations.x; colIndex++) {
+        inputField[colIndex] = new Array<string>(state.calculations.y)
+        for (let rowIndex = 0; rowIndex < state.calculations.y; rowIndex++) {
+            inputField[colIndex][rowIndex] = '' + (rowIndex + 1) + '-' + (colIndex + 1)
         }
     }
     return (
@@ -88,7 +88,7 @@ const Inputs: React.FC = () => {
                 </div>
                 <div className={styles.row}>
                     {inputField.map((row, rowIndex) => (
-                        <div key={row[rowIndex]}>
+                        <div key={rowIndex}>
                             {text[rowIndex]}
                             {row.map((col, colIndex) => (
                                 <div key={col} className={styles.inputElement}>

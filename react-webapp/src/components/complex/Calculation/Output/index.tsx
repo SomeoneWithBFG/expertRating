@@ -14,24 +14,34 @@ import Weighing from '../../../common/Outputs/Weighing/'
 
 import download from '../../../../services/downloadSolution'
 
+const chooseMethod: { [key: string]: any } = {
+    kemeniSnella: (props: {
+        setResult: React.Dispatch<React.SetStateAction<{}>>
+    }) => <KemeniSnella {...props} />,
+    kondorse: (props: {
+        setResult: React.Dispatch<React.SetStateAction<{}>>
+    }) => <Kondorse {...props} />,
+    pairComparsion: (props: {
+        setResult: React.Dispatch<React.SetStateAction<{}>>
+    }) => <PairComparsion {...props} />,
+    preference: (props: {
+        setResult: React.Dispatch<React.SetStateAction<{}>>
+    }) => <Preference {...props} />,
+    sequentiallyComparison: (props: {
+        setResult: React.Dispatch<React.SetStateAction<{}>>
+    }) => <SequentiallyComparison {...props} />,
+    weighing: (props: {
+        setResult: React.Dispatch<React.SetStateAction<{}>>
+    }) => <Weighing {...props} />,
+    default: <> Something went wrong </>,
+}
+
 const Output: React.FC = () => {
     const state = useAppSelector((state) => state)
 
     const [isCalculated, setIsCalculated] = useState(false)
 
     const [result, setResult] = useState({})
-
-    const chooseMethod: { [key: string]: any } = {
-        kemeniSnella: <KemeniSnella setResult={setResult} />,
-        kondorse: <Kondorse setResult={setResult} />,
-        pairComparsion: <PairComparsion setResult={setResult} />,
-        preference: <Preference setResult={setResult} />,
-        sequentiallyComparison: (
-            <SequentiallyComparison setResult={setResult} />
-        ),
-        weighing: <Weighing setResult={setResult} />,
-        default: <> Something went wrong </>,
-    }
 
     function calculate() {
         setIsCalculated(!isCalculated)
@@ -54,7 +64,9 @@ const Output: React.FC = () => {
             </div>
             {isCalculated && (
                 <div>
-                    {chooseMethod[state.calculations.method || 'default']}
+                    {chooseMethod[state.calculations.method || 'default']({
+                        setResult,
+                    })}
                     <div className={styles.button}></div>
                 </div>
             )}

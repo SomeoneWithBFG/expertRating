@@ -1,33 +1,35 @@
 import React from 'react'
+import styles from './styles.module.scss'
+
+import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
+import { endpoints } from '../../../../api/calculations'
 
 import { KondorseResult } from '../../../../dataTypes/resultTypes'
-
-import styles from './styles.module.scss'
-import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
 
 interface props {
     setResult: React.Dispatch<React.SetStateAction<{}>>
 }
 
 const Kondorse: React.FC<props> = ({ setResult }) => {
-    const { result, loading, error } =
-        useCalculationRequest<KondorseResult>('kondorse')
+    const { result, loading, error } = useCalculationRequest<KondorseResult>(
+        endpoints.kondorse
+    )
 
-    if (error === '') {
+    if (!error) {
         setResult(result)
     }
 
     return (
         <div className={styles.container}>
-            {!loading && error === '' && (
+            {!loading && !error && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         Матрица оценок:
                         {result.modMatrix.map((row, rowIndex) => (
-                            <div key={row[rowIndex]} className={styles.row}>
-                                {row.map((col) => (
+                            <div key={rowIndex} className={styles.row}>
+                                {row.map((col, colIndex) => (
                                     <div
-                                        key={col}
+                                        key={colIndex}
                                         className={styles.matrixElement}
                                     >
                                         {col + ' '}

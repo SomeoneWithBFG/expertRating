@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './styles.module.scss'
 
 import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
+import { endpoints } from '../../../../api/calculations'
 
 import { KemeniSnellaResult } from '../../../../dataTypes/resultTypes'
 
@@ -11,34 +12,25 @@ interface props {
 
 const KemeniSnella: React.FC<props> = ({ setResult }) => {
     const { result, loading, error } =
-        useCalculationRequest<KemeniSnellaResult>('kemeni-snella')
+        useCalculationRequest<KemeniSnellaResult>(endpoints.kemeniSnella)
 
-    if (error === '') {
+    if (!error) {
         setResult(result)
     }
 
     return (
         <div className={styles.container}>
-            {!loading && error === '' && (
+            {!loading && !error && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
                         {result.binaryMatrixArray.map((matrix, matrixIndex) => (
-                            <>
+                            <div key={matrixIndex}>
                                 {'Эксперт ' + (matrixIndex + 1) + ':'}
                                 {matrix.map((row, rowIndex) => (
-                                    <div
-                                        key={row[rowIndex]}
-                                        className={styles.row}
-                                    >
+                                    <div key={rowIndex} className={styles.row}>
                                         {row.map((col, columnIndex) => (
                                             <div
-                                                key={
-                                                    '' +
-                                                    rowIndex +
-                                                    matrixIndex +
-                                                    columnIndex +
-                                                    col
-                                                }
+                                                key={columnIndex}
                                                 className={styles.matrixElement}
                                             >
                                                 {col}
@@ -46,16 +38,16 @@ const KemeniSnella: React.FC<props> = ({ setResult }) => {
                                         ))}
                                     </div>
                                 ))}
-                            </>
+                            </div>
                         ))}
                     </div>
                     <div className={styles.dataContainer}>
                         Матрица потерь:
                         {result.looseMatrix.map((row, rowIndex) => (
-                            <div key={row[rowIndex]} className={styles.row}>
+                            <div key={rowIndex} className={styles.row}>
                                 {row.map((col, columnIndex) => (
                                     <div
-                                        key={'' + rowIndex + columnIndex + col}
+                                        key={columnIndex}
                                         className={styles.matrixElement}
                                     >
                                         {col}

@@ -1,35 +1,40 @@
 import React from 'react'
 import styles from './styles.module.scss'
 
-import { WeighingResult } from '../../../../dataTypes/resultTypes'
 import { useCalculationRequest } from '../../../../hooks/useCalculationRequest'
+import { endpoints } from '../../../../api/calculations'
+
+import { WeighingResult } from '../../../../dataTypes/resultTypes'
 
 interface props {
     setResult: React.Dispatch<React.SetStateAction<{}>>
 }
 
 const Weighing: React.FC<props> = ({ setResult }) => {
-    const { result, loading, error } =
-        useCalculationRequest<WeighingResult>('weighing')
+    const { result, loading, error } = useCalculationRequest<WeighingResult>(
+        endpoints.weighing
+    )
 
-    if (error === '') {
+    if (!error) {
         setResult(result)
     }
 
     return (
         <div className={styles.container}>
-            {!loading && error === '' && (
+            {!loading && !error && (
                 <div className={styles.outputField}>
                     <div className={styles.dataContainer}>
-                        Сумма оценок экспертов:
-                        {' ' + result.sumOfMarks}
+                        Сумма оценок экспертов: {result.sumOfMarks}
                     </div>
 
                     <div className={styles.dataContainer}>
                         Относительные оценки экспертов:
                         {result.relativeExpertsMarks.map((col, colIndex) => (
-                            <div key={col} className={styles.matrixElement}>
-                                {'' + (colIndex + 1) + ': ' + col + ' '}
+                            <div
+                                key={colIndex}
+                                className={styles.matrixElement}
+                            >
+                                {colIndex + 1 + ': ' + col + ' '}
                             </div>
                         ))}
                     </div>
@@ -37,8 +42,11 @@ const Weighing: React.FC<props> = ({ setResult }) => {
                     <div className={styles.dataContainer}>
                         Искомые веса:
                         {result.weights.map((col, colIndex) => (
-                            <div key={col} className={styles.matrixElement}>
-                                {'' + (colIndex + 1) + ': ' + col + ' '}
+                            <div
+                                key={colIndex}
+                                className={styles.matrixElement}
+                            >
+                                {colIndex + 1 + ': ' + col + ' '}
                             </div>
                         ))}
                     </div>

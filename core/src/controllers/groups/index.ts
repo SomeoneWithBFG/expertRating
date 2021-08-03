@@ -55,13 +55,13 @@ class GroupController implements IGroupController {
         }
 
         if (req.body.teacherId) {
-            const resp = await UsersRepository.getUserByID(req.body.teacherId)
-            if (resp.type !== 'error') {
-                teacher = resp
+            const response = await UsersRepository.getUserByID(req.body.teacherId)
+            if (response.type !== 'error') {
+                teacher = response
             }
         }
 
-        let result = await GroupsRepository.createGroup(
+        const result = await GroupsRepository.createGroup(
             req.body,
             students,
             teacher

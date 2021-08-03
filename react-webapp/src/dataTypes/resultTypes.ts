@@ -45,71 +45,71 @@ export interface KemeniSnellaResult {
 }
 
 export interface SavedResult {
-    method: string,
-    inputMatrix: string,
-    x: number,
-    y: number,
+    method: string
+    inputMatrix: string
+    x: number
+    y: number
     user: {
-        id: string,
-        createdAt: string,
-        editedAt: string,
-        name: string,
-        role: number
-    },
-    pairComparsionResult: null | {
-        createdAt: string,
-        editedAt: string,
-        id: string,
-        order: string,
-        sumOfValues: number,
-        values: string,
-        weights: string,
-    },
-    sequentiallyComparisonResult: null | {
-        causedCorrections: string,
-        correctedEvaluations: string,
-        sumOfWeights: number,
-        weights: string,
-        order: string,
         id: string
-        createdAt: string,
+        createdAt: string
         editedAt: string
-    },
+        name: string
+        role: number
+    }
+    pairComparsionResult: null | {
+        createdAt: string
+        editedAt: string
+        id: string
+        order: string
+        sumOfValues: number
+        values: string
+        weights: string
+    }
+    sequentiallyComparisonResult: null | {
+        causedCorrections: string
+        correctedEvaluations: string
+        sumOfWeights: number
+        weights: string
+        order: string
+        id: string
+        createdAt: string
+        editedAt: string
+    }
     weighingResult: null | {
-        sumOfMarks: number,
-        relativeExpertsMarks: string,
-        weights: string,
-        order: string,
-        id: string,
-        createdAt: string,
+        sumOfMarks: number
+        relativeExpertsMarks: string
+        weights: string
+        order: string
+        id: string
+        createdAt: string
         editedAt: string
-    },
+    }
     preferenceResult: null | {
-        modMatrix: string,
-        sumMarks: string,
-        sumOfMarks: number,
-        weights: string,
-        order: string,
-        id: string,
-        createdAt: string,
+        modMatrix: string
+        sumMarks: string
+        sumOfMarks: number
+        weights: string
+        order: string
+        id: string
+        createdAt: string
         editedAt: string
-    },
+    }
     kondorseResult: null | {
-        modMatrix: string,
-        best: number,
-        id: string,
-        createdAt: string,
+        modMatrix: string
+        best: number
+        id: string
+        createdAt: string
         editedAt: string
-    },
+    }
     kemeniSnellaResult: null | {
-        binaryMatrixArray: string,
-        looseMatrix: string,
-        order: string,
-        id: string,
-        createdAt: string,
+        binaryMatrixArray: string
+        looseMatrix: string
+        order: string
+        id: string
+        createdAt: string
         editedAt: string
-    },
-    id: string,
-    createdAt: string,
+    }
+    id: string
+    createdAt: string
     editedAt: string
 }

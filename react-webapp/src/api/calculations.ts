@@ -21,8 +21,8 @@ export function universal(
 ) {
     return axios
         .post<{
-            result: 
-                ICalculationResults.PairComparsionResult 
+            result:
+                | ICalculationResults.PairComparsionResult
                 | ICalculationResults.SequentiallyComparisonResult
                 | ICalculationResults.WeighingResult
                 | ICalculationResults.PreferenceResult

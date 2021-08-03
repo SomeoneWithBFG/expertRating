@@ -1,6 +1,6 @@
 import * as ResultTypes from '../dataTypes/resultTypes'
 
-function pairComparsion(solution: ResultTypes.PairComparsionResult) : string {
+function pairComparsion(solution: ResultTypes.PairComparsionResult): string {
     const data = {
         values: '',
         sumOfValues: 0,
@@ -31,7 +31,7 @@ function pairComparsion(solution: ResultTypes.PairComparsionResult) : string {
 
 function sequentiallyComparison(
     solution: ResultTypes.SequentiallyComparisonResult
-) : string {
+): string {
     const data = {
         causedCorrections: '',
         correctedEvaluations: '',
@@ -66,7 +66,7 @@ function sequentiallyComparison(
     return str
 }
 
-function weighing(solution: ResultTypes.WeighingResult) : string {
+function weighing(solution: ResultTypes.WeighingResult): string {
     const data = {
         sumOfMarks: 0,
         relativeExpertsMarks: '',
@@ -95,7 +95,7 @@ function weighing(solution: ResultTypes.WeighingResult) : string {
     return str
 }
 
-function preference(solution: ResultTypes.PreferenceResult) : string {
+function preference(solution: ResultTypes.PreferenceResult): string {
     const data = {
         modMatrix: Array(solution.modMatrix.length).fill(''),
         sumMarks: '',
@@ -134,7 +134,7 @@ function preference(solution: ResultTypes.PreferenceResult) : string {
     return str
 }
 
-function kondorse(solution: ResultTypes.KondorseResult) : string {
+function kondorse(solution: ResultTypes.KondorseResult): string {
     let str = ''
     str += 'Матрица оценок: \n'
     solution.modMatrix.forEach((arr) => {
@@ -147,7 +147,7 @@ function kondorse(solution: ResultTypes.KondorseResult) : string {
     return str
 }
 
-function kemeniSnella(solution: ResultTypes.KemeniSnellaResult) : string {
+function kemeniSnella(solution: ResultTypes.KemeniSnellaResult): string {
     let str = ''
     str += 'Матрицы бинарных предпочтений: \n'
     solution.binaryMatrixArray.forEach((matrix, mIndex) => {
@@ -171,7 +171,7 @@ function kemeniSnella(solution: ResultTypes.KemeniSnellaResult) : string {
     return str
 }
 
-function fileGenerator(solution: any, method: string) : string {
+function fileGenerator(solution: any, method: string): string {
     switch (method) {
         case 'pairComparsion':
             return pairComparsion(solution)
@@ -190,7 +190,7 @@ function fileGenerator(solution: any, method: string) : string {
     }
 }
 
-export default function download(solution: any, method: string) : void {
+export default function download(solution: any, method: string): void {
     let element = document.createElement('a')
     let text = fileGenerator(solution, method)
     element.setAttribute(

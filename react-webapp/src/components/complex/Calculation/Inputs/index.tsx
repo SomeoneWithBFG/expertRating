@@ -59,7 +59,8 @@ const Inputs: React.FC = () => {
     for (let colIndex = 0; colIndex < state.calculations.x; colIndex++) {
         inputField[colIndex] = new Array<string>(state.calculations.y)
         for (let rowIndex = 0; rowIndex < state.calculations.y; rowIndex++) {
-            inputField[colIndex][rowIndex] = '' + (rowIndex + 1) + '-' + (colIndex + 1)
+            inputField[colIndex][rowIndex] =
+                '' + (rowIndex + 1) + '-' + (colIndex + 1)
         }
     }
     return (

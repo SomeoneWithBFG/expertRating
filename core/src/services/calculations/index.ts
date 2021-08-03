@@ -171,7 +171,7 @@ class CalculationsService implements ICalculationsService {
         let result: PreferenceResult
         result = {
             method: 'PreferenceResult',
-            modMatrix: createMatrix(y, x),
+            modMatrix: createMatrix(x, y),
             sumMarks: Array(x).fill(0),
             sumOfMarks: 0,
             weights: Array(x),
@@ -179,7 +179,7 @@ class CalculationsService implements ICalculationsService {
         }
         for (let i = 0; i < x; i++) {
             for (let j = 0; j < y; j++) {
-                result.modMatrix[j][i] = 6 - inputMatrix[j][i]
+                result.modMatrix[j][i] = x - inputMatrix[j][i]
             }
         }
         for (let i = 0; i < x; i++) {

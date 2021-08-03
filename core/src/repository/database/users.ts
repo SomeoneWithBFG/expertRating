@@ -6,6 +6,7 @@ import { IUserDTM } from '@models/dtm/User'
 import DBConnector from './connector'
 
 import MessageGenerator from '@services/messageGenerator'
+import { In } from 'typeorm'
 
 class UsersService implements IUsersService {
     UserRepository = () => {
@@ -21,15 +22,34 @@ class UsersService implements IUsersService {
         }
     }
 
-    getUserByID = async (id: string) => {
+    getUserListByIds = async (ids: string[]) => {
         try {
-            const response = await this.UserRepository().findOne(id)
-            if (!response)
+            const response = await this.UserRepository().find({
+                where: { id: In(ids) },
+            })
+            if (!response) {
                 return MessageGenerator.createMessage(
                     404,
                     'error',
                     'User with this ID not found'
                 )
+            }
+            return response
+        } catch (e) {
+            return e
+        }
+    }
+
+    getUserByID = async (id: string) => {
+        try {
+            const response = await this.UserRepository().findOne(id)
+            if (!response) {
+                return MessageGenerator.createMessage(
+                    404,
+                    'error',
+                    'User with this ID not found'
+                )
+            }
             return response
         } catch (e) {
             return e

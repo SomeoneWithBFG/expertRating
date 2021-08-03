@@ -18,7 +18,7 @@ router.delete('/:id', middleware.validateJWT, Calculations.deleteCalculation)
 router.post('/kemeni-snella', middleware.addUserId, Calculations.kemeniSnella)
 router.post('/kondorse', middleware.addUserId, Calculations.kondorse)
 router.post(
-    '/pair-comparsion',
+    '/pair-comparison',
     middleware.addUserId,
     Calculations.pairComparsion
 )

@@ -101,13 +101,13 @@ class Calculations implements ICalculations {
             res.json({ result, savedResult })
             return
         }
-        res.json(result)
+        res.json({result})
     }
     pairComparsion = async (req: Request, res: Response) => {
         try {
             this.createControllerBuilder(
                 CalculationsService.pairComparsion,
-                req.body.binaryMatrix,
+                req.body.inputMatrix,
                 req.body.x,
                 req.body.y,
                 'pairComparsion',

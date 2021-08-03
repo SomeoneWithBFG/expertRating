@@ -1,9 +1,25 @@
-import thunk from 'redux-thunk'
-import reducer from './reducer'
-import { createStore, applyMiddleware, Store } from 'redux'
+import {
+    configureStore,
+    ThunkAction,
+    Action,
+    combineReducers,
+} from '@reduxjs/toolkit'
 
-const store: Store<ArticleState, ArticleAction> & {
-    dispatch: DispatchType
-} = createStore(reducer, applyMiddleware(thunk))
+import calculations from './calculations/reducer'
 
-export default store
+const rootReducer = combineReducers({
+    calculations,
+})
+
+export const store = configureStore({
+    reducer: rootReducer,
+})
+
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
+>

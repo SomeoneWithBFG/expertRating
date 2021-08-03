@@ -14,7 +14,6 @@ const Select: FC<SelectProps> = ({
     children,
     name,
     disabled,
-    value,
     options,
     onChange,
 }) => {
@@ -25,7 +24,6 @@ const Select: FC<SelectProps> = ({
                 id={name}
                 disabled={disabled}
                 onChange={onChange}
-                value={value}
             >
                 {options &&
                     options.map((option, index) => {
@@ -34,7 +32,6 @@ const Select: FC<SelectProps> = ({
                                 key={index}
                                 className={styles.selectElement}
                                 value={option.value}
-                                selected={value === option.value}
                             >
                                 {option.placeholder
                                     ? option.placeholder

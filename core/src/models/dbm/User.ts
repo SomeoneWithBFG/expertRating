@@ -1,6 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    OneToMany,
+    ManyToOne,
+} from 'typeorm'
 
 import { Calculation } from './Calculation'
+import { Group } from './Group'
 
 @Entity({ name: 'users' })
 export class User {
@@ -27,4 +34,10 @@ export class User {
 
     @OneToMany(() => Calculation, (calculation) => calculation.user)
     calculations: Calculation[]
+
+    @ManyToOne(() => Group, (group) => group.id)
+    group: Group
+
+    @OneToMany(() => Group, (group) => group.teacher)
+    groupsAsTeacher: Group[]
 }

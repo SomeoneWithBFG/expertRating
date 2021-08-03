@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
 app.use('/api/calculations', Routers.CalculationsRouter)
 app.use('/api/auth', Routers.AuthRouter)
 app.use('/api/users', Routers.UsersRouter)
+app.use('/api/groups', Routers.GroupsRouter)
 
 app.listen(port, () => {
     console.log(`Express core listening at http://localhost:${port}`)

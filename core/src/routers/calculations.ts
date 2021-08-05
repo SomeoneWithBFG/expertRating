@@ -5,7 +5,7 @@ import middleware from '@src/middleware'
 
 const router: Router = express.Router()
 
-router.get('/', middleware.validateJWT, Calculations.getCalculationList)
+router.get('/', middleware.validateJWT, middleware.isAdmin, Calculations.getCalculationList)
 router.get('/:id', middleware.validateJWT, Calculations.getCalculationByID)
 router.get(
     '/user/:userId',

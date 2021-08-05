@@ -5,10 +5,10 @@ import middleware from '@src/middleware'
 
 const router: Router = express.Router()
 
-router.get('/', Groups.getGroupList)
+router.get('/', middleware.isAdminOrTeacher, Groups.getGroupList)
 router.get('/:id', Groups.getGroupByID)
-router.post('/', Groups.createGroup)
-router.put('/', Groups.updateGroup)
-router.delete('/', Groups.deleteGroup)
+router.post('/', middleware.isAdminOrTeacher, Groups.createGroup)
+router.put('/', middleware.isAdminOrTeacher, Groups.updateGroup)
+router.delete('/', middleware.isAdminOrTeacher, Groups.deleteGroup)
 
 export default router

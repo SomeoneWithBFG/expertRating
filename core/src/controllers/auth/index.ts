@@ -46,6 +46,17 @@ class AuthController implements IAuthController {
         }
         res.status(200).json(jwt)
     }
+    async whoAmI(req: Request, res: Response) { 
+        const value = await JWTService.verifyAndDecode(req.body.accessToken)
+        if (value instanceof Error) {
+            res.json(
+                MessageGenerator.createMessage(500, 'error', 'JWT not found')
+            )
+            return
+        }
+        const user = await UsersRepository.getUserByID(value.id)
+        res.status(200).json(user)
+    }
 }
 
 export default new AuthController()

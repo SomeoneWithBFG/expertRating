@@ -1,5 +1,11 @@
 @import '../../../styles/colors/colors.scss';
 
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .input {
     width: 100%;
     min-height: 2.25rem;

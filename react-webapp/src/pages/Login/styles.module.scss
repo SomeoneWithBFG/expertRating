@@ -1,0 +1,72 @@
+@import '../../styles/colors/colors.scss';
+
+.container {
+    z-index: 100;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.bigRectangle {
+    height: 50%;
+    width: 80%;
+    max-width: 60rem;
+    display: flex;
+    align-items: center;
+    background-color: $very-light-gray;
+    border-radius: 2rem;
+    border: 1px solid $little-light-gray;
+    box-shadow: 0px 5px 5px $light-gray;
+}
+
+.smallRectangle {
+    border-radius: 2rem;
+    background-color: $light-gray;
+    border: 1px solid $little-light-gray;
+    box-shadow: 0px 4px 4px $light-gray;
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    background-image: url('../../images/loginIMG.png');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.input {
+    width: 40%;
+    min-width: 10rem;
+    margin: 1rem;
+}
+
+.showPassword {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 0.75rem;
+    &:hover {
+        color: $gray;
+    }
+}
+
+.button {
+    width: 20%;
+    min-width: 5rem;
+}
+
+.error {
+    margin: 1rem;
+    color: $red;
+}

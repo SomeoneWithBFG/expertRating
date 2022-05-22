@@ -1,0 +1,6 @@
+{
+    "appId": "com.expertrating.app",
+    "appName": "ExpertRating",
+    "webDir": "dist",
+    "bundledWebRuntime": false
+}

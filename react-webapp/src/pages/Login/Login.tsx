@@ -10,13 +10,9 @@ import Button from '../../components/basic/Button'
 
 const Login: React.FC = () => {
     const history = useHistory()
-
     const [isPassword, setIsPassword] = useState(true)
-
     const [login, setLogin] = useState('')
-
     const [password, setPassword] = useState('')
-
     const [error, setError] = useState('')
 
     function singIn() {

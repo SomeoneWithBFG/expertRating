@@ -17,22 +17,3 @@ services:
         restart: always
         ports:
             - 5051:8080
-
-    MONGO:
-        image: mongo
-        restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: core
-            MONGO_INITDB_ROOT_PASSWORD: trytofindme
-        ports:
-            - 27017:27017
-
-    MONGO-ADMIN:
-        image: mongo-express
-        restart: always
-        ports:
-            - 5052:8081
-        environment:
-            ME_CONFIG_MONGODB_ADMINUSERNAME: core
-            ME_CONFIG_MONGODB_ADMINPASSWORD: trytofindme
-            ME_CONFIG_MONGODB_SERVER: MONGO

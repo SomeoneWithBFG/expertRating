@@ -33,6 +33,10 @@ export function universal(
             inputMatrix,
             x,
             y,
+        }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
         })
         .then((response) => {
             if (response.status === 404) {

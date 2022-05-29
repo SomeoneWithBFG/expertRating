@@ -11,30 +11,30 @@ export const useCalculationRequest = <T>(endpoint: string) => {
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string>('')
 
-    const calculate = () => {
-        CalculationsAPI.universal(
-            endpoint === CalculationsAPI.endpoints.sequentiallyComparison
-                ? state.calculations.seqCompMatrix
-                : state.calculations.commonMatrix,
-            state.calculations.x,
-            state.calculations.y,
-            endpoint
-        )
-            .then((response) => {
-                if (response.type === 'error') {
-                    setError(response.payload)
-                } else {
-                    setResult(response.payload.result)
-                }
-                setLoading(false)
-            })
-            .catch((ex) => {
-                setError('Something went wrong')
-                setLoading(false)
-            })
-    }
-
     useEffect(() => {
+        const calculate = () => {
+            CalculationsAPI.universal(
+                endpoint === CalculationsAPI.endpoints.sequentiallyComparison
+                    ? state.calculations.seqCompMatrix
+                    : state.calculations.commonMatrix,
+                state.calculations.x,
+                state.calculations.y,
+                endpoint
+            )
+                .then((response) => {
+                    if (response.type === 'error') {
+                        setError(response.payload)
+                    } else {
+                        setResult(response.payload.result)
+                    }
+                    setLoading(false)
+                })
+                .catch((ex) => {
+                    setError('Something went wrong')
+                    setLoading(false)
+                })
+        }
+
         calculate()
     }, [])
 
